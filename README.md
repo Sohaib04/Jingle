@@ -2,6 +2,8 @@
 
 A music geography game built with Next.js and Three.js. Listen to a song, guess where it's from, and see how close you get on a 3D satellite globe.
 
+**Play now at [jingle-game.com](https://jingle-game.com)**
+
 Inspired by games like GeoGuessr and Heardle — Jingle combines music trivia with geography in a single, interactive experience.
 
 ## How It Works
