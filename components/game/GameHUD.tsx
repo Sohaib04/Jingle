@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { getStreakTier } from "@/lib/game/streak";
-import { Volume2, VolumeX, Flame, Globe2, RotateCcw } from "lucide-react";
+import { Volume2, Volume1, VolumeX, Flame, Globe2, RotateCcw } from "lucide-react";
 
 export default function GameHUD() {
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -12,6 +12,7 @@ export default function GameHUD() {
   const totalScore = useGameStore((s) => s.totalScore);
   const currentStreak = useGameStore((s) => s.currentStreak);
   const playbackState = useGameStore((s) => s.playbackState);
+  const setVolume = useGameStore((s) => s.setVolume);
   const toggleMute = useGameStore((s) => s.toggleMute);
   const resetGame = useGameStore((s) => s.resetGame);
   const tickTimer = useGameStore((s) => s.tickTimer);
@@ -112,18 +113,33 @@ export default function GameHUD() {
             </span>
           </div>
 
-          {/* Mute Toggle */}
-          <button
-            onClick={toggleMute}
-            className="p-2 rounded-full glass-panel hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/5"
-            title={playbackState.isMuted ? "Unmute" : "Mute"}
-          >
-            {playbackState.isMuted ? (
-              <VolumeX className="w-4 h-4 text-rose-400" />
-            ) : (
-              <Volume2 className="w-4 h-4 text-cyan-400" />
-            )}
-          </button>
+          {/* Volume Slider & Toggle */}
+          <div className="glass-panel px-3 py-1.5 rounded-full border border-white/10 shadow-lg flex items-center space-x-2">
+            <button
+              onClick={toggleMute}
+              className="text-slate-300 hover:text-white transition-colors cursor-pointer flex-shrink-0"
+              title={playbackState.isMuted ? "Unmute" : "Mute"}
+            >
+              {playbackState.isMuted || playbackState.volume === 0 ? (
+                <VolumeX className="w-4 h-4 text-rose-400" />
+              ) : playbackState.volume < 0.5 ? (
+                <Volume1 className="w-4 h-4 text-cyan-400" />
+              ) : (
+                <Volume2 className="w-4 h-4 text-cyan-400" />
+              )}
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={playbackState.isMuted ? 0 : playbackState.volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              aria-label="Volume slider"
+              title={`Volume: ${Math.round((playbackState.isMuted ? 0 : playbackState.volume) * 100)}%`}
+              className="w-16 sm:w-20 h-1.5 bg-slate-700/70 hover:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400 focus:outline-none"
+            />
+          </div>
         </div>
       </div>
     </header>

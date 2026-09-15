@@ -17,7 +17,7 @@ export class ITunesMusicProvider implements IMusicProvider {
     isPlaying: false,
     currentTime: 0,
     duration: 30,
-    volume: 0.8,
+    volume: 0.7,
     isMuted: false,
     isLoading: false,
     hasError: false,
@@ -29,7 +29,7 @@ export class ITunesMusicProvider implements IMusicProvider {
     if (!this.audio) {
       this.audio = new Audio();
       this.audio.preload = "auto";
-      this.audio.volume = this.state.volume;
+      this.audio.volume = this.state.isMuted ? 0 : this.state.volume * 0.85;
 
       this.audio.addEventListener("playing", () => {
         this.updateState({ isPlaying: true, isLoading: false, hasError: false });
@@ -138,16 +138,19 @@ export class ITunesMusicProvider implements IMusicProvider {
   setVolume(volume: number): void {
     const clamped = Math.max(0, Math.min(1, volume));
     this.state.volume = clamped;
-    if (this.audio) {
-      this.audio.volume = this.state.isMuted ? 0 : clamped;
+    if (clamped > 0 && this.state.isMuted) {
+      this.state.isMuted = false;
     }
-    this.updateState({ volume: clamped });
+    if (this.audio) {
+      this.audio.volume = this.state.isMuted ? 0 : clamped * 0.85;
+    }
+    this.updateState({ volume: clamped, isMuted: this.state.isMuted });
   }
 
   setMuted(muted: boolean): void {
     this.state.isMuted = muted;
     if (this.audio) {
-      this.audio.volume = muted ? 0 : this.state.volume;
+      this.audio.volume = muted ? 0 : this.state.volume * 0.85;
     }
     this.updateState({ isMuted: muted });
   }
