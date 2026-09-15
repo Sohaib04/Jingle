@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #08090d;
+  --foreground: #f8fafc;
+  --panel: #0f141d;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
 }
 
 @theme inline {
@@ -12,15 +18,89 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08090d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Glassmorphism & Card styling */
+.glass-panel {
+  background: rgba(15, 20, 29, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-subtle {
+  background: rgba(15, 20, 29, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Keyframe Animations */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(0.98);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes audio-bar {
+  0%, 100% {
+    height: 4px;
+  }
+  50% {
+    height: 20px;
+  }
 }
+
+@keyframes glow-fire {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.8));
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-glow-fire {
+  animation: glow-fire 2s ease-in-out infinite;
+}
+
+/* Audio wave bar animations with staggered delays */
+.audio-bar-1 { animation: audio-bar 0.8s ease-in-out infinite; }
+.audio-bar-2 { animation: audio-bar 0.6s ease-in-out 0.15s infinite; }
+.audio-bar-3 { animation: audio-bar 0.9s ease-in-out 0.3s infinite; }
+.audio-bar-4 { animation: audio-bar 0.7s ease-in-out 0.45s infinite; }
+.audio-bar-5 { animation: audio-bar 0.85s ease-in-out 0.2s infinite; }

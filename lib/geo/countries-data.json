@@ -1,0 +1,2802 @@
+{
+  "AF": {
+    "code": "AF",
+    "code3": "AFG",
+    "name": "Afghanistan",
+    "formalName": "Islamic State of Afghanistan",
+    "continent": "Asia",
+    "flag": "🇦🇫",
+    "lat": 33.9024,
+    "lng": 67.8432,
+    "bbox": [
+      60.52843,
+      29.318572,
+      75.158028,
+      38.486282
+    ]
+  },
+  "AO": {
+    "code": "AO",
+    "code3": "AGO",
+    "name": "Angola",
+    "formalName": "People's Republic of Angola",
+    "continent": "Africa",
+    "flag": "🇦🇴",
+    "lat": -11.1843,
+    "lng": 17.86,
+    "bbox": [
+      11.640096,
+      -17.930636,
+      24.079905,
+      -4.438023
+    ]
+  },
+  "AL": {
+    "code": "AL",
+    "code3": "ALB",
+    "name": "Albania",
+    "formalName": "Republic of Albania",
+    "continent": "Europe",
+    "flag": "🇦🇱",
+    "lat": 41.1566,
+    "lng": 20.1623,
+    "bbox": [
+      19.304486,
+      39.624998,
+      21.02004,
+      42.688247
+    ]
+  },
+  "AE": {
+    "code": "AE",
+    "code3": "ARE",
+    "name": "United Arab Emirates",
+    "formalName": "United Arab Emirates",
+    "continent": "Asia",
+    "flag": "🇦🇪",
+    "lat": 24.2762,
+    "lng": 53.9882,
+    "bbox": [
+      51.579519,
+      22.496948,
+      56.396847,
+      26.055464
+    ]
+  },
+  "AR": {
+    "code": "AR",
+    "code3": "ARG",
+    "name": "Argentina",
+    "formalName": "Argentine Republic",
+    "continent": "South America",
+    "flag": "🇦🇷",
+    "lat": -38.5412,
+    "lng": -63.5219,
+    "bbox": [
+      -73.415436,
+      -55.25,
+      -53.628349,
+      -21.83231
+    ]
+  },
+  "AM": {
+    "code": "AM",
+    "code3": "ARM",
+    "name": "Armenia",
+    "formalName": "Republic of Armenia",
+    "continent": "Asia",
+    "flag": "🇦🇲",
+    "lat": 39.9947,
+    "lng": 45.0442,
+    "bbox": [
+      43.582746,
+      38.741201,
+      46.50572,
+      41.248129
+    ]
+  },
+  "AQ": {
+    "code": "AQ",
+    "code3": "ATA",
+    "name": "Antarctica",
+    "formalName": "Antarctica",
+    "continent": "Antarctica",
+    "flag": "🇦🇶",
+    "lat": -76.6353,
+    "lng": 0,
+    "bbox": [
+      -180,
+      -90,
+      180,
+      -63.27066
+    ]
+  },
+  "TF": {
+    "code": "TF",
+    "code3": "ATF",
+    "name": "Fr. S. Antarctic Lands",
+    "formalName": "Territory of the French Southern and Antarctic Lands",
+    "continent": "Seven seas (open ocean)",
+    "flag": "🇹🇫",
+    "lat": -49.2,
+    "lng": 69.64,
+    "bbox": [
+      68.72,
+      -49.775,
+      70.56,
+      -48.625
+    ]
+  },
+  "AU": {
+    "code": "AU",
+    "code3": "AUS",
+    "name": "Australia",
+    "formalName": "Commonwealth of Australia",
+    "continent": "Oceania",
+    "flag": "🇦🇺",
+    "lat": -27.1514,
+    "lng": 133.4542,
+    "bbox": [
+      113.338953,
+      -43.634597,
+      153.569469,
+      -10.668186
+    ]
+  },
+  "AT": {
+    "code": "AT",
+    "code3": "AUT",
+    "name": "Austria",
+    "formalName": "Republic of Austria",
+    "continent": "Europe",
+    "flag": "🇦🇹",
+    "lat": 47.7354,
+    "lng": 13.2298,
+    "bbox": [
+      9.47997,
+      46.431817,
+      16.979667,
+      49.039074
+    ]
+  },
+  "AZ": {
+    "code": "AZ",
+    "code3": "AZE",
+    "name": "Azerbaijan",
+    "formalName": "Republic of Azerbaijan",
+    "continent": "Asia",
+    "flag": "🇦🇿",
+    "lat": 40.0655,
+    "lng": 47.5934,
+    "bbox": [
+      44.79399,
+      38.270378,
+      50.392821,
+      41.860675
+    ]
+  },
+  "BI": {
+    "code": "BI",
+    "code3": "BDI",
+    "name": "Burundi",
+    "formalName": "Republic of Burundi",
+    "continent": "Africa",
+    "flag": "🇧🇮",
+    "lat": -3.4242,
+    "lng": 29.8886,
+    "bbox": [
+      29.024926,
+      -4.499983,
+      30.75224,
+      -2.348487
+    ]
+  },
+  "BE": {
+    "code": "BE",
+    "code3": "BEL",
+    "name": "Belgium",
+    "formalName": "Kingdom of Belgium",
+    "continent": "Europe",
+    "flag": "🇧🇪",
+    "lat": 50.5023,
+    "lng": 4.3351,
+    "bbox": [
+      2.513573,
+      49.529484,
+      6.156658,
+      51.475024
+    ]
+  },
+  "BJ": {
+    "code": "BJ",
+    "code3": "BEN",
+    "name": "Benin",
+    "formalName": "Republic of Benin",
+    "continent": "Africa",
+    "flag": "🇧🇯",
+    "lat": 9.1889,
+    "lng": 2.2847,
+    "bbox": [
+      0.772336,
+      6.142158,
+      3.797112,
+      12.235636
+    ]
+  },
+  "BF": {
+    "code": "BF",
+    "code3": "BFA",
+    "name": "Burkina Faso",
+    "formalName": "Burkina Faso",
+    "continent": "Africa",
+    "flag": "🇧🇫",
+    "lat": 12.3635,
+    "lng": -1.6467,
+    "bbox": [
+      -5.470565,
+      9.610835,
+      2.177108,
+      15.116158
+    ]
+  },
+  "BD": {
+    "code": "BD",
+    "code3": "BGD",
+    "name": "Bangladesh",
+    "formalName": "People's Republic of Bangladesh",
+    "continent": "Asia",
+    "flag": "🇧🇩",
+    "lat": 23.5587,
+    "lng": 90.3786,
+    "bbox": [
+      88.084422,
+      20.670883,
+      92.672721,
+      26.446526
+    ]
+  },
+  "BG": {
+    "code": "BG",
+    "code3": "BGR",
+    "name": "Bulgaria",
+    "formalName": "Republic of Bulgaria",
+    "continent": "Europe",
+    "flag": "🇧🇬",
+    "lat": 42.7347,
+    "lng": 25.4693,
+    "bbox": [
+      22.380526,
+      41.234486,
+      28.558081,
+      44.234923
+    ]
+  },
+  "BS": {
+    "code": "BS",
+    "code3": "BHS",
+    "name": "Bahamas",
+    "formalName": "Commonwealth of the Bahamas",
+    "continent": "North America",
+    "flag": "🇧🇸",
+    "lat": 25.375,
+    "lng": -77.99,
+    "bbox": [
+      -78.98,
+      23.71,
+      -77,
+      27.04
+    ]
+  },
+  "BA": {
+    "code": "BA",
+    "code3": "BIH",
+    "name": "Bosnia and Herz.",
+    "formalName": "Bosnia and Herzegovina",
+    "continent": "Europe",
+    "flag": "🇧🇦",
+    "lat": 43.9419,
+    "lng": 17.6749,
+    "bbox": [
+      15.750026,
+      42.65,
+      19.59976,
+      45.233777
+    ]
+  },
+  "BY": {
+    "code": "BY",
+    "code3": "BLR",
+    "name": "Belarus",
+    "formalName": "Republic of Belarus",
+    "continent": "Europe",
+    "flag": "🇧🇾",
+    "lat": 53.7443,
+    "lng": 27.9466,
+    "bbox": [
+      23.199494,
+      51.319503,
+      32.693643,
+      56.16913
+    ]
+  },
+  "BZ": {
+    "code": "BZ",
+    "code3": "BLZ",
+    "name": "Belize",
+    "formalName": "Belize",
+    "continent": "North America",
+    "flag": "🇧🇿",
+    "lat": 17.1935,
+    "lng": -88.668,
+    "bbox": [
+      -89.229122,
+      15.886938,
+      -88.106813,
+      18.499982
+    ]
+  },
+  "BO": {
+    "code": "BO",
+    "code3": "BOL",
+    "name": "Bolivia",
+    "formalName": "Plurinational State of Bolivia",
+    "continent": "South America",
+    "flag": "🇧🇴",
+    "lat": -16.3175,
+    "lng": -63.5444,
+    "bbox": [
+      -69.590424,
+      -22.872919,
+      -57.498371,
+      -9.761988
+    ]
+  },
+  "BR": {
+    "code": "BR",
+    "code3": "BRA",
+    "name": "Brazil",
+    "formalName": "Federative Republic of Brazil",
+    "continent": "South America",
+    "flag": "🇧🇷",
+    "lat": -14.2619,
+    "lng": -54.3586,
+    "bbox": [
+      -73.987235,
+      -33.768378,
+      -34.729993,
+      5.244486
+    ]
+  },
+  "BN": {
+    "code": "BN",
+    "code3": "BRN",
+    "name": "Brunei",
+    "formalName": "Negara Brunei Darussalam",
+    "continent": "Asia",
+    "flag": "🇧🇳",
+    "lat": 4.7277,
+    "lng": 114.8274,
+    "bbox": [
+      114.204017,
+      4.007637,
+      115.45071,
+      5.44773
+    ]
+  },
+  "BT": {
+    "code": "BT",
+    "code3": "BTN",
+    "name": "Bhutan",
+    "formalName": "Kingdom of Bhutan",
+    "continent": "Asia",
+    "flag": "🇧🇹",
+    "lat": 27.5079,
+    "lng": 90.459,
+    "bbox": [
+      88.814248,
+      26.719403,
+      92.103712,
+      28.296439
+    ]
+  },
+  "BW": {
+    "code": "BW",
+    "code3": "BWA",
+    "name": "Botswana",
+    "formalName": "Republic of Botswana",
+    "continent": "Africa",
+    "flag": "🇧🇼",
+    "lat": -22.2452,
+    "lng": 24.6638,
+    "bbox": [
+      19.895458,
+      -26.828543,
+      29.432188,
+      -17.661816
+    ]
+  },
+  "CF": {
+    "code": "CF",
+    "code3": "CAF",
+    "name": "Central African Rep.",
+    "formalName": "Central African Republic",
+    "continent": "Africa",
+    "flag": "🇨🇫",
+    "lat": 6.705,
+    "lng": 20.9168,
+    "bbox": [
+      14.459407,
+      2.26764,
+      27.374226,
+      11.142395
+    ]
+  },
+  "CA": {
+    "code": "CA",
+    "code3": "CAN",
+    "name": "Canada",
+    "formalName": "Canada",
+    "continent": "North America",
+    "flag": "🇨🇦",
+    "lat": 62.4542,
+    "lng": -96.8229,
+    "bbox": [
+      -140.99778,
+      41.675105,
+      -52.648099,
+      83.23324
+    ]
+  },
+  "CH": {
+    "code": "CH",
+    "code3": "CHE",
+    "name": "Switzerland",
+    "formalName": "Swiss Confederation",
+    "continent": "Europe",
+    "flag": "🇨🇭",
+    "lat": 46.8039,
+    "lng": 8.2327,
+    "bbox": [
+      6.022609,
+      45.776948,
+      10.442701,
+      47.830828
+    ]
+  },
+  "CL": {
+    "code": "CL",
+    "code3": "CHL",
+    "name": "Chile",
+    "formalName": "Republic of Chile",
+    "continent": "South America",
+    "flag": "🇨🇱",
+    "lat": -36.5959,
+    "lng": -71.3022,
+    "bbox": [
+      -75.644395,
+      -55.61183,
+      -66.95992,
+      -17.580012
+    ]
+  },
+  "CN": {
+    "code": "CN",
+    "code3": "CHN",
+    "name": "China",
+    "formalName": "People's Republic of China",
+    "continent": "Asia",
+    "flag": "🇨🇳",
+    "lat": 35.8283,
+    "lng": 104.3508,
+    "bbox": [
+      73.675379,
+      18.197701,
+      135.026311,
+      53.4588
+    ]
+  },
+  "CI": {
+    "code": "CI",
+    "code3": "CIV",
+    "name": "Côte d'Ivoire",
+    "formalName": "Republic of Ivory Coast",
+    "continent": "Africa",
+    "flag": "🇨🇮",
+    "lat": 7.4312,
+    "lng": -5.5825,
+    "bbox": [
+      -8.60288,
+      4.338288,
+      -2.56219,
+      10.524061
+    ]
+  },
+  "CM": {
+    "code": "CM",
+    "code3": "CMR",
+    "name": "Cameroon",
+    "formalName": "Republic of Cameroon",
+    "continent": "Africa",
+    "flag": "🇨🇲",
+    "lat": 7.2935,
+    "lng": 12.2508,
+    "bbox": [
+      8.488816,
+      1.727673,
+      16.012852,
+      12.859396
+    ]
+  },
+  "CD": {
+    "code": "CD",
+    "code3": "COD",
+    "name": "Dem. Rep. Congo",
+    "formalName": "Democratic Republic of the Congo",
+    "continent": "Africa",
+    "flag": "🇨🇩",
+    "lat": -4.0006,
+    "lng": 21.6782,
+    "bbox": [
+      12.182337,
+      -13.257227,
+      31.174149,
+      5.256088
+    ]
+  },
+  "CG": {
+    "code": "CG",
+    "code3": "COG",
+    "name": "Congo",
+    "formalName": "Republic of the Congo",
+    "continent": "Africa",
+    "flag": "🇨🇬",
+    "lat": -0.6549,
+    "lng": 14.7734,
+    "bbox": [
+      11.093773,
+      -5.037987,
+      18.453065,
+      3.728197
+    ]
+  },
+  "CO": {
+    "code": "CO",
+    "code3": "COL",
+    "name": "Colombia",
+    "formalName": "Republic of Colombia",
+    "continent": "South America",
+    "flag": "🇨🇴",
+    "lat": 4.0696,
+    "lng": -72.9336,
+    "bbox": [
+      -78.990935,
+      -4.298187,
+      -66.876326,
+      12.437303
+    ]
+  },
+  "CR": {
+    "code": "CR",
+    "code3": "CRI",
+    "name": "Costa Rica",
+    "formalName": "Republic of Costa Rica",
+    "continent": "North America",
+    "flag": "🇨🇷",
+    "lat": 9.7211,
+    "lng": -84.244,
+    "bbox": [
+      -85.941725,
+      8.225028,
+      -82.546196,
+      11.217119
+    ]
+  },
+  "CU": {
+    "code": "CU",
+    "code3": "CUB",
+    "name": "Cuba",
+    "formalName": "Republic of Cuba",
+    "continent": "North America",
+    "flag": "🇨🇺",
+    "lat": 21.522,
+    "lng": -79.5765,
+    "bbox": [
+      -84.974911,
+      19.855481,
+      -74.178025,
+      23.188611
+    ]
+  },
+  "NC": {
+    "code": "NC",
+    "code3": "NCL",
+    "name": "New Caledonia",
+    "formalName": "New Caledonia",
+    "continent": "Oceania",
+    "flag": "🇳🇨",
+    "lat": -21.2528,
+    "lng": 165.5748,
+    "bbox": [
+      164.029606,
+      -22.399976,
+      167.120011,
+      -20.105646
+    ]
+  },
+  "CY": {
+    "code": "CY",
+    "code3": "CYP",
+    "name": "Cyprus",
+    "formalName": "Republic of Cyprus",
+    "continent": "Asia",
+    "flag": "🇨🇾",
+    "lat": 34.8725,
+    "lng": 33.1308,
+    "bbox": [
+      32.256667,
+      34.571869,
+      34.004881,
+      35.173125
+    ]
+  },
+  "CZ": {
+    "code": "CZ",
+    "code3": "CZE",
+    "name": "Czechia",
+    "formalName": "Czech Republic",
+    "continent": "Europe",
+    "flag": "🇨🇿",
+    "lat": 49.8363,
+    "lng": 15.5466,
+    "bbox": [
+      12.240111,
+      48.555305,
+      18.853144,
+      51.117268
+    ]
+  },
+  "DE": {
+    "code": "DE",
+    "code3": "DEU",
+    "name": "Germany",
+    "formalName": "Federal Republic of Germany",
+    "continent": "Europe",
+    "flag": "🇩🇪",
+    "lat": 51.1428,
+    "lng": 10.5028,
+    "bbox": [
+      5.988658,
+      47.302488,
+      15.016996,
+      54.983104
+    ]
+  },
+  "DJ": {
+    "code": "DJ",
+    "code3": "DJI",
+    "name": "Djibouti",
+    "formalName": "Republic of Djibouti",
+    "continent": "Africa",
+    "flag": "🇩🇯",
+    "lat": 11.8133,
+    "lng": 42.4898,
+    "bbox": [
+      41.66176,
+      10.926879,
+      43.317852,
+      12.699639
+    ]
+  },
+  "DK": {
+    "code": "DK",
+    "code3": "DNK",
+    "name": "Denmark",
+    "formalName": "Kingdom of Denmark",
+    "continent": "Europe",
+    "flag": "🇩🇰",
+    "lat": 56.265,
+    "lng": 10.39,
+    "bbox": [
+      8.089977,
+      54.800015,
+      12.690006,
+      57.730017
+    ]
+  },
+  "DO": {
+    "code": "DO",
+    "code3": "DOM",
+    "name": "Dominican Rep.",
+    "formalName": "Dominican Republic",
+    "continent": "North America",
+    "flag": "🇩🇴",
+    "lat": 18.7417,
+    "lng": -70.1315,
+    "bbox": [
+      -71.945112,
+      17.598564,
+      -68.317943,
+      19.884911
+    ]
+  },
+  "DZ": {
+    "code": "DZ",
+    "code3": "DZA",
+    "name": "Algeria",
+    "formalName": "People's Democratic Republic of Algeria",
+    "continent": "Africa",
+    "flag": "🇩🇿",
+    "lat": 28.0879,
+    "lng": 1.6576,
+    "bbox": [
+      -8.6844,
+      19.057364,
+      11.999506,
+      37.118381
+    ]
+  },
+  "EC": {
+    "code": "EC",
+    "code3": "ECU",
+    "name": "Ecuador",
+    "formalName": "Republic of Ecuador",
+    "continent": "South America",
+    "flag": "🇪🇨",
+    "lat": -1.7891,
+    "lng": -78.1007,
+    "bbox": [
+      -80.967765,
+      -4.959129,
+      -75.233723,
+      1.380924
+    ]
+  },
+  "EG": {
+    "code": "EG",
+    "code3": "EGY",
+    "name": "Egypt",
+    "formalName": "Arab Republic of Egypt",
+    "continent": "Africa",
+    "flag": "🇪🇬",
+    "lat": 26.7928,
+    "lng": 30.7831,
+    "bbox": [
+      24.70007,
+      22,
+      36.86623,
+      31.58568
+    ]
+  },
+  "ER": {
+    "code": "ER",
+    "code3": "ERI",
+    "name": "Eritrea",
+    "formalName": "State of Eritrea",
+    "continent": "Africa",
+    "flag": "🇪🇷",
+    "lat": 15.2269,
+    "lng": 39.7022,
+    "bbox": [
+      36.32322,
+      12.455416,
+      43.081226,
+      17.998307
+    ]
+  },
+  "ES": {
+    "code": "ES",
+    "code3": "ESP",
+    "name": "Spain",
+    "formalName": "Kingdom of Spain",
+    "continent": "Europe",
+    "flag": "🇪🇸",
+    "lat": 39.8476,
+    "lng": -3.1767,
+    "bbox": [
+      -9.392884,
+      35.94685,
+      3.039484,
+      43.748338
+    ]
+  },
+  "EE": {
+    "code": "EE",
+    "code3": "EST",
+    "name": "Estonia",
+    "formalName": "Republic of Estonia",
+    "continent": "Europe",
+    "flag": "🇪🇪",
+    "lat": 58.5428,
+    "lng": 25.7357,
+    "bbox": [
+      23.339795,
+      57.474528,
+      28.131699,
+      59.61109
+    ]
+  },
+  "ET": {
+    "code": "ET",
+    "code3": "ETH",
+    "name": "Ethiopia",
+    "formalName": "Federal Democratic Republic of Ethiopia",
+    "continent": "Africa",
+    "flag": "🇪🇹",
+    "lat": 9.1907,
+    "lng": 40.3718,
+    "bbox": [
+      32.95418,
+      3.42206,
+      47.78942,
+      14.95943
+    ]
+  },
+  "FI": {
+    "code": "FI",
+    "code3": "FIN",
+    "name": "Finland",
+    "formalName": "Republic of Finland",
+    "continent": "Europe",
+    "flag": "🇫🇮",
+    "lat": 65.0053,
+    "lng": 26.0808,
+    "bbox": [
+      20.645593,
+      59.846373,
+      31.516092,
+      70.164193
+    ]
+  },
+  "FJ": {
+    "code": "FJ",
+    "code3": "FJI",
+    "name": "Fiji",
+    "formalName": "Republic of Fiji",
+    "continent": "Oceania",
+    "flag": "🇫🇯",
+    "lat": -17.1544,
+    "lng": 0,
+    "bbox": [
+      -180,
+      -18.28799,
+      180,
+      -16.020882
+    ]
+  },
+  "FK": {
+    "code": "FK",
+    "code3": "FLK",
+    "name": "Falkland Is.",
+    "formalName": "Falkland Islands",
+    "continent": "South America",
+    "flag": "🇫🇰",
+    "lat": -51.7,
+    "lng": -59.475,
+    "bbox": [
+      -61.2,
+      -52.3,
+      -57.75,
+      -51.1
+    ]
+  },
+  "FR": {
+    "code": "FR",
+    "code3": "FRA",
+    "name": "France",
+    "formalName": "French Republic",
+    "continent": "Europe",
+    "flag": "🇫🇷",
+    "lat": 26.6009,
+    "lng": -22.4824,
+    "bbox": [
+      -54.524754,
+      2.053389,
+      9.560016,
+      51.148506
+    ]
+  },
+  "GA": {
+    "code": "GA",
+    "code3": "GAB",
+    "name": "Gabon",
+    "formalName": "Gabonese Republic",
+    "continent": "Africa",
+    "flag": "🇬🇦",
+    "lat": -0.826,
+    "lng": 11.6117,
+    "bbox": [
+      8.797996,
+      -3.978827,
+      14.425456,
+      2.326758
+    ]
+  },
+  "GB": {
+    "code": "GB",
+    "code3": "GBR",
+    "name": "United Kingdom",
+    "formalName": "United Kingdom of Great Britain and Northern Ireland",
+    "continent": "Europe",
+    "flag": "🇬🇧",
+    "lat": 54.2975,
+    "lng": -2.9453,
+    "bbox": [
+      -7.572168,
+      49.96,
+      1.681531,
+      58.635
+    ]
+  },
+  "GE": {
+    "code": "GE",
+    "code3": "GEO",
+    "name": "Georgia",
+    "formalName": "Georgia",
+    "continent": "Asia",
+    "flag": "🇬🇪",
+    "lat": 42.3088,
+    "lng": 43.2965,
+    "bbox": [
+      39.955009,
+      41.064445,
+      46.637908,
+      43.553104
+    ]
+  },
+  "GH": {
+    "code": "GH",
+    "code3": "GHA",
+    "name": "Ghana",
+    "formalName": "Republic of Ghana",
+    "continent": "Africa",
+    "flag": "🇬🇭",
+    "lat": 7.9044,
+    "lng": -1.0921,
+    "bbox": [
+      -3.24437,
+      4.710462,
+      1.060122,
+      11.098341
+    ]
+  },
+  "GN": {
+    "code": "GN",
+    "code3": "GIN",
+    "name": "Guinea",
+    "formalName": "Republic of Guinea",
+    "continent": "Africa",
+    "flag": "🇬🇳",
+    "lat": 9.9476,
+    "lng": -11.4812,
+    "bbox": [
+      -15.130311,
+      7.309037,
+      -7.8321,
+      12.586183
+    ]
+  },
+  "GM": {
+    "code": "GM",
+    "code3": "GMB",
+    "name": "Gambia",
+    "formalName": "Republic of the Gambia",
+    "continent": "Africa",
+    "flag": "🇬🇲",
+    "lat": 13.5034,
+    "lng": -15.3432,
+    "bbox": [
+      -16.841525,
+      13.130284,
+      -13.844963,
+      13.876492
+    ]
+  },
+  "GW": {
+    "code": "GW",
+    "code3": "GNB",
+    "name": "Guinea-Bissau",
+    "formalName": "Republic of Guinea-Bissau",
+    "continent": "Africa",
+    "flag": "🇬🇼",
+    "lat": 11.8343,
+    "lng": -15.189,
+    "bbox": [
+      -16.677452,
+      11.040412,
+      -13.700476,
+      12.62817
+    ]
+  },
+  "GQ": {
+    "code": "GQ",
+    "code3": "GNQ",
+    "name": "Eq. Guinea",
+    "formalName": "Republic of Equatorial Guinea",
+    "continent": "Africa",
+    "flag": "🇬🇶",
+    "lat": 1.647,
+    "lng": 10.2953,
+    "bbox": [
+      9.305613,
+      1.01012,
+      11.285079,
+      2.283866
+    ]
+  },
+  "GR": {
+    "code": "GR",
+    "code3": "GRC",
+    "name": "Greece",
+    "formalName": "Hellenic Republic",
+    "continent": "Europe",
+    "flag": "🇬🇷",
+    "lat": 38.3734,
+    "lng": 23.3771,
+    "bbox": [
+      20.150016,
+      34.919988,
+      26.604196,
+      41.826905
+    ]
+  },
+  "GL": {
+    "code": "GL",
+    "code3": "GRL",
+    "name": "Greenland",
+    "formalName": "Greenland",
+    "continent": "North America",
+    "flag": "🇬🇱",
+    "lat": 71.8409,
+    "lng": -42.7528,
+    "bbox": [
+      -73.297,
+      60.03676,
+      -12.20855,
+      83.64513
+    ]
+  },
+  "GT": {
+    "code": "GT",
+    "code3": "GTM",
+    "name": "Guatemala",
+    "formalName": "Republic of Guatemala",
+    "continent": "North America",
+    "flag": "🇬🇹",
+    "lat": 15.7773,
+    "lng": -90.2271,
+    "bbox": [
+      -92.229249,
+      13.735338,
+      -88.225023,
+      17.819326
+    ]
+  },
+  "GY": {
+    "code": "GY",
+    "code3": "GUY",
+    "name": "Guyana",
+    "formalName": "Co-operative Republic of Guyana",
+    "continent": "South America",
+    "flag": "🇬🇾",
+    "lat": 4.8176,
+    "lng": -58.9748,
+    "bbox": [
+      -61.410303,
+      1.268088,
+      -56.539386,
+      8.367035
+    ]
+  },
+  "HN": {
+    "code": "HN",
+    "code3": "HND",
+    "name": "Honduras",
+    "formalName": "Republic of Honduras",
+    "continent": "North America",
+    "flag": "🇭🇳",
+    "lat": 14.495,
+    "lng": -86.2503,
+    "bbox": [
+      -89.353326,
+      12.984686,
+      -83.147219,
+      16.005406
+    ]
+  },
+  "HR": {
+    "code": "HR",
+    "code3": "HRV",
+    "name": "Croatia",
+    "formalName": "Republic of Croatia",
+    "continent": "Europe",
+    "flag": "🇭🇷",
+    "lat": 44.4919,
+    "lng": 16.5237,
+    "bbox": [
+      13.656976,
+      42.479991,
+      19.390476,
+      46.503751
+    ]
+  },
+  "HT": {
+    "code": "HT",
+    "code3": "HTI",
+    "name": "Haiti",
+    "formalName": "Republic of Haiti",
+    "continent": "North America",
+    "flag": "🇭🇹",
+    "lat": 18.9733,
+    "lng": -73.0415,
+    "bbox": [
+      -74.458034,
+      18.030993,
+      -71.624873,
+      19.915684
+    ]
+  },
+  "HU": {
+    "code": "HU",
+    "code3": "HUN",
+    "name": "Hungary",
+    "formalName": "Republic of Hungary",
+    "continent": "Europe",
+    "flag": "🇭🇺",
+    "lat": 47.1917,
+    "lng": 19.4564,
+    "bbox": [
+      16.202298,
+      45.759481,
+      22.710531,
+      48.623854
+    ]
+  },
+  "ID": {
+    "code": "ID",
+    "code3": "IDN",
+    "name": "Indonesia",
+    "formalName": "Republic of Indonesia",
+    "continent": "Asia",
+    "flag": "🇮🇩",
+    "lat": -2.4401,
+    "lng": 118.1634,
+    "bbox": [
+      95.293026,
+      -10.359987,
+      141.033852,
+      5.479821
+    ]
+  },
+  "IN": {
+    "code": "IN",
+    "code3": "IND",
+    "name": "India",
+    "formalName": "Republic of India",
+    "continent": "Asia",
+    "flag": "🇮🇳",
+    "lat": 21.7298,
+    "lng": 82.7896,
+    "bbox": [
+      68.176645,
+      7.965535,
+      97.402561,
+      35.49401
+    ]
+  },
+  "IE": {
+    "code": "IE",
+    "code3": "IRL",
+    "name": "Ireland",
+    "formalName": "Ireland",
+    "continent": "Europe",
+    "flag": "🇮🇪",
+    "lat": 53.4005,
+    "lng": -8.005,
+    "bbox": [
+      -9.977086,
+      51.669301,
+      -6.032985,
+      55.131622
+    ]
+  },
+  "IR": {
+    "code": "IR",
+    "code3": "IRN",
+    "name": "Iran",
+    "formalName": "Islamic Republic of Iran",
+    "continent": "Asia",
+    "flag": "🇮🇷",
+    "lat": 32.3956,
+    "lng": 53.7129,
+    "bbox": [
+      44.109225,
+      25.078237,
+      63.316632,
+      39.713003
+    ]
+  },
+  "IQ": {
+    "code": "IQ",
+    "code3": "IRQ",
+    "name": "Iraq",
+    "formalName": "Republic of Iraq",
+    "continent": "Asia",
+    "flag": "🇮🇶",
+    "lat": 33.2421,
+    "lng": 43.6802,
+    "bbox": [
+      38.792341,
+      29.099025,
+      48.567971,
+      37.385264
+    ]
+  },
+  "IS": {
+    "code": "IS",
+    "code3": "ISL",
+    "name": "Iceland",
+    "formalName": "Republic of Iceland",
+    "continent": "Europe",
+    "flag": "🇮🇸",
+    "lat": 65.0116,
+    "lng": -18.968,
+    "bbox": [
+      -24.326184,
+      63.496383,
+      -13.609732,
+      66.526792
+    ]
+  },
+  "IL": {
+    "code": "IL",
+    "code3": "ISR",
+    "name": "Israel",
+    "formalName": "State of Israel",
+    "continent": "Asia",
+    "flag": "🇮🇱",
+    "lat": 31.3894,
+    "lng": 35.0509,
+    "bbox": [
+      34.265433,
+      29.501326,
+      35.836397,
+      33.277426
+    ]
+  },
+  "IT": {
+    "code": "IT",
+    "code3": "ITA",
+    "name": "Italy",
+    "formalName": "Italian Republic",
+    "continent": "Europe",
+    "flag": "🇮🇹",
+    "lat": 41.8677,
+    "lng": 12.6151,
+    "bbox": [
+      6.749955,
+      36.619987,
+      18.480247,
+      47.115393
+    ]
+  },
+  "JM": {
+    "code": "JM",
+    "code3": "JAM",
+    "name": "Jamaica",
+    "formalName": "Jamaica",
+    "continent": "North America",
+    "flag": "🇯🇲",
+    "lat": 18.1127,
+    "lng": -77.2687,
+    "bbox": [
+      -78.337719,
+      17.701116,
+      -76.199659,
+      18.524218
+    ]
+  },
+  "JO": {
+    "code": "JO",
+    "code3": "JOR",
+    "name": "Jordan",
+    "formalName": "Hashemite Kingdom of Jordan",
+    "continent": "Asia",
+    "flag": "🇯🇴",
+    "lat": 31.2881,
+    "lng": 37.059,
+    "bbox": [
+      34.922603,
+      29.197495,
+      39.195468,
+      33.378686
+    ]
+  },
+  "JP": {
+    "code": "JP",
+    "code3": "JPN",
+    "name": "Japan",
+    "formalName": "Japan",
+    "continent": "Asia",
+    "flag": "🇯🇵",
+    "lat": 38.2905,
+    "lng": 137.4758,
+    "bbox": [
+      129.408463,
+      31.029579,
+      145.543137,
+      45.551483
+    ]
+  },
+  "KZ": {
+    "code": "KZ",
+    "code3": "KAZ",
+    "name": "Kazakhstan",
+    "formalName": "Republic of Kazakhstan",
+    "continent": "Asia",
+    "flag": "🇰🇿",
+    "lat": 48.0238,
+    "lng": 66.9132,
+    "bbox": [
+      46.466446,
+      40.662325,
+      87.35997,
+      55.38525
+    ]
+  },
+  "KE": {
+    "code": "KE",
+    "code3": "KEN",
+    "name": "Kenya",
+    "formalName": "Republic of Kenya",
+    "continent": "Africa",
+    "flag": "🇰🇪",
+    "lat": 0.4146,
+    "lng": 37.8743,
+    "bbox": [
+      33.893569,
+      -4.67677,
+      41.855083,
+      5.506
+    ]
+  },
+  "KG": {
+    "code": "KG",
+    "code3": "KGZ",
+    "name": "Kyrgyzstan",
+    "formalName": "Kyrgyz Republic",
+    "continent": "Asia",
+    "flag": "🇰🇬",
+    "lat": 41.2889,
+    "lng": 74.8624,
+    "bbox": [
+      69.464887,
+      39.279463,
+      80.25999,
+      43.298339
+    ]
+  },
+  "KH": {
+    "code": "KH",
+    "code3": "KHM",
+    "name": "Cambodia",
+    "formalName": "Kingdom of Cambodia",
+    "continent": "Asia",
+    "flag": "🇰🇭",
+    "lat": 12.5286,
+    "lng": 104.9813,
+    "bbox": [
+      102.348099,
+      10.486544,
+      107.614548,
+      14.570584
+    ]
+  },
+  "KR": {
+    "code": "KR",
+    "code3": "KOR",
+    "name": "South Korea",
+    "formalName": "Republic of Korea",
+    "continent": "Asia",
+    "flag": "🇰🇷",
+    "lat": 36.5011,
+    "lng": 127.7929,
+    "bbox": [
+      126.117398,
+      34.390046,
+      129.468304,
+      38.612243
+    ]
+  },
+  "XK": {
+    "code": "XK",
+    "code3": "KOS",
+    "name": "Kosovo",
+    "formalName": "Republic of Kosovo",
+    "continent": "Europe",
+    "flag": "🇽🇰",
+    "lat": 42.5596,
+    "lng": 20.9229,
+    "bbox": [
+      20.0707,
+      41.84711,
+      21.77505,
+      43.27205
+    ]
+  },
+  "KW": {
+    "code": "KW",
+    "code3": "KWT",
+    "name": "Kuwait",
+    "formalName": "State of Kuwait",
+    "continent": "Asia",
+    "flag": "🇰🇼",
+    "lat": 29.2926,
+    "lng": 47.4924,
+    "bbox": [
+      46.568713,
+      28.526063,
+      48.416094,
+      30.05907
+    ]
+  },
+  "LA": {
+    "code": "LA",
+    "code3": "LAO",
+    "name": "Laos",
+    "formalName": "Lao People's Democratic Republic",
+    "continent": "Asia",
+    "flag": "🇱🇦",
+    "lat": 18.1729,
+    "lng": 103.8403,
+    "bbox": [
+      100.115988,
+      13.881091,
+      107.564525,
+      22.464753
+    ]
+  },
+  "LB": {
+    "code": "LB",
+    "code3": "LBN",
+    "name": "Lebanon",
+    "formalName": "Lebanese Republic",
+    "continent": "Asia",
+    "flag": "🇱🇧",
+    "lat": 33.867,
+    "lng": 35.8689,
+    "bbox": [
+      35.126053,
+      33.08904,
+      36.61175,
+      34.644914
+    ]
+  },
+  "LR": {
+    "code": "LR",
+    "code3": "LBR",
+    "name": "Liberia",
+    "formalName": "Republic of Liberia",
+    "continent": "Africa",
+    "flag": "🇱🇷",
+    "lat": 6.4484,
+    "lng": -9.4892,
+    "bbox": [
+      -11.438779,
+      4.355755,
+      -7.539715,
+      8.541055
+    ]
+  },
+  "LY": {
+    "code": "LY",
+    "code3": "LBY",
+    "name": "Libya",
+    "formalName": "Libya",
+    "continent": "Africa",
+    "flag": "🇱🇾",
+    "lat": 26.3587,
+    "lng": 17.2421,
+    "bbox": [
+      9.319411,
+      19.58047,
+      25.16482,
+      33.136996
+    ]
+  },
+  "LK": {
+    "code": "LK",
+    "code3": "LKA",
+    "name": "Sri Lanka",
+    "formalName": "Democratic Socialist Republic of Sri Lanka",
+    "continent": "Asia",
+    "flag": "🇱🇰",
+    "lat": 7.8962,
+    "lng": 80.7416,
+    "bbox": [
+      79.695167,
+      5.96837,
+      81.787959,
+      9.824078
+    ]
+  },
+  "LS": {
+    "code": "LS",
+    "code3": "LSO",
+    "name": "Lesotho",
+    "formalName": "Kingdom of Lesotho",
+    "continent": "Africa",
+    "flag": "🇱🇸",
+    "lat": -29.6463,
+    "lng": 28.1622,
+    "bbox": [
+      26.999262,
+      -30.645106,
+      29.325166,
+      -28.647502
+    ]
+  },
+  "LT": {
+    "code": "LT",
+    "code3": "LTU",
+    "name": "Lithuania",
+    "formalName": "Republic of Lithuania",
+    "continent": "Europe",
+    "flag": "🇱🇹",
+    "lat": 55.1391,
+    "lng": 23.822,
+    "bbox": [
+      21.0558,
+      53.905702,
+      26.588279,
+      56.372528
+    ]
+  },
+  "LU": {
+    "code": "LU",
+    "code3": "LUX",
+    "name": "Luxembourg",
+    "formalName": "Grand Duchy of Luxembourg",
+    "continent": "Europe",
+    "flag": "🇱🇺",
+    "lat": 49.7854,
+    "lng": 5.9584,
+    "bbox": [
+      5.674052,
+      49.442667,
+      6.242751,
+      50.128052
+    ]
+  },
+  "LV": {
+    "code": "LV",
+    "code3": "LVA",
+    "name": "Latvia",
+    "formalName": "Republic of Latvia",
+    "continent": "Europe",
+    "flag": "🇱🇻",
+    "lat": 56.7926,
+    "lng": 24.6163,
+    "bbox": [
+      21.0558,
+      55.615107,
+      28.176709,
+      57.970157
+    ]
+  },
+  "MA": {
+    "code": "MA",
+    "code3": "MAR",
+    "name": "Morocco",
+    "formalName": "Kingdom of Morocco",
+    "continent": "Africa",
+    "flag": "🇲🇦",
+    "lat": 28.5904,
+    "lng": -9.0725,
+    "bbox": [
+      -17.020428,
+      21.420734,
+      -1.124551,
+      35.759988
+    ]
+  },
+  "MD": {
+    "code": "MD",
+    "code3": "MDA",
+    "name": "Moldova",
+    "formalName": "Republic of Moldova",
+    "continent": "Europe",
+    "flag": "🇲🇩",
+    "lat": 46.9777,
+    "lng": 28.322,
+    "bbox": [
+      26.619337,
+      45.488283,
+      30.024659,
+      48.467119
+    ]
+  },
+  "MG": {
+    "code": "MG",
+    "code3": "MDG",
+    "name": "Madagascar",
+    "formalName": "Republic of Madagascar",
+    "continent": "Africa",
+    "flag": "🇲🇬",
+    "lat": -18.821,
+    "lng": 46.8654,
+    "bbox": [
+      43.254187,
+      -25.601434,
+      50.476537,
+      -12.040557
+    ]
+  },
+  "MX": {
+    "code": "MX",
+    "code3": "MEX",
+    "name": "Mexico",
+    "formalName": "United Mexican States",
+    "continent": "North America",
+    "flag": "🇲🇽",
+    "lat": 23.6298,
+    "lng": -101.9699,
+    "bbox": [
+      -117.12776,
+      14.538829,
+      -86.811982,
+      32.72083
+    ]
+  },
+  "MK": {
+    "code": "MK",
+    "code3": "MKD",
+    "name": "Macedonia",
+    "formalName": "Former Yugoslav Republic of Macedonia",
+    "continent": "Europe",
+    "flag": "🇲🇰",
+    "lat": 41.5815,
+    "lng": 21.7078,
+    "bbox": [
+      20.463175,
+      40.842727,
+      22.952377,
+      42.32026
+    ]
+  },
+  "ML": {
+    "code": "ML",
+    "code3": "MLI",
+    "name": "Mali",
+    "formalName": "Republic of Mali",
+    "continent": "Africa",
+    "flag": "🇲🇱",
+    "lat": 17.5355,
+    "lng": -3.9503,
+    "bbox": [
+      -12.17075,
+      10.096361,
+      4.27021,
+      24.974574
+    ]
+  },
+  "MM": {
+    "code": "MM",
+    "code3": "MMR",
+    "name": "Myanmar",
+    "formalName": "Republic of the Union of Myanmar",
+    "continent": "Asia",
+    "flag": "🇲🇲",
+    "lat": 19.1345,
+    "lng": 96.7416,
+    "bbox": [
+      92.303234,
+      9.93296,
+      101.180005,
+      28.335945
+    ]
+  },
+  "ME": {
+    "code": "ME",
+    "code3": "MNE",
+    "name": "Montenegro",
+    "formalName": "Montenegro",
+    "continent": "Europe",
+    "flag": "🇲🇪",
+    "lat": 42.7007,
+    "lng": 19.3949,
+    "bbox": [
+      18.450017,
+      41.877551,
+      20.3398,
+      43.52384
+    ]
+  },
+  "MN": {
+    "code": "MN",
+    "code3": "MNG",
+    "name": "Mongolia",
+    "formalName": "Mongolia",
+    "continent": "Asia",
+    "flag": "🇲🇳",
+    "lat": 46.8224,
+    "lng": 103.762,
+    "bbox": [
+      87.751264,
+      41.59741,
+      119.772824,
+      52.047366
+    ]
+  },
+  "MZ": {
+    "code": "MZ",
+    "code3": "MOZ",
+    "name": "Mozambique",
+    "formalName": "Republic of Mozambique",
+    "continent": "Africa",
+    "flag": "🇲🇿",
+    "lat": -18.5296,
+    "lng": 35.4775,
+    "bbox": [
+      30.179481,
+      -26.742192,
+      40.775475,
+      -10.317096
+    ]
+  },
+  "MR": {
+    "code": "MR",
+    "code3": "MRT",
+    "name": "Mauritania",
+    "formalName": "Islamic Republic of Mauritania",
+    "continent": "Africa",
+    "flag": "🇲🇷",
+    "lat": 21.0063,
+    "lng": -10.9934,
+    "bbox": [
+      -17.063423,
+      14.616834,
+      -4.923337,
+      27.395744
+    ]
+  },
+  "MW": {
+    "code": "MW",
+    "code3": "MWI",
+    "name": "Malawi",
+    "formalName": "Republic of Malawi",
+    "continent": "Africa",
+    "flag": "🇲🇼",
+    "lat": -13.0159,
+    "lng": 34.23,
+    "bbox": [
+      32.688165,
+      -16.8013,
+      35.771905,
+      -9.230599
+    ]
+  },
+  "MY": {
+    "code": "MY",
+    "code3": "MYS",
+    "name": "Malaysia",
+    "formalName": "Malaysia",
+    "continent": "Asia",
+    "flag": "🇲🇾",
+    "lat": 3.8506,
+    "lng": 109.6338,
+    "bbox": [
+      100.085757,
+      0.773131,
+      119.181904,
+      6.928053
+    ]
+  },
+  "NA": {
+    "code": "NA",
+    "code3": "NAM",
+    "name": "Namibia",
+    "formalName": "Republic of Namibia",
+    "continent": "Africa",
+    "flag": "🇳🇦",
+    "lat": -22.9934,
+    "lng": 18.4093,
+    "bbox": [
+      11.734199,
+      -29.045462,
+      25.084443,
+      -16.941343
+    ]
+  },
+  "NE": {
+    "code": "NE",
+    "code3": "NER",
+    "name": "Niger",
+    "formalName": "Republic of Niger",
+    "continent": "Africa",
+    "flag": "🇳🇪",
+    "lat": 17.5659,
+    "lng": 8.0994,
+    "bbox": [
+      0.295646,
+      11.660167,
+      15.903247,
+      23.471668
+    ]
+  },
+  "NG": {
+    "code": "NG",
+    "code3": "NGA",
+    "name": "Nigeria",
+    "formalName": "Federal Republic of Nigeria",
+    "continent": "Africa",
+    "flag": "🇳🇬",
+    "lat": 9.0533,
+    "lng": 8.6344,
+    "bbox": [
+      2.691702,
+      4.240594,
+      14.577178,
+      13.865924
+    ]
+  },
+  "NI": {
+    "code": "NI",
+    "code3": "NIC",
+    "name": "Nicaragua",
+    "formalName": "Republic of Nicaragua",
+    "continent": "North America",
+    "flag": "🇳🇮",
+    "lat": 12.8716,
+    "lng": -85.4079,
+    "bbox": [
+      -87.668493,
+      10.726839,
+      -83.147219,
+      15.016267
+    ]
+  },
+  "NL": {
+    "code": "NL",
+    "code3": "NLD",
+    "name": "Netherlands",
+    "formalName": "Kingdom of the Netherlands",
+    "continent": "Europe",
+    "flag": "🇳🇱",
+    "lat": 52.1571,
+    "lng": 5.2035,
+    "bbox": [
+      3.314971,
+      50.803721,
+      7.092053,
+      53.510403
+    ]
+  },
+  "NO": {
+    "code": "NO",
+    "code3": "NOR",
+    "name": "Norway",
+    "formalName": "Kingdom of Norway",
+    "continent": "Europe",
+    "flag": "🇳🇴",
+    "lat": 69.368,
+    "lng": 18.1427,
+    "bbox": [
+      4.992078,
+      58.078884,
+      31.293418,
+      80.657144
+    ]
+  },
+  "NP": {
+    "code": "NP",
+    "code3": "NPL",
+    "name": "Nepal",
+    "formalName": "Nepal",
+    "continent": "Asia",
+    "flag": "🇳🇵",
+    "lat": 28.4103,
+    "lng": 84.1316,
+    "bbox": [
+      80.088425,
+      26.397898,
+      88.174804,
+      30.422717
+    ]
+  },
+  "NZ": {
+    "code": "NZ",
+    "code3": "NZL",
+    "name": "New Zealand",
+    "formalName": "New Zealand",
+    "continent": "Oceania",
+    "flag": "🇳🇿",
+    "lat": -40.5459,
+    "lng": 172.5131,
+    "bbox": [
+      166.509144,
+      -46.641235,
+      178.517094,
+      -34.450662
+    ]
+  },
+  "OM": {
+    "code": "OM",
+    "code3": "OMN",
+    "name": "Oman",
+    "formalName": "Sultanate of Oman",
+    "continent": "Asia",
+    "flag": "🇴🇲",
+    "lat": 21.5235,
+    "lng": 55.904,
+    "bbox": [
+      52.00001,
+      16.651051,
+      59.80806,
+      26.395934
+    ]
+  },
+  "PK": {
+    "code": "PK",
+    "code3": "PAK",
+    "name": "Pakistan",
+    "formalName": "Islamic Republic of Pakistan",
+    "continent": "Asia",
+    "flag": "🇵🇰",
+    "lat": 30.4125,
+    "lng": 69.3558,
+    "bbox": [
+      60.874248,
+      23.691965,
+      77.837451,
+      37.133031
+    ]
+  },
+  "PA": {
+    "code": "PA",
+    "code3": "PAN",
+    "name": "Panama",
+    "formalName": "Republic of Panama",
+    "continent": "North America",
+    "flag": "🇵🇦",
+    "lat": 8.4161,
+    "lng": -80.1042,
+    "bbox": [
+      -82.965783,
+      7.220541,
+      -77.242566,
+      9.61161
+    ]
+  },
+  "PE": {
+    "code": "PE",
+    "code3": "PER",
+    "name": "Peru",
+    "formalName": "Republic of Peru",
+    "continent": "South America",
+    "flag": "🇵🇪",
+    "lat": -9.2026,
+    "lng": -75.038,
+    "bbox": [
+      -81.410943,
+      -18.347975,
+      -68.66508,
+      -0.057205
+    ]
+  },
+  "PH": {
+    "code": "PH",
+    "code3": "PHL",
+    "name": "Philippines",
+    "formalName": "Republic of the Philippines",
+    "continent": "Asia",
+    "flag": "🇵🇭",
+    "lat": 12.0431,
+    "lng": 121.8558,
+    "bbox": [
+      117.174275,
+      5.581003,
+      126.537424,
+      18.505227
+    ]
+  },
+  "PG": {
+    "code": "PG",
+    "code3": "PNG",
+    "name": "Papua New Guinea",
+    "formalName": "Independent State of Papua New Guinea",
+    "continent": "Oceania",
+    "flag": "🇵🇬",
+    "lat": -6.5762,
+    "lng": 148.5101,
+    "bbox": [
+      141.00021,
+      -10.652476,
+      156.019965,
+      -2.500002
+    ]
+  },
+  "PL": {
+    "code": "PL",
+    "code3": "POL",
+    "name": "Poland",
+    "formalName": "Republic of Poland",
+    "continent": "Europe",
+    "flag": "🇵🇱",
+    "lat": 51.9395,
+    "lng": 19.0523,
+    "bbox": [
+      14.074521,
+      49.027395,
+      24.029986,
+      54.851536
+    ]
+  },
+  "PR": {
+    "code": "PR",
+    "code3": "PRI",
+    "name": "Puerto Rico",
+    "formalName": "Commonwealth of Puerto Rico",
+    "continent": "North America",
+    "flag": "🇵🇷",
+    "lat": 18.2336,
+    "lng": -66.4167,
+    "bbox": [
+      -67.242428,
+      17.946553,
+      -65.591004,
+      18.520601
+    ]
+  },
+  "KP": {
+    "code": "KP",
+    "code3": "PRK",
+    "name": "North Korea",
+    "formalName": "Democratic People's Republic of Korea",
+    "continent": "Asia",
+    "flag": "🇰🇵",
+    "lat": 40.3272,
+    "lng": 127.5228,
+    "bbox": [
+      124.265625,
+      37.669071,
+      130.780007,
+      42.985387
+    ]
+  },
+  "PT": {
+    "code": "PT",
+    "code3": "PRT",
+    "name": "Portugal",
+    "formalName": "Portuguese Republic",
+    "continent": "Europe",
+    "flag": "🇵🇹",
+    "lat": 39.5594,
+    "lng": -7.9578,
+    "bbox": [
+      -9.526571,
+      36.838269,
+      -6.389088,
+      42.280469
+    ]
+  },
+  "PY": {
+    "code": "PY",
+    "code3": "PRY",
+    "name": "Paraguay",
+    "formalName": "Republic of Paraguay",
+    "continent": "South America",
+    "flag": "🇵🇾",
+    "lat": -23.4456,
+    "lng": -58.489,
+    "bbox": [
+      -62.685057,
+      -27.548499,
+      -54.29296,
+      -19.342747
+    ]
+  },
+  "PS": {
+    "code": "PS",
+    "code3": "PSE",
+    "name": "Palestine",
+    "formalName": "West Bank and Gaza",
+    "continent": "Asia",
+    "flag": "🇵🇸",
+    "lat": 31.943,
+    "lng": 35.2365,
+    "bbox": [
+      34.927408,
+      31.353435,
+      35.545665,
+      32.532511
+    ]
+  },
+  "QA": {
+    "code": "QA",
+    "code3": "QAT",
+    "name": "Qatar",
+    "formalName": "State of Qatar",
+    "continent": "Asia",
+    "flag": "🇶🇦",
+    "lat": 25.3355,
+    "lng": 51.1753,
+    "bbox": [
+      50.743911,
+      24.556331,
+      51.6067,
+      26.114582
+    ]
+  },
+  "RO": {
+    "code": "RO",
+    "code3": "ROU",
+    "name": "Romania",
+    "formalName": "Romania",
+    "continent": "Europe",
+    "flag": "🇷🇴",
+    "lat": 45.9547,
+    "lng": 24.9234,
+    "bbox": [
+      20.220192,
+      43.688445,
+      29.626543,
+      48.220881
+    ]
+  },
+  "RU": {
+    "code": "RU",
+    "code3": "RUS",
+    "name": "Russia",
+    "formalName": "Russian Federation",
+    "continent": "Europe",
+    "flag": "🇷🇺",
+    "lat": 61.2009,
+    "lng": 0,
+    "bbox": [
+      -180,
+      41.151416,
+      180,
+      81.2504
+    ]
+  },
+  "RW": {
+    "code": "RW",
+    "code3": "RWA",
+    "name": "Rwanda",
+    "formalName": "Republic of Rwanda",
+    "continent": "Africa",
+    "flag": "🇷🇼",
+    "lat": -2.0263,
+    "lng": 29.9205,
+    "bbox": [
+      29.024926,
+      -2.917858,
+      30.816135,
+      -1.134659
+    ]
+  },
+  "EH": {
+    "code": "EH",
+    "code3": "ESH",
+    "name": "W. Sahara",
+    "formalName": "Sahrawi Arab Democratic Republic",
+    "continent": "Africa",
+    "flag": "🇪🇭",
+    "lat": 24.3281,
+    "lng": -12.8643,
+    "bbox": [
+      -17.063423,
+      20.999752,
+      -8.665124,
+      27.656426
+    ]
+  },
+  "SA": {
+    "code": "SA",
+    "code3": "SAU",
+    "name": "Saudi Arabia",
+    "formalName": "Kingdom of Saudi Arabia",
+    "continent": "Asia",
+    "flag": "🇸🇦",
+    "lat": 24.2544,
+    "lng": 45.1495,
+    "bbox": [
+      34.632336,
+      16.347891,
+      55.666659,
+      32.161009
+    ]
+  },
+  "SD": {
+    "code": "SD",
+    "code3": "SDN",
+    "name": "Sudan",
+    "formalName": "Republic of the Sudan",
+    "continent": "Africa",
+    "flag": "🇸🇩",
+    "lat": 15.1146,
+    "lng": 30.1734,
+    "bbox": [
+      21.93681,
+      8.229188,
+      38.41009,
+      22
+    ]
+  },
+  "SS": {
+    "code": "SS",
+    "code3": "SSD",
+    "name": "S. Sudan",
+    "formalName": "Republic of South Sudan",
+    "continent": "Africa",
+    "flag": "🇸🇸",
+    "lat": 7.8786,
+    "lng": 29.5925,
+    "bbox": [
+      23.88698,
+      3.509172,
+      35.298007,
+      12.248008
+    ]
+  },
+  "SN": {
+    "code": "SN",
+    "code3": "SEN",
+    "name": "Senegal",
+    "formalName": "Republic of Senegal",
+    "continent": "Africa",
+    "flag": "🇸🇳",
+    "lat": 14.4652,
+    "lng": -14.5465,
+    "bbox": [
+      -17.625043,
+      12.33209,
+      -11.467899,
+      16.598264
+    ]
+  },
+  "SB": {
+    "code": "SB",
+    "code3": "SLB",
+    "name": "Solomon Is.",
+    "formalName": "Solomon Is.",
+    "continent": "Oceania",
+    "flag": "🇸🇧",
+    "lat": -8.7129,
+    "lng": 159.445,
+    "bbox": [
+      156.491358,
+      -10.826367,
+      162.398646,
+      -6.599338
+    ]
+  },
+  "SL": {
+    "code": "SL",
+    "code3": "SOL",
+    "name": "Somaliland",
+    "formalName": "Republic of Somaliland",
+    "continent": "Africa",
+    "flag": "🇸🇱",
+    "lat": 9.7295,
+    "lng": 45.7535,
+    "bbox": [
+      42.55876,
+      7.99688,
+      48.948206,
+      11.46204
+    ]
+  },
+  "SV": {
+    "code": "SV",
+    "code3": "SLV",
+    "name": "El Salvador",
+    "formalName": "Republic of El Salvador",
+    "continent": "North America",
+    "flag": "🇸🇻",
+    "lat": 13.7866,
+    "lng": -88.9095,
+    "bbox": [
+      -90.095555,
+      13.149017,
+      -87.723503,
+      14.424133
+    ]
+  },
+  "SO": {
+    "code": "SO",
+    "code3": "SOM",
+    "name": "Somalia",
+    "formalName": "Federal Republic of Somalia",
+    "continent": "Africa",
+    "flag": "🇸🇴",
+    "lat": 5.1707,
+    "lng": 46.0575,
+    "bbox": [
+      40.98105,
+      -1.68325,
+      51.13387,
+      12.02464
+    ]
+  },
+  "RS": {
+    "code": "RS",
+    "code3": "SRB",
+    "name": "Serbia",
+    "formalName": "Republic of Serbia",
+    "continent": "Europe",
+    "flag": "🇷🇸",
+    "lat": 44.2085,
+    "lng": 20.9079,
+    "bbox": [
+      18.829825,
+      42.245224,
+      22.986019,
+      46.17173
+    ]
+  },
+  "SR": {
+    "code": "SR",
+    "code3": "SUR",
+    "name": "Suriname",
+    "formalName": "Republic of Suriname",
+    "continent": "South America",
+    "flag": "🇸🇷",
+    "lat": 3.9215,
+    "lng": -56.0014,
+    "bbox": [
+      -58.044694,
+      1.817667,
+      -53.958045,
+      6.025291
+    ]
+  },
+  "SK": {
+    "code": "SK",
+    "code3": "SVK",
+    "name": "Slovakia",
+    "formalName": "Slovak Republic",
+    "continent": "Europe",
+    "flag": "🇸🇰",
+    "lat": 48.665,
+    "lng": 19.7191,
+    "bbox": [
+      16.879983,
+      47.758429,
+      22.558138,
+      49.571574
+    ]
+  },
+  "SI": {
+    "code": "SI",
+    "code3": "SVN",
+    "name": "Slovenia",
+    "formalName": "Republic of Slovenia",
+    "continent": "Europe",
+    "flag": "🇸🇮",
+    "lat": 46.1524,
+    "lng": 15.1315,
+    "bbox": [
+      13.69811,
+      45.452316,
+      16.564808,
+      46.852386
+    ]
+  },
+  "SE": {
+    "code": "SE",
+    "code3": "SWE",
+    "name": "Sweden",
+    "formalName": "Kingdom of Sweden",
+    "continent": "Europe",
+    "flag": "🇸🇪",
+    "lat": 62.234,
+    "lng": 17.4654,
+    "bbox": [
+      11.027369,
+      55.361737,
+      23.903379,
+      69.106247
+    ]
+  },
+  "SZ": {
+    "code": "SZ",
+    "code3": "SWZ",
+    "name": "Swaziland",
+    "formalName": "Kingdom of Swaziland",
+    "continent": "Africa",
+    "flag": "🇸🇿",
+    "lat": -26.473,
+    "lng": 31.3741,
+    "bbox": [
+      30.676609,
+      -27.285879,
+      32.071665,
+      -25.660191
+    ]
+  },
+  "SY": {
+    "code": "SY",
+    "code3": "SYR",
+    "name": "Syria",
+    "formalName": "Syrian Arab Republic",
+    "continent": "Asia",
+    "flag": "🇸🇾",
+    "lat": 34.7714,
+    "lng": 39.0252,
+    "bbox": [
+      35.700798,
+      32.312938,
+      42.349591,
+      37.229873
+    ]
+  },
+  "TD": {
+    "code": "TD",
+    "code3": "TCD",
+    "name": "Chad",
+    "formalName": "Republic of Chad",
+    "continent": "Africa",
+    "flag": "🇹🇩",
+    "lat": 15.4158,
+    "lng": 18.7136,
+    "bbox": [
+      13.540394,
+      7.421925,
+      23.88689,
+      23.40972
+    ]
+  },
+  "TG": {
+    "code": "TG",
+    "code3": "TGO",
+    "name": "Togo",
+    "formalName": "Togolese Republic",
+    "continent": "Africa",
+    "flag": "🇹🇬",
+    "lat": 8.4738,
+    "lng": 0.9077,
+    "bbox": [
+      -0.049785,
+      5.928837,
+      1.865241,
+      11.018682
+    ]
+  },
+  "TH": {
+    "code": "TH",
+    "code3": "THA",
+    "name": "Thailand",
+    "formalName": "Kingdom of Thailand",
+    "continent": "Asia",
+    "flag": "🇹🇭",
+    "lat": 13.0546,
+    "lng": 101.4825,
+    "bbox": [
+      97.375896,
+      5.691384,
+      105.589039,
+      20.41785
+    ]
+  },
+  "TJ": {
+    "code": "TJ",
+    "code3": "TJK",
+    "name": "Tajikistan",
+    "formalName": "Republic of Tajikistan",
+    "continent": "Asia",
+    "flag": "🇹🇯",
+    "lat": 38.8492,
+    "lng": 71.2111,
+    "bbox": [
+      67.44222,
+      36.738171,
+      74.980002,
+      40.960213
+    ]
+  },
+  "TM": {
+    "code": "TM",
+    "code3": "TKM",
+    "name": "Turkmenistan",
+    "formalName": "Turkmenistan",
+    "continent": "Asia",
+    "flag": "🇹🇲",
+    "lat": 39.0111,
+    "lng": 59.5243,
+    "bbox": [
+      52.50246,
+      35.270664,
+      66.54615,
+      42.751551
+    ]
+  },
+  "TL": {
+    "code": "TL",
+    "code3": "TLS",
+    "name": "Timor-Leste",
+    "formalName": "Democratic Republic of Timor-Leste",
+    "continent": "Asia",
+    "flag": "🇹🇱",
+    "lat": -8.8333,
+    "lng": 126.1523,
+    "bbox": [
+      124.968682,
+      -9.393173,
+      127.335928,
+      -8.273345
+    ]
+  },
+  "TT": {
+    "code": "TT",
+    "code3": "TTO",
+    "name": "Trinidad and Tobago",
+    "formalName": "Republic of Trinidad and Tobago",
+    "continent": "North America",
+    "flag": "🇹🇹",
+    "lat": 10.445,
+    "lng": -61.4225,
+    "bbox": [
+      -61.95,
+      10,
+      -60.895,
+      10.89
+    ]
+  },
+  "TN": {
+    "code": "TN",
+    "code3": "TUN",
+    "name": "Tunisia",
+    "formalName": "Republic of Tunisia",
+    "continent": "Africa",
+    "flag": "🇹🇳",
+    "lat": 33.8288,
+    "lng": 9.5066,
+    "bbox": [
+      7.524482,
+      30.307556,
+      11.488787,
+      37.349994
+    ]
+  },
+  "TR": {
+    "code": "TR",
+    "code3": "TUR",
+    "name": "Turkey",
+    "formalName": "Republic of Turkey",
+    "continent": "Asia",
+    "flag": "🇹🇷",
+    "lat": 38.9815,
+    "lng": 35.4187,
+    "bbox": [
+      26.043351,
+      35.821535,
+      44.79399,
+      42.141485
+    ]
+  },
+  "TW": {
+    "code": "TW",
+    "code3": "TWN",
+    "name": "Taiwan",
+    "formalName": "Taiwan",
+    "continent": "Asia",
+    "flag": "🇹🇼",
+    "lat": 23.633,
+    "lng": 121.0287,
+    "bbox": [
+      120.106189,
+      21.970571,
+      121.951244,
+      25.295459
+    ]
+  },
+  "TZ": {
+    "code": "TZ",
+    "code3": "TZA",
+    "name": "Tanzania",
+    "formalName": "United Republic of Tanzania",
+    "continent": "Africa",
+    "flag": "🇹🇿",
+    "lat": -6.3355,
+    "lng": 34.8283,
+    "bbox": [
+      29.339998,
+      -11.720938,
+      40.31659,
+      -0.95
+    ]
+  },
+  "UG": {
+    "code": "UG",
+    "code3": "UGA",
+    "name": "Uganda",
+    "formalName": "Republic of Uganda",
+    "continent": "Africa",
+    "flag": "🇺🇬",
+    "lat": 1.4033,
+    "lng": 32.3077,
+    "bbox": [
+      29.579466,
+      -1.443322,
+      35.03599,
+      4.249885
+    ]
+  },
+  "UA": {
+    "code": "UA",
+    "code3": "UKR",
+    "name": "Ukraine",
+    "formalName": "Ukraine",
+    "continent": "Europe",
+    "flag": "🇺🇦",
+    "lat": 48.8142,
+    "lng": 31.0832,
+    "bbox": [
+      22.085608,
+      45.293308,
+      40.080789,
+      52.335075
+    ]
+  },
+  "UY": {
+    "code": "UY",
+    "code3": "URY",
+    "name": "Uruguay",
+    "formalName": "Oriental Republic of Uruguay",
+    "continent": "South America",
+    "flag": "🇺🇾",
+    "lat": -32.5312,
+    "lng": -55.8183,
+    "bbox": [
+      -58.427074,
+      -34.952647,
+      -53.209589,
+      -30.109686
+    ]
+  },
+  "US": {
+    "code": "US",
+    "code3": "USA",
+    "name": "United States of America",
+    "formalName": "United States of America",
+    "continent": "North America",
+    "flag": "🇺🇸",
+    "lat": 45.137,
+    "lng": -119.3779,
+    "bbox": [
+      -171.791111,
+      18.91619,
+      -66.96466,
+      71.357764
+    ]
+  },
+  "UZ": {
+    "code": "UZ",
+    "code3": "UZB",
+    "name": "Uzbekistan",
+    "formalName": "Republic of Uzbekistan",
+    "continent": "Asia",
+    "flag": "🇺🇿",
+    "lat": 41.3659,
+    "lng": 64.4922,
+    "bbox": [
+      55.928917,
+      37.144994,
+      73.055417,
+      45.586804
+    ]
+  },
+  "VE": {
+    "code": "VE",
+    "code3": "VEN",
+    "name": "Venezuela",
+    "formalName": "Bolivarian Republic of Venezuela",
+    "continent": "South America",
+    "flag": "🇻🇪",
+    "lat": 6.4434,
+    "lng": -66.5316,
+    "bbox": [
+      -73.304952,
+      0.724452,
+      -59.758285,
+      12.162307
+    ]
+  },
+  "VN": {
+    "code": "VN",
+    "code3": "VNM",
+    "name": "Vietnam",
+    "formalName": "Socialist Republic of Vietnam",
+    "continent": "Asia",
+    "flag": "🇻🇳",
+    "lat": 15.9759,
+    "lng": 105.7529,
+    "bbox": [
+      102.170436,
+      8.59976,
+      109.33527,
+      23.352063
+    ]
+  },
+  "VU": {
+    "code": "VU",
+    "code3": "VUT",
+    "name": "Vanuatu",
+    "formalName": "Republic of Vanuatu",
+    "continent": "Oceania",
+    "flag": "🇻🇺",
+    "lat": -15.6122,
+    "lng": 167.237,
+    "bbox": [
+      166.629137,
+      -16.59785,
+      167.844877,
+      -14.626497
+    ]
+  },
+  "YE": {
+    "code": "YE",
+    "code3": "YEM",
+    "name": "Yemen",
+    "formalName": "Republic of Yemen",
+    "continent": "Asia",
+    "flag": "🇾🇪",
+    "lat": 15.793,
+    "lng": 47.8567,
+    "bbox": [
+      42.604873,
+      12.58595,
+      53.108573,
+      19.000003
+    ]
+  },
+  "ZA": {
+    "code": "ZA",
+    "code3": "ZAF",
+    "name": "South Africa",
+    "formalName": "Republic of South Africa",
+    "continent": "Africa",
+    "flag": "🇿🇦",
+    "lat": -28.4552,
+    "lng": 24.5875,
+    "bbox": [
+      16.344977,
+      -34.819166,
+      32.83012,
+      -22.091313
+    ]
+  },
+  "ZM": {
+    "code": "ZM",
+    "code3": "ZMB",
+    "name": "Zambia",
+    "formalName": "Republic of Zambia",
+    "continent": "Africa",
+    "flag": "🇿🇲",
+    "lat": -13.0997,
+    "lng": 27.6868,
+    "bbox": [
+      21.887843,
+      -17.961229,
+      33.485688,
+      -8.238257
+    ]
+  },
+  "ZW": {
+    "code": "ZW",
+    "code3": "ZWE",
+    "name": "Zimbabwe",
+    "formalName": "Republic of Zimbabwe",
+    "continent": "Africa",
+    "flag": "🇿🇼",
+    "lat": -18.8897,
+    "lng": 29.057,
+    "bbox": [
+      25.264226,
+      -22.271612,
+      32.849861,
+      -15.507787
+    ]
+  }
+}
