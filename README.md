@@ -22,27 +22,6 @@ Inspired by games like GeoGuessr and Heardle — Jingle combines music trivia wi
 - **Database** — Supabase (optional, falls back to localStorage)
 - **Styling** — Tailwind CSS
 
-## Getting Started
-
-```bash
-# clone the repo
-git clone https://github.com/Sohaib04/Jingle.git
-cd Jingle
-
-# install dependencies
-bun install
-# or: npm install
-
-# copy env template (optional — app works without it)
-cp .env.example .env.local
-
-# start dev server
-bun dev
-# or: npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to play.
-
 ## Environment Variables
 
 All environment variables are optional. Without them the app uses local audio previews and localStorage for persistence.
