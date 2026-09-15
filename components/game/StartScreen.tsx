@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { Difficulty } from "@/lib/game/types";
-import { Headphones, Play, Radio, Satellite, Sparkles, Zap, Loader2 } from "lucide-react";
+import { Headphones, Play, Satellite, Sparkles, Zap, Loader2, Music } from "lucide-react";
 
 export default function StartScreen() {
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -20,20 +20,41 @@ export default function StartScreen() {
     <div className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-6 pointer-events-none safe-bottom safe-top">
       <div className="radio-panel max-w-lg w-full rounded-3xl border border-white/15 p-5 sm:p-8 shadow-2xl space-y-5 sm:space-y-6 pointer-events-auto animate-in fade-in zoom-in-95 duration-400">
         {/* Brand Header */}
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <Radio className="w-3.5 h-3.5 animate-pulse" />
-            <span>Planetary Audio Observatory</span>
+        <div className="text-center">
+          {/* Upper Badge */}
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] sm:text-xs font-mono font-bold tracking-widest uppercase shadow-sm mb-3">
+            <Music className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+            <span>Global Music Trivia</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl font-black tracking-tight text-white flex items-center justify-center space-x-1">
-            <span>JIN</span>
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(16,185,129,0.35)]">
-              GLE
-            </span>
-          </h1>
+          {/* Logo with Musical Note Crown */}
+          <div className="relative pt-7 pb-1 flex items-center justify-center">
+            <h1 className="text-5xl sm:text-6xl font-black tracking-normal inline-flex items-center select-none">
+              <span className="text-white">J</span>
+              <span className="relative text-white inline-block">
+                I
+                {/* Clearly positioned musical note with ample headroom */}
+                <span className="absolute -top-6 left-1/2 -translate-x-1/2 pointer-events-none">
+                  <Music className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 stroke-[2.5] drop-shadow-[0_0_12px_rgba(16,185,129,0.9)] animate-pulse" />
+                </span>
+              </span>
+              <span className="text-white">N</span>
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(16,185,129,0.35)]">
+                GLE
+              </span>
+            </h1>
+          </div>
 
-          <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-sm mx-auto leading-relaxed">
+          {/* Audio Wave Visualizer Accent */}
+          <div className="flex items-center justify-center space-x-1 h-3 my-2.5 opacity-70">
+            <span className="w-1 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="w-1 h-3 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: "150ms" }} />
+            <span className="w-1 h-4 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: "300ms" }} />
+            <span className="w-1 h-3 bg-emerald-300 rounded-full animate-pulse" style={{ animationDelay: "450ms" }} />
+            <span className="w-1 h-2 bg-emerald-500 rounded-full animate-pulse" style={{ animationDelay: "200ms" }} />
+          </div>
+
+          <p className="text-xs sm:text-sm text-slate-300 font-normal max-w-sm mx-auto leading-relaxed mt-2">
             Tune into radio frequencies across the globe. Listen to the track, spin the satellite Earth, and identify the country.
           </p>
         </div>

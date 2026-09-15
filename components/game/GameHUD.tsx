@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { getStreakTier } from "@/lib/game/streak";
-import { Volume2, Volume1, VolumeX, Flame, RotateCcw } from "lucide-react";
+import { Volume2, Volume1, VolumeX, Flame, RotateCcw, Music } from "lucide-react";
 
 export default function GameHUD() {
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -45,8 +45,9 @@ export default function GameHUD() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
-            <span className="font-bold tracking-widest text-xs sm:text-sm bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-              JINGLE
+            <span className="flex items-center space-x-1 font-bold tracking-widest text-xs sm:text-sm bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+              <Music className="w-3.5 h-3.5 text-emerald-400 inline" />
+              <span>JINGLE</span>
             </span>
             <span className="hidden md:inline-block text-[10px] uppercase font-mono tracking-widest text-emerald-400/90 pl-1 border-l border-white/10">
               ON AIR
