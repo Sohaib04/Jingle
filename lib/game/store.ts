@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { GameStatus, Difficulty, SongTrack, RoundResult, GameSummary } from "./types";
+import { GameStatus, Difficulty, SongTrack, RoundResult, GameSummary, GlobeViewMode } from "./types";
 import { CountryMetadata, getCountry } from "@/lib/geo/countries";
 import { calculateRoundScore, DEFAULT_SCORING_CONFIG } from "./scoring";
 import { calculateNextStreak, getStreakMultiplier } from "./streak";
@@ -20,11 +20,15 @@ export interface GameState {
   latestResult: RoundResult | null;
   playbackState: PlaybackState;
   difficulty: Difficulty;
+  globeViewMode: GlobeViewMode;
+  isAutoRotating: boolean;
 
   // Actions
   startGame: (difficulty?: Difficulty) => Promise<void>;
   hoverCountry: (country: CountryMetadata | null) => void;
   selectCountry: (country: CountryMetadata) => void;
+  setGlobeViewMode: (mode: GlobeViewMode) => void;
+  toggleAutoRotate: () => void;
   submitGuess: () => void;
   nextRound: () => void;
   resetGame: () => void;
@@ -57,6 +61,11 @@ export const useGameStore = create<GameState>((set, get) => {
     latestResult: null,
     playbackState: defaultMusicProvider.getPlaybackState(),
     difficulty: "easy",
+    globeViewMode:
+      (typeof window !== "undefined" &&
+        (localStorage.getItem("jingle_globe_view") as GlobeViewMode)) ||
+      "satellite",
+    isAutoRotating: true,
 
     startGame: async (difficulty: Difficulty = "easy") => {
       set({
@@ -90,7 +99,9 @@ export const useGameStore = create<GameState>((set, get) => {
     },
 
     hoverCountry: (country) => {
-      if (get().gameStatus === "playing" || get().gameStatus === "guessing") {
+      const { gameStatus, hoveredCountry } = get();
+      if (gameStatus === "playing" || gameStatus === "guessing") {
+        if (hoveredCountry?.code === country?.code) return;
         set({ hoveredCountry: country });
       }
     },
@@ -103,6 +114,19 @@ export const useGameStore = create<GameState>((set, get) => {
           gameStatus: "guessing",
         });
       }
+    },
+
+    setGlobeViewMode: (mode) => {
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem("jingle_globe_view", mode);
+        } catch {}
+      }
+      set({ globeViewMode: mode });
+    },
+
+    toggleAutoRotate: () => {
+      set((s) => ({ isAutoRotating: !s.isAutoRotating }));
     },
 
     submitGuess: () => {

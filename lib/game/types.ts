@@ -11,6 +11,8 @@ export type GameStatus =
 
 export type Difficulty = "easy" | "medium" | "hard";
 
+export type GlobeViewMode = "satellite" | "dark" | "night";
+
 export interface SongTrack {
   id: string;
   title: string;

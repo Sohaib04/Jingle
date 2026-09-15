@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useGameStore } from "@/lib/game/store";
-import { Play, Pause, Music2, Disc, Clock } from "lucide-react";
+import { Play, Pause, Radio, Disc, Clock } from "lucide-react";
 import Image from "next/image";
 
 export default function SongPlayer() {
@@ -22,111 +22,112 @@ export default function SongPlayer() {
   const timerWarning = timeRemaining <= 5;
 
   return (
-    <div className="fixed top-18 left-4 sm:top-20 sm:left-6 z-20 pointer-events-auto">
-      <div className="glass-panel p-3 sm:p-3.5 rounded-2xl border border-white/10 shadow-2xl flex items-center space-x-3 sm:space-x-4 max-w-[340px] transition-all duration-300">
-        {/* Album Artwork / Vinyl */}
-        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-800 flex-shrink-0 border border-white/10 shadow-inner group">
+    <div className="fixed top-14 left-3 right-3 sm:top-20 sm:left-6 sm:right-auto z-20 pointer-events-auto">
+      <div className="radio-panel p-2.5 sm:p-3.5 rounded-2xl border border-white/10 shadow-2xl flex items-center space-x-3 sm:space-x-4 max-w-full sm:max-w-[340px] transition-all duration-300">
+        {/* Album Artwork / Vinyl Disk */}
+        <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 border border-white/10 shadow-inner group">
           {isRevealed ? (
             <Image
               src={currentSong.albumArt}
               alt={currentSong.title}
               fill
               unoptimized
-              sizes="(max-width: 640px) 56px, 64px"
+              sizes="(max-width: 640px) 48px, 64px"
               className="object-cover transition-opacity duration-500"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center relative">
+            <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center relative">
               {/* Spinning vinyl disk effect */}
               <div
-                className={`w-12 h-12 rounded-full border border-cyan-500/20 bg-slate-900/80 flex items-center justify-center ${
+                className={`w-9 h-9 sm:w-12 sm:h-12 rounded-full border border-emerald-500/30 bg-slate-950 flex items-center justify-center ${
                   playbackState.isPlaying ? "animate-spin" : ""
                 }`}
-                style={{ animationDuration: "4s" }}
+                style={{ animationDuration: "3.5s" }}
               >
-                <div className="w-4 h-4 rounded-full bg-cyan-500/30 border border-cyan-400/50 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500/20 border border-emerald-400/60 flex items-center justify-center">
+                  <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-emerald-300 shadow-[0_0_4px_#10b981]" />
                 </div>
               </div>
-              <Disc className="absolute w-6 h-6 text-cyan-400/40" />
+              <Disc className="absolute w-5 h-5 sm:w-6 sm:h-6 text-emerald-400/40" />
             </div>
           )}
 
-          {/* Play/Pause hover button */}
+          {/* Play/Pause hover overlay */}
           <button
             onClick={togglePlayPause}
-            className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity backdrop-blur-[2px]"
-            title={playbackState.isPlaying ? "Pause" : "Play"}
+            className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity backdrop-blur-[2px] cursor-pointer"
+            title={playbackState.isPlaying ? "Pause Stream" : "Resume Stream"}
+            aria-label={playbackState.isPlaying ? "Pause audio stream" : "Play audio stream"}
           >
             {playbackState.isPlaying ? (
-              <Pause className="w-5 h-5 text-white fill-current" />
+              <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current" />
             ) : (
-              <Play className="w-5 h-5 text-white fill-current ml-0.5" />
+              <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current ml-0.5" />
             )}
           </button>
         </div>
 
         {/* Track Info & Visualizer */}
-        <div className="flex-1 min-w-0 pr-1">
+        <div className="flex-1 min-w-0 pr-0.5">
           {isRevealed ? (
             <div className="space-y-0.5">
-              <h4 className="text-sm font-bold text-white truncate">
+              <h4 className="text-xs sm:text-sm font-bold text-white truncate">
                 {currentSong.title}
               </h4>
-              <p className="text-xs text-cyan-300 font-medium truncate">
+              <p className="text-[11px] sm:text-xs text-emerald-300 font-medium truncate">
                 {currentSong.artist}
               </p>
             </div>
           ) : (
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               <div className="flex items-center space-x-1.5">
-                <Music2 className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-                <span className="text-xs font-semibold text-slate-200 tracking-wide uppercase">
-                  Mystery Track
+                <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
+                <span className="text-[10px] sm:text-xs font-mono font-bold text-emerald-400 tracking-wider uppercase">
+                  FREQUENCY: BROADCASTING
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 truncate">
-                Identify the country of origin
+              <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">
+                Pinpoint the broadcast origin on Earth
               </p>
             </div>
           )}
 
-          {/* Audio Equalizer & Timer Bar */}
-          <div className="mt-2 flex items-center justify-between space-x-3">
-            {/* Waveform Equalizer */}
-            <div className="flex items-end space-x-1 h-5">
+          {/* Audio Equalizer & Countdown Timer */}
+          <div className="mt-1.5 sm:mt-2 flex items-center justify-between space-x-2">
+            {/* GPU-Accelerated Waveform Equalizer */}
+            <div className="flex items-end space-x-1 h-4 sm:h-5">
               <span
-                className={`w-1 bg-cyan-400 rounded-full ${
-                  playbackState.isPlaying ? "audio-bar-1" : "h-1 opacity-40"
+                className={`w-1 bg-emerald-400 rounded-full h-full ${
+                  playbackState.isPlaying ? "audio-bar-1" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
-                className={`w-1 bg-cyan-300 rounded-full ${
-                  playbackState.isPlaying ? "audio-bar-2" : "h-1 opacity-40"
+                className={`w-1 bg-teal-400 rounded-full h-full ${
+                  playbackState.isPlaying ? "audio-bar-2" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
-                className={`w-1 bg-cyan-400 rounded-full ${
-                  playbackState.isPlaying ? "audio-bar-3" : "h-1 opacity-40"
+                className={`w-1 bg-cyan-400 rounded-full h-full ${
+                  playbackState.isPlaying ? "audio-bar-3" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
-                className={`w-1 bg-cyan-200 rounded-full ${
-                  playbackState.isPlaying ? "audio-bar-4" : "h-1 opacity-40"
+                className={`w-1 bg-emerald-300 rounded-full h-full ${
+                  playbackState.isPlaying ? "audio-bar-4" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
-                className={`w-1 bg-cyan-500 rounded-full ${
-                  playbackState.isPlaying ? "audio-bar-5" : "h-1 opacity-40"
+                className={`w-1 bg-emerald-500 rounded-full h-full ${
+                  playbackState.isPlaying ? "audio-bar-5" : "scale-y-[0.2] opacity-40"
                 }`}
               />
             </div>
 
             {/* Countdown timer pill */}
             <div
-              className={`flex items-center space-x-1 px-2 py-0.5 rounded-full text-xs font-mono font-bold transition-colors ${
+              className={`flex items-center space-x-1 px-2 py-0.5 rounded-full text-[11px] sm:text-xs font-mono font-bold transition-all duration-200 ${
                 timerWarning
-                  ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse"
+                  ? "bg-rose-500/25 text-rose-300 border border-rose-500/50 animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.4)]"
                   : "bg-white/5 text-slate-300 border border-white/10"
               }`}
             >

@@ -33,10 +33,13 @@ export default function GlobeInner() {
   const [countriesData, setCountriesData] = useState<CountryFeature[]>([]);
   const [hasLoadedData, setHasLoadedData] = useState(false);
 
+  // Store subscriptions
   const gameStatus = useGameStore((s) => s.gameStatus);
   const selectedCountry = useGameStore((s) => s.selectedCountry);
   const hoveredCountry = useGameStore((s) => s.hoveredCountry);
   const latestResult = useGameStore((s) => s.latestResult);
+  const globeViewMode = useGameStore((s) => s.globeViewMode);
+  const isAutoRotating = useGameStore((s) => s.isAutoRotating);
   const hoverCountry = useGameStore((s) => s.hoverCountry);
   const selectCountry = useGameStore((s) => s.selectCountry);
 
@@ -75,22 +78,48 @@ export default function GlobeInner() {
     };
   }, []);
 
-  // Configure OrbitControls and camera defaults
+  // Configure OrbitControls and camera defaults with Radio Garden smooth damping
   useEffect(() => {
     if (globeRef.current) {
       const controls = globeRef.current.controls();
       if (controls) {
         controls.enableDamping = true;
-        controls.dampingFactor = 0.08;
-        controls.rotateSpeed = 0.7;
-        controls.zoomSpeed = 0.8;
-        controls.minDistance = 150;
-        controls.maxDistance = 500;
-        controls.autoRotate = gameStatus === "idle";
-        controls.autoRotateSpeed = 0.5;
+        controls.dampingFactor = 0.05; // Silky Radio Garden momentum
+        controls.rotateSpeed = 0.65;
+        controls.zoomSpeed = 0.75;
+        controls.minDistance = 130;
+        controls.maxDistance = 460;
+        controls.autoRotate = gameStatus === "idle" && isAutoRotating;
+        controls.autoRotateSpeed = 0.4;
       }
     }
-  }, [hasLoadedData, gameStatus]);
+  }, [hasLoadedData, gameStatus, isAutoRotating]);
+
+  // Listen to custom zoom & recenter events from GlobeControls
+  useEffect(() => {
+    const handleZoom = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (globeRef.current) {
+        const pov = globeRef.current.pointOfView();
+        const deltaAlt = detail?.delta > 0 ? 0.35 : -0.35;
+        const newAlt = Math.max(0.4, Math.min(3.8, pov.altitude + deltaAlt));
+        globeRef.current.pointOfView({ altitude: newAlt }, 400);
+      }
+    };
+
+    const handleRecenter = () => {
+      if (globeRef.current) {
+        globeRef.current.pointOfView({ lat: 20, lng: 0, altitude: 2.2 }, 900);
+      }
+    };
+
+    window.addEventListener("globe:zoom", handleZoom);
+    window.addEventListener("globe:recenter", handleRecenter);
+    return () => {
+      window.removeEventListener("globe:zoom", handleZoom);
+      window.removeEventListener("globe:recenter", handleRecenter);
+    };
+  }, []);
 
   // Handle camera fly-to on answer reveal
   useEffect(() => {
@@ -101,9 +130,9 @@ export default function GlobeInner() {
         {
           lat: actualCountry.lat,
           lng: actualCountry.lng,
-          altitude: 1.8,
+          altitude: 1.6,
         },
-        1400
+        1300
       );
     }
   }, [gameStatus, latestResult]);
@@ -130,10 +159,17 @@ export default function GlobeInner() {
     return [];
   }, [gameStatus, latestResult]);
 
-  // Helper to resolve CountryMetadata from feature
+  // Fast memoized lookup cache for features
+  const featureToCountryMap = useRef<WeakMap<CountryFeature, CountryMetadata | null>>(new WeakMap());
+
   const resolveCountry = useCallback((feat: CountryFeature): CountryMetadata | undefined => {
+    if (featureToCountryMap.current.has(feat)) {
+      return featureToCountryMap.current.get(feat) || undefined;
+    }
     const code = feat.properties?.ISO_A2 || feat.properties?.NAME || feat.properties?.ADMIN;
-    return code ? getCountry(String(code)) : undefined;
+    const country = code ? getCountry(String(code)) : undefined;
+    featureToCountryMap.current.set(feat, country || null);
+    return country;
   }, []);
 
   // Handlers for hover & click
@@ -167,49 +203,92 @@ export default function GlobeInner() {
     [gameStatus, selectCountry, resolveCountry]
   );
 
-  // Styling accessor functions
+  // Satellite vs Dark vs Night texture & styling configurations
+  const globeConfig = useMemo(() => {
+    switch (globeViewMode) {
+      case "satellite":
+        return {
+          globeImage: "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
+          bumpImage: "//unpkg.com/three-globe/example/img/earth-topology.png",
+          atmosphereColor: "#38bdf8",
+          atmosphereAltitude: 0.17,
+          strokeColor: "rgba(255, 255, 255, 0.22)",
+          sideColor: "rgba(16, 185, 129, 0.1)",
+        };
+      case "night":
+        return {
+          globeImage: "//unpkg.com/three-globe/example/img/earth-night.jpg",
+          bumpImage: "//unpkg.com/three-globe/example/img/earth-topology.png",
+          atmosphereColor: "#f59e0b",
+          atmosphereAltitude: 0.14,
+          strokeColor: "rgba(255, 255, 255, 0.18)",
+          sideColor: "rgba(245, 158, 11, 0.1)",
+        };
+      case "dark":
+      default:
+        return {
+          globeImage: "//unpkg.com/three-globe/example/img/earth-dark.jpg",
+          bumpImage: "//unpkg.com/three-globe/example/img/earth-topology.png",
+          atmosphereColor: "#0284c7",
+          atmosphereAltitude: 0.15,
+          strokeColor: "rgba(255, 255, 255, 0.12)",
+          sideColor: "rgba(10, 15, 24, 0.4)",
+        };
+    }
+  }, [globeViewMode]);
+
+  // Styling accessor functions (Translucent in satellite view for photorealistic look)
   const getPolygonCapColor = useCallback(
     (featObj: object): string => {
       const feat = featObj as CountryFeature;
       const country = resolveCountry(feat);
-      if (!country) return "rgba(18, 24, 38, 0.75)";
+      const isSat = globeViewMode === "satellite";
+      const isNight = globeViewMode === "night";
+
+      const defaultColor = isSat
+        ? "rgba(0, 0, 0, 0.04)"
+        : isNight
+        ? "rgba(10, 14, 20, 0.35)"
+        : "rgba(14, 20, 32, 0.72)";
+
+      if (!country) return defaultColor;
 
       // In reveal or roundResult state: highlight answer in green and guess in red
       if (gameStatus === "revealing" || gameStatus === "roundResult") {
         if (latestResult) {
           if (country.code === latestResult.actualCountry.code) {
-            return "rgba(16, 185, 129, 0.9)"; // Emerald green
+            return "rgba(16, 185, 129, 0.85)"; // Vivid Emerald green
           }
           if (
             latestResult.guessedCountry &&
             country.code === latestResult.guessedCountry.code
           ) {
-            return "rgba(239, 68, 68, 0.9)"; // Crimson red
+            return "rgba(239, 68, 68, 0.85)"; // Vivid Crimson red
           }
         }
-        return "rgba(18, 24, 38, 0.65)";
+        return isSat ? "rgba(0, 0, 0, 0.25)" : "rgba(14, 20, 32, 0.6)";
       }
 
       // Selected country state
       if (selectedCountry && country.code === selectedCountry.code) {
-        return "rgba(37, 99, 235, 0.85)"; // Vibrant blue
+        return "rgba(37, 99, 235, 0.75)"; // Vibrant electric blue
       }
 
-      // Hovered country state
+      // Hovered country state (Radio Garden green-cyan beacon glow)
       if (hoveredCountry && country.code === hoveredCountry.code) {
-        return "rgba(56, 189, 248, 0.65)"; // Light cyan
+        return isSat ? "rgba(34, 197, 94, 0.5)" : "rgba(56, 189, 248, 0.6)";
       }
 
-      return "rgba(18, 24, 38, 0.75)";
+      return defaultColor;
     },
-    [gameStatus, latestResult, selectedCountry, hoveredCountry, resolveCountry]
+    [gameStatus, latestResult, selectedCountry, hoveredCountry, resolveCountry, globeViewMode]
   );
 
   const getPolygonAltitude = useCallback(
     (featObj: object): number => {
       const feat = featObj as CountryFeature;
       const country = resolveCountry(feat);
-      if (!country) return 0.01;
+      if (!country) return 0.008;
 
       if (gameStatus === "revealing" || gameStatus === "roundResult") {
         if (
@@ -217,20 +296,20 @@ export default function GlobeInner() {
           (country.code === latestResult.actualCountry.code ||
             (latestResult.guessedCountry && country.code === latestResult.guessedCountry.code))
         ) {
-          return 0.055;
+          return 0.05;
         }
-        return 0.01;
+        return 0.008;
       }
 
       if (selectedCountry && country.code === selectedCountry.code) {
-        return 0.045;
+        return 0.04;
       }
 
       if (hoveredCountry && country.code === hoveredCountry.code) {
-        return 0.025;
+        return 0.022;
       }
 
-      return 0.01;
+      return 0.008;
     },
     [gameStatus, latestResult, selectedCountry, hoveredCountry, resolveCountry]
   );
@@ -245,17 +324,18 @@ export default function GlobeInner() {
         width={dimensions.width}
         height={dimensions.height}
         backgroundColor="rgba(0, 0, 0, 0)"
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-        bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+        globeImageUrl={globeConfig.globeImage}
+        bumpImageUrl={globeConfig.bumpImage}
         showAtmosphere={true}
-        atmosphereColor="#0284c7"
-        atmosphereAltitude={0.16}
+        atmosphereColor={globeConfig.atmosphereColor}
+        atmosphereAltitude={globeConfig.atmosphereAltitude}
         polygonsData={countriesData}
         polygonCapColor={getPolygonCapColor}
-        polygonSideColor={() => "rgba(10, 15, 24, 0.4)"}
-        polygonStrokeColor={() => "rgba(255, 255, 255, 0.12)"}
+        polygonSideColor={() => globeConfig.sideColor}
+        polygonStrokeColor={() => globeConfig.strokeColor}
         polygonAltitude={getPolygonAltitude}
         polygonCapCurvatureResolution={2}
+        polygonsTransitionDuration={150}
         onPolygonHover={handlePolygonHover}
         onPolygonClick={handlePolygonClick}
         arcsData={arcsData}

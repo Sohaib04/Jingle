@@ -33,7 +33,7 @@ export default function FinalScore() {
         particleCount: 90,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#06b6d4", "#10b981", "#3b82f6", "#f59e0b", "#ec4899"],
+        colors: ["#10b981", "#06b6d4", "#3b82f6", "#f59e0b", "#14b8a6"],
       });
     }
   }, [gameStatus]);
@@ -54,7 +54,7 @@ export default function FinalScore() {
 
   // Share result formatter
   function handleShare() {
-    const summaryText = `🌐 Jingle Classic Mode\n🏆 Score: ${totalScore.toLocaleString()} pts\n🎯 Accuracy: ${exactMatches}/${roundResults.length} Exact\n🔥 Best Streak: ${bestStreak}\n✈️ Distance: ${formatDistance(totalDistance)}\n\nPlay Jingle at: https://jingle.game`;
+    const summaryText = `🌐 Jingle — World Audio Observatory\n🏆 Score: ${totalScore.toLocaleString()} pts\n🎯 Accuracy: ${exactMatches}/${roundResults.length} Exact\n🔥 Best Streak: ${bestStreak}\n✈️ Total Distance: ${formatDistance(totalDistance)}\n\nPlay Jingle at: https://jingle.game`;
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(summaryText);
@@ -64,71 +64,71 @@ export default function FinalScore() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
-      <div className="glass-panel max-w-xl w-full rounded-3xl border border-white/15 p-6 sm:p-8 shadow-2xl space-y-6 text-center">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-300 safe-top safe-bottom">
+      <div className="radio-panel max-w-xl w-full rounded-3xl border border-white/15 p-5 sm:p-8 shadow-2xl space-y-5 sm:space-y-6 text-center my-auto">
         {/* Trophy icon & header */}
-        <div className="space-y-2">
-          <div className="inline-flex p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10 animate-bounce">
-            <Trophy className="w-8 h-8" />
+        <div className="space-y-1.5 sm:space-y-2">
+          <div className="inline-flex p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/10 animate-bounce">
+            <Trophy className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
-          <h2 className="text-xs font-bold text-cyan-400 tracking-widest uppercase">
-            Game Complete
-          </h2>
-          <div className="text-5xl sm:text-6xl font-black tracking-tight text-white tabular-nums">
+          <div className="text-[11px] font-mono font-bold text-emerald-400 tracking-widest uppercase">
+            Planetary Session Report
+          </div>
+          <div className="text-4xl sm:text-6xl font-black tracking-tight text-white tabular-nums drop-shadow-[0_0_20px_rgba(16,185,129,0.3)]">
             {totalScore.toLocaleString()}
           </div>
           <p className="text-xs text-slate-400">Total Points Earned</p>
         </div>
 
         {/* Stats 4-Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
-          <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-left">
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-0.5 sm:space-y-1">
             <div className="flex items-center space-x-1.5 text-slate-400 text-xs font-medium">
               <Award className="w-3.5 h-3.5 text-emerald-400" />
               <span>Exact</span>
             </div>
-            <div className="text-lg font-bold text-white tabular-nums">
+            <div className="text-base sm:text-lg font-bold text-white tabular-nums">
               {exactMatches} / {roundResults.length}
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-0.5 sm:space-y-1">
             <div className="flex items-center space-x-1.5 text-slate-400 text-xs font-medium">
               <Flame className="w-3.5 h-3.5 text-amber-400" />
-              <span>Best Streak</span>
+              <span>Streak</span>
             </div>
-            <div className="text-lg font-bold text-white tabular-nums">
+            <div className="text-base sm:text-lg font-bold text-white tabular-nums">
               {bestStreak}
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-0.5 sm:space-y-1">
             <div className="flex items-center space-x-1.5 text-slate-400 text-xs font-medium">
               <Navigation className="w-3.5 h-3.5 text-cyan-400" />
               <span>Distance</span>
             </div>
-            <div className="text-lg font-bold text-white tabular-nums truncate">
+            <div className="text-base sm:text-lg font-bold text-white tabular-nums truncate">
               {totalDistance.toLocaleString()} km
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-0.5 sm:space-y-1">
             <div className="flex items-center space-x-1.5 text-slate-400 text-xs font-medium">
-              <Timer className="w-3.5 h-3.5 text-purple-400" />
+              <Timer className="w-3.5 h-3.5 text-teal-400" />
               <span>Avg Speed</span>
             </div>
-            <div className="text-lg font-bold text-white tabular-nums">
+            <div className="text-base sm:text-lg font-bold text-white tabular-nums">
               {avgTime}s
             </div>
           </div>
         </div>
 
         {/* Round by Round Breakdown */}
-        <div className="space-y-2 text-left">
-          <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">
-            Round History
+        <div className="space-y-1.5 text-left">
+          <h4 className="text-[11px] sm:text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider px-1">
+            Broadcast Log
           </h4>
-          <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1">
+          <div className="max-h-44 sm:max-h-48 overflow-y-auto space-y-1.5 pr-1">
             {roundResults.map((r, i) => (
               <div
                 key={i}
@@ -146,7 +146,7 @@ export default function FinalScore() {
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-3 text-right flex-shrink-0">
+                <div className="flex items-center space-x-2 sm:space-x-3 text-right flex-shrink-0">
                   <span className="text-[11px] text-slate-400">
                     {r.isExact ? (
                       <span className="text-emerald-400 font-bold">Exact</span>
@@ -154,7 +154,7 @@ export default function FinalScore() {
                       `${r.distanceKm.toLocaleString()} km`
                     )}
                   </span>
-                  <span className="font-bold text-cyan-300 tabular-nums">
+                  <span className="font-bold text-emerald-300 tabular-nums">
                     +{r.totalScore.toLocaleString()}
                   </span>
                 </div>
@@ -164,39 +164,39 @@ export default function FinalScore() {
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-2.5 pt-2">
+        <div className="space-y-2 sm:space-y-2.5 pt-1">
           <button
             onClick={() => startGame()}
-            className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-base shadow-xl shadow-cyan-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
-            <RotateCcw className="w-5 h-5" />
+            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
             <span>Play Again</span>
           </button>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => {
                 setShowDailyToast(true);
                 setTimeout(() => setShowDailyToast(false), 2500);
               }}
-              className="py-3 px-4 rounded-xl glass-panel hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center space-x-2 cursor-pointer"
+              className="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl radio-pill hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center space-x-1.5 cursor-pointer"
             >
-              <Calendar className="w-4 h-4 text-cyan-400" />
+              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
               <span>Daily Challenge</span>
             </button>
 
             <button
               onClick={handleShare}
-              className="py-3 px-4 rounded-xl glass-panel hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center space-x-2 cursor-pointer"
+              className="py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl radio-pill hover:bg-white/10 text-slate-300 hover:text-white text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center space-x-1.5 cursor-pointer"
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
+                  <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                   <span className="text-emerald-300">Copied!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-slate-400" />
+                  <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />
                   <span>Share Result</span>
                 </>
               )}
@@ -206,7 +206,7 @@ export default function FinalScore() {
 
         {showDailyToast && (
           <div className="text-xs text-amber-300 bg-amber-500/10 border border-amber-500/30 py-2 px-3 rounded-xl animate-in fade-in duration-200">
-            🌅 Daily Challenge drops every day at 00:00 UTC. Check back soon!
+            🌅 Daily Challenge resets at 00:00 UTC. Check back soon!
           </div>
         )}
       </div>
