@@ -3,7 +3,7 @@ import { GameStatus, Difficulty, SongTrack, RoundResult, GameSummary } from "./t
 import { CountryMetadata, getCountry } from "@/lib/geo/countries";
 import { calculateRoundScore, DEFAULT_SCORING_CONFIG } from "./scoring";
 import { calculateNextStreak, getStreakMultiplier } from "./streak";
-import { defaultMusicProvider, PreviewMusicProvider } from "@/lib/music/preview-provider";
+import { defaultMusicProvider, ITunesMusicProvider } from "@/lib/music/itunes-provider";
 import { PlaybackState } from "@/lib/music/provider";
 
 export interface GameState {
@@ -164,7 +164,7 @@ export const useGameStore = create<GameState>((set, get) => {
       };
 
       // Sound cue
-      if (defaultMusicProvider instanceof PreviewMusicProvider) {
+      if (defaultMusicProvider instanceof ITunesMusicProvider) {
         if (scoreResult.isExact || scoreResult.distanceKm < 1000) {
           defaultMusicProvider.playSuccessChime();
         } else {

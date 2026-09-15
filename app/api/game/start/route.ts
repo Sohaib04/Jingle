@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { defaultMusicProvider } from "@/lib/music/preview-provider";
+import { defaultMusicProvider } from "@/lib/music/itunes-provider";
 
 export async function POST(request: Request) {
   try {
