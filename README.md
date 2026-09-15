@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jingle
+
+A music geography game built with Next.js and Three.js. Listen to a song, guess where it's from, and see how close you get on a 3D satellite globe.
+
+Inspired by games like GeoGuessr and Heardle — Jingle combines music trivia with geography in a single, interactive experience.
+
+## How It Works
+
+1. A mystery song plays from somewhere in the world
+2. Spin the 3D globe and select the country you think it's from
+3. Scoring is based on distance accuracy, response time, and streak multiplier
+4. Play through 10 rounds and aim for the top score
+
+## Tech Stack
+
+- **Framework** — Next.js (App Router)
+- **3D Globe** — Three.js / react-globe.gl with custom night-mode shader
+- **State** — Zustand
+- **Music** — iTunes preview API with Web Audio API synth fallback
+- **Database** — Supabase (optional, falls back to localStorage)
+- **Styling** — Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# clone the repo
+git clone https://github.com/Sohaib04/Jingle.git
+cd Jingle
+
+# install dependencies
+bun install
+# or: npm install
+
+# copy env template (optional — app works without it)
+cp .env.example .env.local
+
+# start dev server
 bun dev
+# or: npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to play.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All environment variables are optional. Without them the app uses local audio previews and localStorage for persistence.
 
-## Learn More
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL for score persistence |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key |
 
-To learn more about Next.js, take a look at the following resources:
+See [`.env.example`](.env.example) for the full template.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  api/game/         # Game session API routes (start, finish)
+  page.tsx           # Main game page
+  layout.tsx         # Root layout with metadata
+components/
+  game/              # HUD, song player, guess bar, results, start screen
+  globe/             # 3D globe with satellite/night views and controls
+lib/
+  game/              # Scoring engine, state store, types
+  geo/               # Country data, haversine distance
+  music/             # Music providers (iTunes, preview, Spotify stub)
+  supabase/          # Client + schema
+public/
+  audio/             # Placeholder WAV tracks
+  data/              # GeoJSON country boundaries
+  images/            # Globe textures
+```
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
