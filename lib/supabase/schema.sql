@@ -1,5 +1,5 @@
 -- ==========================================================
--- GeoTune Database Schema (Supabase / PostgreSQL)
+-- Jingle Database Schema (Supabase / PostgreSQL)
 -- ==========================================================
 
 -- 1. Countries table

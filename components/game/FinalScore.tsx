@@ -54,7 +54,7 @@ export default function FinalScore() {
 
   // Share result formatter
   function handleShare() {
-    const summaryText = `🌐 GeoTune Classic Mode\n🏆 Score: ${totalScore.toLocaleString()} pts\n🎯 Accuracy: ${exactMatches}/${roundResults.length} Exact\n🔥 Best Streak: ${bestStreak}\n✈️ Distance: ${formatDistance(totalDistance)}\n\nTest your ear at GeoTune!`;
+    const summaryText = `🌐 Jingle Classic Mode\n🏆 Score: ${totalScore.toLocaleString()} pts\n🎯 Accuracy: ${exactMatches}/${roundResults.length} Exact\n🔥 Best Streak: ${bestStreak}\n✈️ Distance: ${formatDistance(totalDistance)}\n\nPlay Jingle at: https://jingle.game`;
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(summaryText);

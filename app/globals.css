@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08090d;
+  --background: #05070b;
   --foreground: #f8fafc;
-  --panel: #0f141d;
+  --panel: #0b0f17;
   --panel-border: rgba(255, 255, 255, 0.08);
   --accent-cyan: #06b6d4;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
+  --radio-green: #22c55e;
+  --radio-glow: rgba(34, 197, 94, 0.4);
 }
 
 @theme inline {
@@ -24,83 +26,145 @@ body {
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   user-select: none;
   -webkit-user-select: none;
+  overflow: hidden;
+  touch-action: manipulation;
 }
 
-/* Custom scrollbar */
+/* Custom sleek scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #08090d;
+  background: rgba(5, 7, 11, 0.6);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.28);
 }
 
-/* Glassmorphism & Card styling */
+/* Radio Garden & Glassmorphism Panels */
 .glass-panel {
-  background: rgba(15, 20, 29, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 15, 23, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
 }
 
 .glass-panel-subtle {
-  background: rgba(15, 20, 29, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(11, 15, 23, 0.52);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Keyframe Animations */
-@keyframes pulse-subtle {
+.radio-panel {
+  background: radial-gradient(120% 120% at 50% 0%, rgba(20, 28, 42, 0.85) 0%, rgba(7, 10, 16, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+.radio-pill {
+  background: rgba(14, 20, 30, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Radio frequency / telemetry monospace tag */
+.telemetry-tag {
+  font-family: var(--font-geist-mono), monospace;
+  letter-spacing: 0.08em;
+}
+
+/* GPU-Accelerated Keyframe Animations (Zero Reflow) */
+@keyframes audio-bar-transform {
   0%, 100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes radio-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
     opacity: 1;
-    transform: scale(1);
+    box-shadow: 0 0 16px rgba(34, 197, 94, 0.6);
   }
-  50% {
-    opacity: 0.85;
-    transform: scale(0.98);
+  100% {
+    transform: scale(0.95);
+    opacity: 0.9;
   }
 }
 
-@keyframes audio-bar {
-  0%, 100% {
-    height: 4px;
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
   }
-  50% {
-    height: 20px;
+  100% {
+    transform: rotate(360deg);
   }
 }
 
 @keyframes glow-fire {
   0%, 100% {
-    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.45));
   }
   50% {
-    filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.8));
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.8));
   }
 }
 
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s ease-in-out infinite;
+.animate-radio-pulse {
+  animation: radio-pulse 2.2s ease-in-out infinite;
 }
 
 .animate-glow-fire {
   animation: glow-fire 2s ease-in-out infinite;
 }
 
-/* Audio wave bar animations with staggered delays */
-.audio-bar-1 { animation: audio-bar 0.8s ease-in-out infinite; }
-.audio-bar-2 { animation: audio-bar 0.6s ease-in-out 0.15s infinite; }
-.audio-bar-3 { animation: audio-bar 0.9s ease-in-out 0.3s infinite; }
-.audio-bar-4 { animation: audio-bar 0.7s ease-in-out 0.45s infinite; }
-.audio-bar-5 { animation: audio-bar 0.85s ease-in-out 0.2s infinite; }
+/* Audio wave bar animations with GPU scaleY & staggered delays */
+.audio-bar-1 {
+  transform-origin: bottom;
+  animation: audio-bar-transform 0.8s ease-in-out infinite;
+}
+.audio-bar-2 {
+  transform-origin: bottom;
+  animation: audio-bar-transform 0.6s ease-in-out 0.15s infinite;
+}
+.audio-bar-3 {
+  transform-origin: bottom;
+  animation: audio-bar-transform 0.9s ease-in-out 0.3s infinite;
+}
+.audio-bar-4 {
+  transform-origin: bottom;
+  animation: audio-bar-transform 0.7s ease-in-out 0.45s infinite;
+}
+.audio-bar-5 {
+  transform-origin: bottom;
+  animation: audio-bar-transform 0.85s ease-in-out 0.2s infinite;
+}
+
+/* Safe area insets for mobile edge-to-edge screens */
+.safe-bottom {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.safe-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}

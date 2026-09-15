@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#08090d",
+  themeColor: "#05070b",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -21,13 +21,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "GeoTune — Global Music Trivia Game",
-  description: "Listen to the music. Guess the country on an interactive 3D globe. Test your global ear and build your streak in GeoTune.",
-  keywords: ["GeoTune", "music trivia", "geography game", "3D globe", "world music", "GeoGuessr for music"],
-  authors: [{ name: "GeoTune" }],
+  title: "Jingle — World Audio Observatory & Geography Game",
+  description: "Explore the planet through sound. Spin the 3D satellite globe, tune into world music frequencies, and test your geography ear in Jingle.",
+  keywords: ["Jingle", "Radio Garden", "globle", "heardle", "geoguessr", "music trivia", "satellite globe", "3D globe", "world music"],
+  authors: [{ name: "Jingle" }],
   openGraph: {
-    title: "GeoTune — Global Music Trivia Game",
-    description: "Listen to the music. Guess the country on an interactive 3D globe.",
+    title: "Jingle — World Audio Observatory & Geography Game",
+    description: "Explore the planet through sound. Spin the 3D globe, tune into world music, and test your geography ear.",
     type: "website",
   },
 };

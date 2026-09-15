@@ -4,7 +4,7 @@ import { MOCK_GLOBAL_SONGS } from "./mock-data";
 
 export class PreviewMusicProvider implements IMusicProvider {
   readonly id = "preview";
-  readonly name = "GeoTune Audio Previews";
+  readonly name = "Jingle Audio Previews";
 
   private audio: HTMLAudioElement | null = null;
   private audioContext: AudioContext | null = null;

@@ -26,10 +26,10 @@ export default function StartScreen() {
             <span>3D Music Geography</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white flex items-center justify-center space-x-2">
-            <span>GEO</span>
+          <h1 className="text-5xl sm:text-6xl font-black tracking-tight text-white flex items-center justify-center space-x-1">
+            <span>JIN</span>
             <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
-              TUNE
+              GLE
             </span>
           </h1>
 

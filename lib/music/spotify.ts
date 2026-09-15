@@ -4,7 +4,7 @@
  * NOTE ON SPOTIFY DEVELOPER POLICY:
  * Current Spotify developer policy places explicit restrictions on streaming integrations
  * and prohibits building commercial games/trivia quizzes using the Spotify Platform.
- * GeoTune uses a provider-agnostic architecture where this module is completely isolated.
+ * Jingle uses a provider-agnostic architecture where this module is completely isolated.
  * Do NOT extract audio, circumvent DRM, or expose client secrets in browser code.
  */
 

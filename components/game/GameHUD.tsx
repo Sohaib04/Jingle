@@ -43,7 +43,7 @@ export default function GameHUD() {
           <div className="flex items-center space-x-2 glass-panel px-3.5 py-1.5 rounded-full border border-white/10 shadow-lg">
             <Globe2 className="w-4 h-4 text-cyan-400 animate-spin-slow" />
             <span className="font-bold tracking-wider text-sm bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              GEOTUNE
+              JINGLE
             </span>
           </div>
           <button

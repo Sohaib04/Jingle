@@ -60,15 +60,15 @@ export async function saveGameResult(summary: GameSummary): Promise<void> {
   // Graceful local storage fallback
   if (typeof window !== "undefined" && window.localStorage) {
     try {
-      const existingRaw = localStorage.getItem("geotune_recent_games");
+      const existingRaw = localStorage.getItem("jingle_recent_games") || localStorage.getItem("geotune_recent_games");
       const list = existingRaw ? JSON.parse(existingRaw) : [];
       list.unshift(summary);
-      localStorage.setItem("geotune_recent_games", JSON.stringify(list.slice(0, 20)));
+      localStorage.setItem("jingle_recent_games", JSON.stringify(list.slice(0, 20)));
 
       // Update high score
-      const currentHighScore = Number(localStorage.getItem("geotune_high_score") || "0");
+      const currentHighScore = Number(localStorage.getItem("jingle_high_score") || localStorage.getItem("geotune_high_score") || "0");
       if (summary.totalScore > currentHighScore) {
-        localStorage.setItem("geotune_high_score", String(summary.totalScore));
+        localStorage.setItem("jingle_high_score", String(summary.totalScore));
       }
     } catch {
       // ignore storage errors
