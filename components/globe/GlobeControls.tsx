@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { GlobeViewMode } from "@/lib/game/types";
 import {
@@ -20,6 +20,16 @@ export default function GlobeControls() {
   const isAutoRotating = useGameStore((s) => s.isAutoRotating);
   const toggleAutoRotate = useGameStore((s) => s.toggleAutoRotate);
   const gameStatus = useGameStore((s) => s.gameStatus);
+
+  // Restore saved view mode on client mount without hydration mismatch
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("jingle_globe_view") as GlobeViewMode;
+      if (saved && (saved === "satellite" || saved === "dark" || saved === "night")) {
+        setGlobeViewMode(saved);
+      }
+    } catch {}
+  }, [setGlobeViewMode]);
 
   const handleZoom = (delta: number) => {
     window.dispatchEvent(new CustomEvent("globe:zoom", { detail: { delta } }));

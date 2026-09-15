@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Globe, { GlobeMethods } from "react-globe.gl";
+import * as THREE from "three";
 import { useGameStore } from "@/lib/game/store";
 import { getCountry, CountryMetadata } from "@/lib/geo/countries";
 
@@ -265,6 +266,94 @@ export default function GlobeInner() {
     []
   );
 
+  // Track active globe view mode in a ref for synchronous onBeforeRender shader checks
+  const currentViewModeRef = useRef(globeViewMode);
+  useEffect(() => {
+    currentViewModeRef.current = globeViewMode;
+  }, [globeViewMode]);
+
+  // Preload all globe textures on mount for instantaneous, lag-free view switching
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    loader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+    loader.load("//unpkg.com/three-globe/example/img/earth-dark.jpg");
+    loader.load("/images/BlackMarble_2016_3km.jpg");
+  }, []);
+
+  // Dynamic uniforms to control night lights contrast and brightness in custom Three.js shader
+  const nightUniforms = useRef({
+    uIsNight: { value: 0 },
+  });
+
+  // Enhanced globe material with custom shader for vibrant, high-contrast night lights
+  const customGlobeMaterial = useMemo(() => {
+    const mat = new THREE.MeshPhongMaterial({
+      shininess: 15,
+    });
+
+    // Per-frame guard: ensure night shader logic ONLY runs when the night texture is actively bound to mat.map.
+    // This completely eliminates any visual artifact where the daytime satellite map would flash through the night shader.
+    mat.onBeforeRender = () => {
+      const mapSrc = (mat.map?.image as HTMLImageElement | undefined)?.src || "";
+      const isNightTextureActive =
+        currentViewModeRef.current === "night" &&
+        (mapSrc.includes("BlackMarble") || mapSrc.includes("earth-night"));
+
+      nightUniforms.current.uIsNight.value = isNightTextureActive ? 1.0 : 0.0;
+    };
+
+    mat.onBeforeCompile = (shader) => {
+      shader.uniforms.uIsNight = nightUniforms.current.uIsNight;
+
+      // Inject uniform declaration in fragment shader
+      shader.fragmentShader = `
+        uniform float uIsNight;
+      ` + shader.fragmentShader;
+
+      // Replace map_fragment to apply contrast and brightness boost for city lights
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <map_fragment>",
+        `
+        #ifdef USE_MAP
+          vec4 sampledDiffuseColor = texture2D( map, vMapUv );
+          #ifdef DECODE_VIDEO_TEXTURE
+            sampledDiffuseColor = sRGBTransferEOTF( sampledDiffuseColor );
+          #endif
+
+          if (uIsNight > 0.5) {
+            float lum = dot(sampledDiffuseColor.rgb, vec3(0.299, 0.587, 0.114));
+
+            if (lum > 0.16) {
+              // Extract city lights with steep contrast response
+              float normLum = clamp((lum - 0.16) / 0.84, 0.0, 1.0);
+
+              // Non-linear contrast curve: strongly amplifies midtones and highlights
+              float contrastBoost = pow(normLum, 0.70) * 4.0;
+
+              // Warm, luminous incandescent city glow (golden amber highlights)
+              vec3 cityColor = sampledDiffuseColor.rgb * (1.0 + contrastBoost) * vec3(1.18, 1.06, 0.88);
+
+              // Emissive self-illumination guarantees vivid brightness from all viewing angles
+              totalEmissiveRadiance += cityColor * 2.4;
+              sampledDiffuseColor.rgb = cityColor;
+            } else {
+              // Deep obsidian continent silhouette with pitch-black oceans
+              float landFactor = clamp((lum - 0.04) / 0.11, 0.0, 1.0);
+              sampledDiffuseColor.rgb = vec3(0.015, 0.018, 0.024) * landFactor;
+            }
+          }
+
+          diffuseColor *= sampledDiffuseColor;
+        #endif
+        `
+      );
+    };
+
+    mat.customProgramCacheKey = () => "globe-custom-phong-material";
+
+    return mat;
+  }, []);
+
   // Satellite vs Dark vs Night texture & styling configurations
   const globeConfig = useMemo(() => {
     switch (globeViewMode) {
@@ -279,11 +368,11 @@ export default function GlobeInner() {
         };
       case "night":
         return {
-          globeImage: "//unpkg.com/three-globe/example/img/earth-night.jpg",
+          globeImage: "/images/BlackMarble_2016_3km.jpg",
           bumpImage: "//unpkg.com/three-globe/example/img/earth-topology.png",
           atmosphereColor: "#f59e0b",
           atmosphereAltitude: 0.14,
-          strokeColor: "rgba(255, 255, 255, 0.18)",
+          strokeColor: "rgba(255, 255, 255, 0.22)",
           sideColor: "rgba(245, 158, 11, 0.1)",
         };
       case "dark":
@@ -307,10 +396,11 @@ export default function GlobeInner() {
       const isSat = globeViewMode === "satellite";
       const isNight = globeViewMode === "night";
 
+      // Completely clear polygon cap on night mode so city lights are not dimmed by dark overlays
       const defaultColor = isSat
         ? "rgba(0, 0, 0, 0.04)"
         : isNight
-        ? "rgba(10, 14, 20, 0.35)"
+        ? "rgba(0, 0, 0, 0)"
         : "rgba(14, 20, 32, 0.72)";
 
       if (!country) return defaultColor;
@@ -328,7 +418,7 @@ export default function GlobeInner() {
             return "rgba(239, 68, 68, 0.85)"; // Vivid Crimson red
           }
         }
-        return isSat ? "rgba(0, 0, 0, 0.25)" : "rgba(14, 20, 32, 0.6)";
+        return isSat || isNight ? "rgba(0, 0, 0, 0.2)" : "rgba(14, 20, 32, 0.6)";
       }
 
       // Selected country state
@@ -336,9 +426,13 @@ export default function GlobeInner() {
         return "rgba(37, 99, 235, 0.75)"; // Vibrant electric blue
       }
 
-      // Hovered country state (Radio Garden green-cyan beacon glow)
+      // Hovered country state (Radio Garden green-cyan beacon glow, warm amber on night mode)
       if (hoveredCountry && country.code === hoveredCountry.code) {
-        return isSat ? "rgba(34, 197, 94, 0.5)" : "rgba(56, 189, 248, 0.6)";
+        return isSat
+          ? "rgba(34, 197, 94, 0.5)"
+          : isNight
+          ? "rgba(245, 158, 11, 0.45)"
+          : "rgba(56, 189, 248, 0.6)";
       }
 
       return defaultColor;
@@ -383,6 +477,7 @@ export default function GlobeInner() {
     >
       <Globe
         ref={globeRef}
+        globeMaterial={customGlobeMaterial}
         width={dimensions.width}
         height={dimensions.height}
         backgroundColor="rgba(0, 0, 0, 0)"

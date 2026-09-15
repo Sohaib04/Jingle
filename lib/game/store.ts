@@ -61,10 +61,7 @@ export const useGameStore = create<GameState>((set, get) => {
     latestResult: null,
     playbackState: defaultMusicProvider.getPlaybackState(),
     difficulty: "easy",
-    globeViewMode:
-      (typeof window !== "undefined" &&
-        (localStorage.getItem("jingle_globe_view") as GlobeViewMode)) ||
-      "satellite",
+    globeViewMode: "satellite",
     isAutoRotating: true,
 
     startGame: async (difficulty: Difficulty = "easy") => {
