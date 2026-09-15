@@ -31,6 +31,7 @@ export default function SongPlayer() {
               src={currentSong.albumArt}
               alt={currentSong.title}
               fill
+              unoptimized
               sizes="(max-width: 640px) 56px, 64px"
               className="object-cover transition-opacity duration-500"
             />

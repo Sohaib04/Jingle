@@ -13,7 +13,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "the-weeknd-blinding-lights",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/laser_hum.ogg",
+    audioUrl: "/audio/track-1.wav",
     durationSeconds: 30,
   },
   {
@@ -28,7 +28,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "rema-calm-down",
-    audioUrl: "https://actions.google.com/sounds/v1/percussion/drum_groove.ogg",
+    audioUrl: "/audio/track-2.wav",
     durationSeconds: 30,
   },
   {
@@ -43,7 +43,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "michel-telo-ai-se-eu-te-pego",
-    audioUrl: "https://actions.google.com/sounds/v1/ambiences/carnival_distant.ogg",
+    audioUrl: "/audio/track-3.wav",
     durationSeconds: 30,
   },
   {
@@ -58,7 +58,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "psy-gangnam-style",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/electronic_energy_pulse.ogg",
+    audioUrl: "/audio/track-4.wav",
     durationSeconds: 30,
   },
   {
@@ -73,7 +73,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "medium",
     provider: "preview",
     providerTrackId: "m83-midnight-city",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/synth_pulse.ogg",
+    audioUrl: "/audio/track-5.wav",
     durationSeconds: 30,
   },
   {
@@ -88,7 +88,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "dua-lipa-levitating",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/outer_space_hum.ogg",
+    audioUrl: "/audio/track-6.wav",
     durationSeconds: 30,
   },
   {
@@ -103,7 +103,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "medium",
     provider: "preview",
     providerTrackId: "kyu-sakamoto-sukiyaki",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/water_gentle_stream.ogg",
+    audioUrl: "/audio/track-7.wav",
     durationSeconds: 30,
   },
   {
@@ -118,7 +118,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "master-kg-jerusalema",
-    audioUrl: "https://actions.google.com/sounds/v1/percussion/tribal_drums.ogg",
+    audioUrl: "/audio/track-8.wav",
     durationSeconds: 30,
   },
   {
@@ -133,7 +133,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "los-lobos-la-bamba",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/festive_crowd.ogg",
+    audioUrl: "/audio/track-9.wav",
     durationSeconds: 30,
   },
   {
@@ -148,7 +148,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "domenico-modugno-volare",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/gentle_sea_waves.ogg",
+    audioUrl: "/audio/track-10.wav",
     durationSeconds: 30,
   },
   {
@@ -163,7 +163,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "abba-dancing-queen",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/synth_pulse.ogg",
+    audioUrl: "/audio/track-11.wav",
     durationSeconds: 30,
   },
   {
@@ -178,7 +178,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "a-ha-take-on-me",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/laser_hum.ogg",
+    audioUrl: "/audio/track-12.wav",
     durationSeconds: 30,
   },
   {
@@ -193,7 +193,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "men-at-work-down-under",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/wind_gentle.ogg",
+    audioUrl: "/audio/track-13.wav",
     durationSeconds: 30,
   },
   {
@@ -208,7 +208,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "shakira-hips-dont-lie",
-    audioUrl: "https://actions.google.com/sounds/v1/percussion/drum_groove.ogg",
+    audioUrl: "/audio/track-14.wav",
     durationSeconds: 30,
   },
   {
@@ -223,7 +223,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "bob-marley-could-you-be-loved",
-    audioUrl: "https://actions.google.com/sounds/v1/percussion/tribal_drums.ogg",
+    audioUrl: "/audio/track-15.wav",
     durationSeconds: 30,
   },
   {
@@ -238,7 +238,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "medium",
     provider: "preview",
     providerTrackId: "daler-mehndi-tunak-tunak-tun",
-    audioUrl: "https://actions.google.com/sounds/v1/percussion/drum_groove.ogg",
+    audioUrl: "/audio/track-16.wav",
     durationSeconds: 30,
   },
   {
@@ -253,7 +253,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "rosalia-despecha",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/festive_crowd.ogg",
+    audioUrl: "/audio/track-17.wav",
     durationSeconds: 30,
   },
   {
@@ -268,7 +268,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "medium",
     provider: "preview",
     providerTrackId: "buena-vista-chan-chan",
-    audioUrl: "https://actions.google.com/sounds/v1/foley/gentle_sea_waves.ogg",
+    audioUrl: "/audio/track-18.wav",
     durationSeconds: 30,
   },
   {
@@ -283,7 +283,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "the-cranberries-zombie",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/synth_pulse.ogg",
+    audioUrl: "/audio/track-19.wav",
     durationSeconds: 30,
   },
   {
@@ -298,7 +298,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     difficulty: "easy",
     provider: "preview",
     providerTrackId: "nena-99-luftballons",
-    audioUrl: "https://actions.google.com/sounds/v1/science_fiction/laser_hum.ogg",
+    audioUrl: "/audio/track-20.wav",
     durationSeconds: 30,
   },
 ];
