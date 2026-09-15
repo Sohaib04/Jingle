@@ -59,7 +59,9 @@ export default function GuessBar() {
     setIsSearchOpen(false);
     setSearchQuery("");
     window.dispatchEvent(
-      new CustomEvent("globe:zoom", { detail: { delta: 0 } })
+      new CustomEvent("globe:fly-to", {
+        detail: { lat: country.lat, lng: country.lng, altitude: 1.6 },
+      })
     );
   };
 

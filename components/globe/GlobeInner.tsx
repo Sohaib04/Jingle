@@ -113,11 +113,31 @@ export default function GlobeInner() {
       }
     };
 
+    const handleFlyTo = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (globeRef.current && detail?.lat != null && detail?.lng != null) {
+        const pov = globeRef.current.pointOfView();
+        const targetAlt =
+          detail.altitude ??
+          (pov?.altitude ? Math.max(1.1, Math.min(pov.altitude, 2.2)) : 1.7);
+        globeRef.current.pointOfView(
+          {
+            lat: detail.lat,
+            lng: detail.lng,
+            altitude: targetAlt,
+          },
+          detail.duration ?? 850
+        );
+      }
+    };
+
     window.addEventListener("globe:zoom", handleZoom);
     window.addEventListener("globe:recenter", handleRecenter);
+    window.addEventListener("globe:fly-to", handleFlyTo);
     return () => {
       window.removeEventListener("globe:zoom", handleZoom);
       window.removeEventListener("globe:recenter", handleRecenter);
+      window.removeEventListener("globe:fly-to", handleFlyTo);
     };
   }, []);
 
@@ -190,17 +210,59 @@ export default function GlobeInner() {
   );
 
   const handlePolygonClick = useCallback(
-    (polygon: object) => {
-      if (gameStatus !== "playing" && gameStatus !== "guessing") {
-        return;
-      }
+    (polygon: object, _event?: MouseEvent, coords?: { lat: number; lng: number }) => {
       const feat = polygon as CountryFeature;
       const country = resolveCountry(feat);
-      if (country) {
+      if (!country) return;
+
+      if (gameStatus === "playing" || gameStatus === "guessing") {
         selectCountry(country);
+      }
+
+      // Fixate and center camera on the clicked country
+      if (globeRef.current) {
+        const pov = globeRef.current.pointOfView();
+        const targetAltitude = pov?.altitude
+          ? Math.max(1.1, Math.min(pov.altitude, 2.2))
+          : 1.7;
+
+        const targetLat = country.lat ?? coords?.lat;
+        const targetLng = country.lng ?? coords?.lng;
+
+        if (targetLat != null && targetLng != null) {
+          globeRef.current.pointOfView(
+            {
+              lat: targetLat,
+              lng: targetLng,
+              altitude: targetAltitude,
+            },
+            850
+          );
+        }
       }
     },
     [gameStatus, selectCountry, resolveCountry]
+  );
+
+  const handleGlobeClick = useCallback(
+    (coords: { lat: number; lng: number }) => {
+      if (globeRef.current && coords?.lat != null && coords?.lng != null) {
+        const pov = globeRef.current.pointOfView();
+        const targetAltitude = pov?.altitude
+          ? Math.max(1.1, Math.min(pov.altitude, 2.4))
+          : 1.8;
+
+        globeRef.current.pointOfView(
+          {
+            lat: coords.lat,
+            lng: coords.lng,
+            altitude: targetAltitude,
+          },
+          850
+        );
+      }
+    },
+    []
   );
 
   // Satellite vs Dark vs Night texture & styling configurations
@@ -338,6 +400,7 @@ export default function GlobeInner() {
         polygonsTransitionDuration={150}
         onPolygonHover={handlePolygonHover}
         onPolygonClick={handlePolygonClick}
+        onGlobeClick={handleGlobeClick}
         arcsData={arcsData}
         arcColor={(arc: object) => (arc as ArcData).color}
         arcAltitude={(arc: object) => (arc as ArcData).altitude}
