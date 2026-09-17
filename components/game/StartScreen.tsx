@@ -3,14 +3,21 @@
 import React, { useState } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { Difficulty } from "@/lib/game/types";
-import { Headphones, Play, Satellite, Sparkles, Zap, Loader2, Music } from "lucide-react";
+import { Headphones, Play, Satellite, Sparkles, Zap, Loader2, Music, Swords } from "lucide-react";
+import { useMultiplayerStore } from "@/lib/multiplayer/store";
 
 export default function StartScreen() {
   const gameStatus = useGameStore((s) => s.gameStatus);
   const startGame = useGameStore((s) => s.startGame);
+  const mpStatus = useMultiplayerStore((s) => s.status);
+  const openMatchmakingModal = useMultiplayerStore((s) => s.openMatchmakingModal);
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>("easy");
 
   if (gameStatus !== "idle" && gameStatus !== "loading") {
+    return null;
+  }
+
+  if (mpStatus !== "idle") {
     return null;
   }
 
@@ -115,25 +122,36 @@ export default function StartScreen() {
           </div>
         </div>
 
-        {/* Start Game Action */}
+        {/* Game Mode Actions: Solo & 1v1 Battle Arena */}
         <div className="space-y-2.5 pt-1">
-          <button
-            onClick={() => startGame(selectedDifficulty)}
-            disabled={isLoading}
-            className="w-full py-3.5 sm:py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2.5 cursor-pointer disabled:opacity-60"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Tuning 10 Frequencies...</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-5 h-5 fill-current" />
-                <span>Start Session (10 Rounds)</span>
-              </>
-            )}
-          </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button
+              onClick={() => startGame(selectedDifficulty)}
+              disabled={isLoading}
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Tuning...</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>Solo (10 Rounds)</span>
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={openMatchmakingModal}
+              disabled={isLoading}
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-rose-500 via-amber-500 to-emerald-500 hover:from-rose-400 hover:to-emerald-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-rose-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60 border border-white/10"
+            >
+              <Swords className="w-4 h-4 fill-current" />
+              <span>1v1 Battle Duel</span>
+            </button>
+          </div>
 
           <p className="text-[11px] text-slate-400 text-center flex items-center justify-center space-x-1">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />

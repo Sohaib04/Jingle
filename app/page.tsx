@@ -7,6 +7,11 @@ import GuessBar from "@/components/game/GuessBar";
 import RoundResult from "@/components/game/RoundResult";
 import FinalScore from "@/components/game/FinalScore";
 import StartScreen from "@/components/game/StartScreen";
+import MatchmakingModal from "@/components/multiplayer/MatchmakingModal";
+import BattleHUD from "@/components/multiplayer/BattleHUD";
+import BattleGuessBar from "@/components/multiplayer/BattleGuessBar";
+import BattleRoundResult from "@/components/multiplayer/BattleRoundResult";
+import BattleFinalScore from "@/components/multiplayer/BattleFinalScore";
 
 export default function HomePage() {
   return (
@@ -22,20 +27,35 @@ export default function HomePage() {
       {/* Floating Radio Garden Globe Controls (Satellite Switcher & Camera Zoom) */}
       <GlobeControls />
 
-      {/* Game HUD (Top Bar) */}
+      {/* Solo Mode HUD (Top Bar) */}
       <GameHUD />
+
+      {/* 1v1 Battle Mode HUD (Top Bar with Head-to-Head Duel Status) */}
+      <BattleHUD />
 
       {/* Radio Tuner / Mystery Song Player (Top Left) */}
       <SongPlayer />
 
-      {/* Target Lock & Country Confirmation Bar (Bottom Center) */}
+      {/* Solo Mode: Target Lock & Country Confirmation Bar (Bottom Center) */}
       <GuessBar />
 
-      {/* Answer Reveal Telemetry Card */}
+      {/* 1v1 Battle Mode: Target Lock & Duel Action Bar (Bottom Center) */}
+      <BattleGuessBar />
+
+      {/* Solo Answer Reveal Telemetry Card */}
       <RoundResult />
 
-      {/* Final 10-Round Session Report Screen */}
+      {/* 1v1 Battle Round Outcome & Head-to-Head Duel Card */}
+      <BattleRoundResult />
+
+      {/* Solo 10-Round Session Report Screen */}
       <FinalScore />
+
+      {/* 1v1 Battle 10-Round Match Victory / Defeat Screen */}
+      <BattleFinalScore />
+
+      {/* 1v1 Multiplayer Matchmaking Lobby Modal */}
+      <MatchmakingModal />
 
       {/* Welcome / Idle Start Screen */}
       <StartScreen />

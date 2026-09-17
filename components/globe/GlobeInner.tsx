@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useMemo, useCallback } from "react"
 import Globe, { GlobeMethods } from "react-globe.gl";
 import * as THREE from "three";
 import { useGameStore } from "@/lib/game/store";
+import { useMultiplayerStore } from "@/lib/multiplayer/store";
 import { getCountry, CountryMetadata } from "@/lib/geo/countries";
 
 interface CountryFeature {
@@ -43,6 +44,19 @@ export default function GlobeInner() {
   const isAutoRotating = useGameStore((s) => s.isAutoRotating);
   const hoverCountry = useGameStore((s) => s.hoverCountry);
   const selectCountry = useGameStore((s) => s.selectCountry);
+
+  // Multiplayer subscriptions
+  const mpStatus = useMultiplayerStore((s) => s.status);
+  const mpSelectedCountry = useMultiplayerStore((s) => s.selectedCountry);
+  const mpHoveredCountry = useMultiplayerStore((s) => s.hoveredCountry);
+  const mpLatestDuelResult = useMultiplayerStore((s) => s.latestDuelResult);
+  const mpSelectCountry = useMultiplayerStore((s) => s.selectCountry);
+  const mpHoverCountry = useMultiplayerStore((s) => s.hoverCountry);
+
+  const isMpActive =
+    mpStatus === "roundActive" ||
+    mpStatus === "roundReview" ||
+    mpStatus === "roundRevealing";
 
   // Resize listener
   useEffect(() => {
@@ -160,6 +174,43 @@ export default function GlobeInner() {
 
   // Compute curved 3D arcs (for revealing guess to answer)
   const arcsData = useMemo<ArcData[]>(() => {
+    // Multiplayer battle dual arcs
+    if (
+      isMpActive &&
+      (mpStatus === "roundReview" || mpStatus === "roundRevealing") &&
+      mpLatestDuelResult
+    ) {
+      const arcs: ArcData[] = [];
+      const actual = mpLatestDuelResult.actualCountry;
+      const p1 = mpLatestDuelResult.player1Guess;
+      const p2 = mpLatestDuelResult.player2Guess;
+
+      if (p1 && !p1.isExact && p1.lat != null && p1.lng != null && (p1.lat !== 0 || p1.lng !== 0)) {
+        arcs.push({
+          startLat: p1.lat,
+          startLng: p1.lng,
+          endLat: actual.lat,
+          endLng: actual.lng,
+          color: ["#3b82f6", "#10b981"], // Electric Blue -> Emerald Green
+          altitude: 0.28,
+        });
+      }
+
+      if (p2 && !p2.isExact && p2.lat != null && p2.lng != null && (p2.lat !== 0 || p2.lng !== 0)) {
+        arcs.push({
+          startLat: p2.lat,
+          startLng: p2.lng,
+          endLat: actual.lat,
+          endLng: actual.lng,
+          color: ["#f59e0b", "#10b981"], // Vivid Amber -> Emerald Green
+          altitude: 0.34,
+        });
+      }
+
+      return arcs;
+    }
+
+    // Solo game arc
     if (
       (gameStatus === "revealing" || gameStatus === "roundResult") &&
       latestResult &&
@@ -178,7 +229,13 @@ export default function GlobeInner() {
       ];
     }
     return [];
-  }, [gameStatus, latestResult]);
+  }, [
+    gameStatus,
+    latestResult,
+    isMpActive,
+    mpStatus,
+    mpLatestDuelResult,
+  ]);
 
   // Fast memoized lookup cache for features
   const featureToCountryMap = useRef<WeakMap<CountryFeature, CountryMetadata | null>>(new WeakMap());
@@ -196,6 +253,18 @@ export default function GlobeInner() {
   // Handlers for hover & click
   const handlePolygonHover = useCallback(
     (polygon: object | null) => {
+      if (isMpActive) {
+        if (mpStatus !== "roundActive") return;
+        if (!polygon) {
+          mpHoverCountry(null);
+          return;
+        }
+        const feat = polygon as CountryFeature;
+        const country = resolveCountry(feat);
+        mpHoverCountry(country || null);
+        return;
+      }
+
       if (gameStatus !== "playing" && gameStatus !== "guessing") {
         return;
       }
@@ -207,7 +276,14 @@ export default function GlobeInner() {
       const country = resolveCountry(feat);
       hoverCountry(country || null);
     },
-    [gameStatus, hoverCountry, resolveCountry]
+    [
+      isMpActive,
+      mpStatus,
+      mpHoverCountry,
+      gameStatus,
+      hoverCountry,
+      resolveCountry,
+    ]
   );
 
   const handlePolygonClick = useCallback(
@@ -216,7 +292,11 @@ export default function GlobeInner() {
       const country = resolveCountry(feat);
       if (!country) return;
 
-      if (gameStatus === "playing" || gameStatus === "guessing") {
+      if (isMpActive) {
+        if (mpStatus === "roundActive") {
+          mpSelectCountry(country);
+        }
+      } else if (gameStatus === "playing" || gameStatus === "guessing") {
         selectCountry(country);
       }
 
@@ -242,7 +322,14 @@ export default function GlobeInner() {
         }
       }
     },
-    [gameStatus, selectCountry, resolveCountry]
+    [
+      isMpActive,
+      mpStatus,
+      mpSelectCountry,
+      gameStatus,
+      selectCountry,
+      resolveCountry,
+    ]
   );
 
   const handleGlobeClick = useCallback(
@@ -405,7 +492,41 @@ export default function GlobeInner() {
 
       if (!country) return defaultColor;
 
-      // In reveal or roundResult state: highlight answer in green and guess in red
+      // Multiplayer mode styling
+      if (isMpActive) {
+        if (mpStatus === "roundReview" || mpStatus === "roundRevealing") {
+          if (mpLatestDuelResult) {
+            if (country.code === mpLatestDuelResult.actualCountry.code) {
+              return "rgba(16, 185, 129, 0.85)"; // Vivid Emerald green (answer)
+            }
+            if (mpLatestDuelResult.player1Guess?.countryCode === country.code) {
+              return "rgba(59, 130, 246, 0.85)"; // Player 1 guess (Electric Blue)
+            }
+            if (mpLatestDuelResult.player2Guess?.countryCode === country.code) {
+              return "rgba(245, 158, 11, 0.85)"; // Player 2 guess (Vivid Amber)
+            }
+          }
+          return isSat || isNight ? "rgba(0, 0, 0, 0.2)" : "rgba(14, 20, 32, 0.6)";
+        }
+
+        // Multiplayer selected country state
+        if (mpSelectedCountry && country.code === mpSelectedCountry.code) {
+          return "rgba(37, 99, 235, 0.75)";
+        }
+
+        // Multiplayer hovered country state
+        if (mpHoveredCountry && country.code === mpHoveredCountry.code) {
+          return isSat
+            ? "rgba(34, 197, 94, 0.5)"
+            : isNight
+            ? "rgba(245, 158, 11, 0.45)"
+            : "rgba(56, 189, 248, 0.6)";
+        }
+
+        return defaultColor;
+      }
+
+      // Solo game: In reveal or roundResult state: highlight answer in green and guess in red
       if (gameStatus === "revealing" || gameStatus === "roundResult") {
         if (latestResult) {
           if (country.code === latestResult.actualCountry.code) {
@@ -437,7 +558,19 @@ export default function GlobeInner() {
 
       return defaultColor;
     },
-    [gameStatus, latestResult, selectedCountry, hoveredCountry, resolveCountry, globeViewMode]
+    [
+      isMpActive,
+      mpStatus,
+      mpLatestDuelResult,
+      mpSelectedCountry,
+      mpHoveredCountry,
+      gameStatus,
+      latestResult,
+      selectedCountry,
+      hoveredCountry,
+      resolveCountry,
+      globeViewMode,
+    ]
   );
 
   const getPolygonAltitude = useCallback(
@@ -445,6 +578,27 @@ export default function GlobeInner() {
       const feat = featObj as CountryFeature;
       const country = resolveCountry(feat);
       if (!country) return 0.008;
+
+      if (isMpActive) {
+        if (mpStatus === "roundReview" || mpStatus === "roundRevealing") {
+          if (
+            mpLatestDuelResult &&
+            (country.code === mpLatestDuelResult.actualCountry.code ||
+              mpLatestDuelResult.player1Guess?.countryCode === country.code ||
+              mpLatestDuelResult.player2Guess?.countryCode === country.code)
+          ) {
+            return 0.05;
+          }
+          return 0.008;
+        }
+        if (mpSelectedCountry && country.code === mpSelectedCountry.code) {
+          return 0.04;
+        }
+        if (mpHoveredCountry && country.code === mpHoveredCountry.code) {
+          return 0.022;
+        }
+        return 0.008;
+      }
 
       if (gameStatus === "revealing" || gameStatus === "roundResult") {
         if (
@@ -467,7 +621,18 @@ export default function GlobeInner() {
 
       return 0.008;
     },
-    [gameStatus, latestResult, selectedCountry, hoveredCountry, resolveCountry]
+    [
+      isMpActive,
+      mpStatus,
+      mpLatestDuelResult,
+      mpSelectedCountry,
+      mpHoveredCountry,
+      gameStatus,
+      latestResult,
+      selectedCountry,
+      hoveredCountry,
+      resolveCountry,
+    ]
   );
 
   return (

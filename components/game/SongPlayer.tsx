@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useGameStore } from "@/lib/game/store";
+import { useMultiplayerStore } from "@/lib/multiplayer/store";
 import { Play, Pause, Radio, Disc, Clock } from "lucide-react";
 import Image from "next/image";
 
@@ -9,16 +10,29 @@ export default function SongPlayer() {
   const gameStatus = useGameStore((s) => s.gameStatus);
   const rounds = useGameStore((s) => s.rounds);
   const currentRoundIndex = useGameStore((s) => s.currentRoundIndex);
-  const timeRemaining = useGameStore((s) => s.timeRemaining);
+  const soloTimeRemaining = useGameStore((s) => s.timeRemaining);
   const playbackState = useGameStore((s) => s.playbackState);
   const togglePlayPause = useGameStore((s) => s.togglePlayPause);
 
-  const currentSong = rounds[currentRoundIndex];
-  if (!currentSong || gameStatus === "idle" || gameStatus === "loading") {
+  const mpStatus = useMultiplayerStore((s) => s.status);
+  const mpCurrentSong = useMultiplayerStore((s) => s.currentSong);
+  const mpTimeRemaining = useMultiplayerStore((s) => s.timeRemaining);
+
+  const isMp = mpStatus === "roundActive" || mpStatus === "roundReview";
+  const currentSong = isMp ? mpCurrentSong : rounds[currentRoundIndex];
+  const timeRemaining = isMp ? mpTimeRemaining : soloTimeRemaining;
+
+  if (!currentSong) {
     return null;
   }
 
-  const isRevealed = gameStatus === "revealing" || gameStatus === "roundResult";
+  if (!isMp && (gameStatus === "idle" || gameStatus === "loading")) {
+    return null;
+  }
+
+  const isRevealed = isMp
+    ? mpStatus === "roundReview"
+    : gameStatus === "revealing" || gameStatus === "roundResult";
   const timerWarning = timeRemaining <= 5;
 
   return (
