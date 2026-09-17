@@ -46,12 +46,12 @@ export default function StartScreen() {
           </div>
 
           {/* Audio Wave Visualizer Accent */}
-          <div className="flex items-center justify-center space-x-1 h-3 my-2.5 opacity-70">
-            <span className="w-1 h-2 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="w-1 h-3 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: "150ms" }} />
-            <span className="w-1 h-4 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: "300ms" }} />
-            <span className="w-1 h-3 bg-emerald-300 rounded-full animate-pulse" style={{ animationDelay: "450ms" }} />
-            <span className="w-1 h-2 bg-emerald-500 rounded-full animate-pulse" style={{ animationDelay: "200ms" }} />
+          <div className="flex items-center justify-center space-x-1.5 h-6 my-2.5">
+            <span className="w-1.5 h-5 bg-emerald-400 rounded-full wave-bar-1 drop-shadow-[0_0_6px_rgba(52,211,153,0.5)]" />
+            <span className="w-1.5 h-5 bg-teal-400 rounded-full wave-bar-2 drop-shadow-[0_0_6px_rgba(45,212,191,0.5)]" />
+            <span className="w-1.5 h-5 bg-cyan-400 rounded-full wave-bar-3 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+            <span className="w-1.5 h-5 bg-teal-300 rounded-full wave-bar-4 drop-shadow-[0_0_6px_rgba(94,234,212,0.5)]" />
+            <span className="w-1.5 h-5 bg-emerald-400 rounded-full wave-bar-5 drop-shadow-[0_0_6px_rgba(52,211,153,0.5)]" />
           </div>
 
           <p className="text-xs sm:text-sm text-slate-300 font-normal max-w-sm mx-auto leading-relaxed mt-2">

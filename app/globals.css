@@ -160,6 +160,63 @@ body {
   animation: audio-bar-transform 0.85s ease-in-out 0.2s infinite;
 }
 
+/* Symmetrical Center-Origin Sound Waveform (Start Screen & Broadcast Visualizer) */
+@keyframes wave-oscillate-1 {
+  0%, 100% { transform: scaleY(0.35); }
+  25% { transform: scaleY(0.85); }
+  50% { transform: scaleY(0.4); }
+  75% { transform: scaleY(0.7); }
+}
+
+@keyframes wave-oscillate-2 {
+  0%, 100% { transform: scaleY(0.55); }
+  30% { transform: scaleY(0.95); }
+  60% { transform: scaleY(0.35); }
+  85% { transform: scaleY(0.8); }
+}
+
+@keyframes wave-oscillate-3 {
+  0%, 100% { transform: scaleY(0.7); }
+  25% { transform: scaleY(1); }
+  55% { transform: scaleY(0.45); }
+  80% { transform: scaleY(0.9); }
+}
+
+@keyframes wave-oscillate-4 {
+  0%, 100% { transform: scaleY(0.5); }
+  20% { transform: scaleY(0.9); }
+  55% { transform: scaleY(0.3); }
+  75% { transform: scaleY(0.85); }
+}
+
+@keyframes wave-oscillate-5 {
+  0%, 100% { transform: scaleY(0.3); }
+  35% { transform: scaleY(0.75); }
+  65% { transform: scaleY(0.35); }
+  85% { transform: scaleY(0.8); }
+}
+
+.wave-bar-1 {
+  transform-origin: center;
+  animation: wave-oscillate-1 1.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+.wave-bar-2 {
+  transform-origin: center;
+  animation: wave-oscillate-2 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.08s infinite;
+}
+.wave-bar-3 {
+  transform-origin: center;
+  animation: wave-oscillate-3 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.16s infinite;
+}
+.wave-bar-4 {
+  transform-origin: center;
+  animation: wave-oscillate-4 1.18s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.12s infinite;
+}
+.wave-bar-5 {
+  transform-origin: center;
+  animation: wave-oscillate-5 1.28s cubic-bezier(0.45, 0.05, 0.55, 0.95) 0.04s infinite;
+}
+
 /* Safe area insets for mobile edge-to-edge screens */
 .safe-bottom {
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
