@@ -120,6 +120,18 @@ export default function RoundResult() {
                 {song.artist} — {song.title}
               </span>
             </p>
+            <div className="flex items-center space-x-1.5 mt-1">
+              {song.language && (
+                <span className="inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  🗣️ {song.language}
+                </span>
+              )}
+              {song.genre && (
+                <span className="text-[10px] text-slate-400 truncate">
+                  • {song.genre}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 

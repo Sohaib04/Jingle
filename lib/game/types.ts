@@ -28,6 +28,7 @@ export interface SongTrack {
   audioUrl?: string;
   previewStartTime?: number;
   durationSeconds?: number;
+  language?: string;
 }
 
 export interface RoundResult {

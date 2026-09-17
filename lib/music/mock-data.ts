@@ -15,6 +15,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "the-weeknd-blinding-lights",
     audioUrl: "/audio/track-1.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-2",
@@ -30,6 +31,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "rema-calm-down",
     audioUrl: "/audio/track-2.wav",
     durationSeconds: 30,
+    language: "English / Pidgin",
   },
   {
     id: "track-3",
@@ -45,6 +47,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "michel-telo-ai-se-eu-te-pego",
     audioUrl: "/audio/track-3.wav",
     durationSeconds: 30,
+    language: "Portuguese",
   },
   {
     id: "track-4",
@@ -60,6 +63,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "psy-gangnam-style",
     audioUrl: "/audio/track-4.wav",
     durationSeconds: 30,
+    language: "Korean",
   },
   {
     id: "track-5",
@@ -75,6 +79,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "m83-midnight-city",
     audioUrl: "/audio/track-5.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-6",
@@ -90,6 +95,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "dua-lipa-levitating",
     audioUrl: "/audio/track-6.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-7",
@@ -105,6 +111,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "kyu-sakamoto-sukiyaki",
     audioUrl: "/audio/track-7.wav",
     durationSeconds: 30,
+    language: "Japanese",
   },
   {
     id: "track-8",
@@ -120,6 +127,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "master-kg-jerusalema",
     audioUrl: "/audio/track-8.wav",
     durationSeconds: 30,
+    language: "Zulu",
   },
   {
     id: "track-9",
@@ -135,6 +143,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "los-lobos-la-bamba",
     audioUrl: "/audio/track-9.wav",
     durationSeconds: 30,
+    language: "Spanish",
   },
   {
     id: "track-10",
@@ -150,6 +159,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "domenico-modugno-volare",
     audioUrl: "/audio/track-10.wav",
     durationSeconds: 30,
+    language: "Italian",
   },
   {
     id: "track-11",
@@ -165,6 +175,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "abba-dancing-queen",
     audioUrl: "/audio/track-11.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-12",
@@ -180,6 +191,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "a-ha-take-on-me",
     audioUrl: "/audio/track-12.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-13",
@@ -195,6 +207,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "men-at-work-down-under",
     audioUrl: "/audio/track-13.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-14",
@@ -210,6 +223,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "shakira-hips-dont-lie",
     audioUrl: "/audio/track-14.wav",
     durationSeconds: 30,
+    language: "Spanish / English",
   },
   {
     id: "track-15",
@@ -225,6 +239,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "bob-marley-could-you-be-loved",
     audioUrl: "/audio/track-15.wav",
     durationSeconds: 30,
+    language: "English / Patois",
   },
   {
     id: "track-16",
@@ -240,6 +255,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "daler-mehndi-tunak-tunak-tun",
     audioUrl: "/audio/track-16.wav",
     durationSeconds: 30,
+    language: "Punjabi",
   },
   {
     id: "track-17",
@@ -255,6 +271,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "rosalia-despecha",
     audioUrl: "/audio/track-17.wav",
     durationSeconds: 30,
+    language: "Spanish",
   },
   {
     id: "track-18",
@@ -270,6 +287,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "buena-vista-chan-chan",
     audioUrl: "/audio/track-18.wav",
     durationSeconds: 30,
+    language: "Spanish",
   },
   {
     id: "track-19",
@@ -285,6 +303,7 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "the-cranberries-zombie",
     audioUrl: "/audio/track-19.wav",
     durationSeconds: 30,
+    language: "English",
   },
   {
     id: "track-20",
@@ -300,5 +319,6 @@ export const MOCK_GLOBAL_SONGS: SongTrack[] = [
     providerTrackId: "nena-99-luftballons",
     audioUrl: "/audio/track-20.wav",
     durationSeconds: 30,
+    language: "German",
   },
 ];

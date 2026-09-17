@@ -79,7 +79,25 @@ export class ITunesMusicProvider implements IMusicProvider {
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
 
-    return pool.slice(0, count);
+    // Prioritize distinct countries for maximum diversity across rounds
+    const selected: SongTrack[] = [];
+    const usedCountries = new Set<string>();
+    const remaining: SongTrack[] = [];
+
+    for (const track of pool) {
+      if (!usedCountries.has(track.countryCode) && selected.length < count) {
+        selected.push(track);
+        usedCountries.add(track.countryCode);
+      } else {
+        remaining.push(track);
+      }
+    }
+
+    while (selected.length < count && remaining.length > 0) {
+      selected.push(remaining.shift()!);
+    }
+
+    return selected;
   }
 
   /**
