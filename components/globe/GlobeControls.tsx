@@ -110,19 +110,19 @@ export default function GlobeControls() {
           <Crosshair className="w-4 h-4 group-hover:scale-110" />
         </button>
 
-        {/* Toggle Auto Rotation */}
+        {/* Toggle Auto Rotation (Highlighted Pause = Still/Paused, Unhighlighted = Spinning) */}
         {gameStatus === "idle" && (
           <button
             onClick={toggleAutoRotate}
-            title={isAutoRotating ? "Pause Spin" : "Resume Spin"}
-            aria-label={isAutoRotating ? "Pause globe spin" : "Resume globe spin"}
+            title={!isAutoRotating ? "Resume Spin" : "Pause Spin"}
+            aria-label={!isAutoRotating ? "Resume globe spin" : "Pause globe spin"}
             className={`p-2.5 rounded-xl transition-all duration-200 cursor-pointer group flex items-center justify-center ${
-              isAutoRotating
-                ? "text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
+              !isAutoRotating
+                ? "text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
+                : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
             }`}
           >
-            {isAutoRotating ? (
+            {!isAutoRotating ? (
               <Pause className="w-4 h-4 group-hover:scale-110" />
             ) : (
               <RotateCw className="w-4 h-4 group-hover:scale-110" />
