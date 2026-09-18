@@ -14,6 +14,7 @@ export default function BattleRoundResult() {
   const reviewCountdown = useMultiplayerStore((s) => s.reviewCountdown);
   const currentRoundIndex = useMultiplayerStore((s) => s.currentRoundIndex);
   const totalRounds = useMultiplayerStore((s) => s.totalRounds);
+  const playerId = useMultiplayerStore((s) => s.playerId);
 
   const [timer, setTimer] = useState(reviewCountdown || 5);
 
@@ -35,38 +36,35 @@ export default function BattleRoundResult() {
     actualCountry,
     player1Guess,
     player2Guess,
+    player1Id,
     winnerId,
     song,
     roundNumber,
   } = latestDuelResult;
 
-  // Determine which guess belongs to self vs opponent
-  const isP1 = self?.id === latestDuelResult.actualCountry.code ? false : true; // fallback
-  // Use self.id to match accurately
-  const selfGuess = self?.id === winnerId || (player1Guess && player2Guess)
-    ? (player1Guess?.countryCode === self?.id ? player1Guess : player1Guess) // we have player1 and player2 in room
-    : null;
+  // Authoritatively identify whether this client is Player 1
+  const amIPlayer1 = player1Id
+    ? player1Id === playerId
+    : self?.id
+    ? self.id === player1Id
+    : true;
 
-  // More reliable: let's map guesses by looking at who scored what or room order
-  // In RoomManager: player1 is room.player1, player2 is room.player2
-  // We can compare self.name or player id
-  const p1IsSelf = player1Guess !== null || player2Guess !== null;
+  const myGuess = amIPlayer1 ? player1Guess : player2Guess;
+  const oppGuess = amIPlayer1 ? player2Guess : player1Guess;
 
-  // To be crystal clear: RoomManager stores player1Guess and player2Guess matching player1 and player2.
-  // In store: self is either player1 or player2.
-  // Let's resolve selfGuess and oppGuess accurately:
-  const isSelfPlayer1 = self?.id === (self ? self.id : "");
-  // Actually, room-manager passed duelResult with player1Guess and player2Guess.
-  // In `useMultiplayerStore`, we can check:
-  const isSelfP1 = self?.score !== undefined; // Let's check duelResult's winnerId vs self.id
-  const isWon = winnerId === self?.id;
-  const isTie = winnerId === "tie";
+  const myScore = myGuess?.totalScore || 0;
+  const oppScore = oppGuess?.totalScore || 0;
+
+  // Authoritative win determination:
+  // 1. Direct match with winnerId (authoritative server outcome)
+  // 2. Fallback to score comparison if IDs had any discrepancy
+  const isWon =
+    winnerId === playerId ||
+    (Boolean(self?.id) && winnerId === self?.id) ||
+    (winnerId !== "tie" && myScore > oppScore);
+
+  const isTie = winnerId === "tie" || (myScore === oppScore && myScore > 0);
   const isLost = !isWon && !isTie;
-
-  // Extract guesses
-  // If player 1 is self:
-  const myGuess = isWon ? (player1Guess?.totalScore! >= (player2Guess?.totalScore || 0) ? player1Guess : player2Guess) : (player1Guess?.totalScore! <= (player2Guess?.totalScore || 0) ? player1Guess : player2Guess);
-  const oppGuess = myGuess === player1Guess ? player2Guess : player1Guess;
 
   return (
     <div className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-40 px-3 sm:px-4 flex justify-center pointer-events-none safe-bottom animate-in fade-in slide-in-from-bottom-6 duration-300">

@@ -2,7 +2,8 @@
 
 import React, { useEffect } from "react";
 import { useMultiplayerStore } from "@/lib/multiplayer/store";
-import { Check, Flame, Loader2, RotateCcw, Swords, Zap } from "lucide-react";
+import { useGameStore } from "@/lib/game/store";
+import { Check, Flame, Loader2, RotateCcw, Swords, Zap, Volume2, Volume1, VolumeX } from "lucide-react";
 
 export default function BattleHUD() {
   const status = useMultiplayerStore((s) => s.status);
@@ -15,6 +16,10 @@ export default function BattleHUD() {
   const hasLockedIn = useMultiplayerStore((s) => s.hasLockedIn);
   const leaveMatch = useMultiplayerStore((s) => s.leaveMatch);
   const tickTimer = useMultiplayerStore((s) => s.tickTimer);
+
+  const playbackState = useGameStore((s) => s.playbackState);
+  const setVolume = useGameStore((s) => s.setVolume);
+  const toggleMute = useGameStore((s) => s.toggleMute);
 
   // Round countdown timer tick
   useEffect(() => {
@@ -178,6 +183,39 @@ export default function BattleHUD() {
               </div>
             </div>
             <span className="text-xl sm:text-2xl select-none">{opponent?.avatar || "🎧"}</span>
+          </div>
+
+          {/* Volume Control */}
+          <div className="relative">
+            <div className="radio-pill p-1.5 sm:px-3 sm:py-1.5 rounded-full border border-white/10 shadow-lg flex items-center space-x-2">
+              <button
+                onClick={toggleMute}
+                className="text-slate-300 hover:text-white transition-colors cursor-pointer flex-shrink-0"
+                title={playbackState.isMuted ? "Unmute" : "Mute"}
+                aria-label={playbackState.isMuted ? "Unmute audio" : "Mute audio"}
+              >
+                {playbackState.isMuted || playbackState.volume === 0 ? (
+                  <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400" />
+                ) : playbackState.volume < 0.5 ? (
+                  <Volume1 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                ) : (
+                  <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                )}
+              </button>
+
+              {/* Slider for tablets & desktops */}
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={playbackState.isMuted ? 0 : playbackState.volume}
+                onChange={(e) => setVolume(parseFloat(e.target.value))}
+                aria-label="Volume slider"
+                title={`Volume: ${Math.round((playbackState.isMuted ? 0 : playbackState.volume) * 100)}%`}
+                className="hidden sm:block w-14 sm:w-20 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400 focus:outline-none"
+              />
+            </div>
           </div>
         </div>
       </div>

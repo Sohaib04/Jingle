@@ -29,6 +29,8 @@ export async function POST(request: Request) {
       player,
       roomId: result.room?.id || null,
       difficulty,
+      player1: result.room?.player1 || null,
+      player2: result.room?.player2 || null,
     });
   } catch (error) {
     console.error("Error in matchmaking queue:", error);

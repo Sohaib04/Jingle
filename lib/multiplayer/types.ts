@@ -52,6 +52,10 @@ export interface RoundDuelResult {
   roundNumber: number;
   song: SongTrack;
   actualCountry: CountryMetadata;
+  player1Id: string;
+  player2Id: string;
+  player1Name: string;
+  player2Name: string;
   player1Guess: PlayerGuess | null;
   player2Guess: PlayerGuess | null;
   winnerId: string | "tie";
@@ -81,6 +85,7 @@ export interface MultiplayerRoom {
 
 // Events streamed via Server-Sent Events (SSE)
 export type MultiplayerServerEvent =
+  | { type: "ROOM_CONNECTED"; roomId: string; roomState: RoomState; roundIndex: number; totalRounds: number; player1: MultiplayerPlayer; player2: MultiplayerPlayer | null }
   | { type: "MATCH_FOUND"; roomId: string; player1: MultiplayerPlayer; player2: MultiplayerPlayer; difficulty: Difficulty }
   | { type: "COUNTDOWN_TICK"; count: number }
   | { type: "ROUND_START"; roundIndex: number; totalRounds: number; song: SongTrack; durationSeconds: number; serverTime: number }

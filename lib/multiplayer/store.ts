@@ -192,6 +192,20 @@ export const useMultiplayerStore = create<MultiplayerState>((set, get) => {
     const { playerId } = get();
 
     switch (event.type) {
+      case "ROOM_CONNECTED": {
+        const p1 = event.player1 as MultiplayerPlayer | null;
+        const p2 = event.player2 as MultiplayerPlayer | null;
+        if (p1 && p2) {
+          const self = p1.id === playerId ? p1 : p2;
+          const opponent = p1.id === playerId ? p2 : p1;
+          set({
+            self,
+            opponent,
+          });
+        }
+        break;
+      }
+
       case "MATCH_FOUND": {
         const p1 = event.player1 as MultiplayerPlayer;
         const p2 = event.player2 as MultiplayerPlayer;
@@ -261,29 +275,30 @@ export const useMultiplayerStore = create<MultiplayerState>((set, get) => {
         const p2Score = event.player2TotalScore as number;
         const nextCountdown = (event.nextRoundCountdownSeconds as number) || 5;
 
-        const isP1 = get().self?.id === duelResult.actualCountry.code ? false : get().self?.id === (get().roomId ? get().self?.id : "");
-        // Update players' scores
-        set((state) => {
-          const selfIsP1 = state.self?.id === state.roomId; // fallback check
-          const updatedSelfScore = isP1 ? p1Score : p2Score;
-          const updatedOpponentScore = isP1 ? p2Score : p1Score;
+        const amIPlayer1 = duelResult.player1Id
+          ? duelResult.player1Id === playerId
+          : get().self?.id === duelResult.player1Id;
+        const updatedSelfScore = amIPlayer1 ? p1Score : p2Score;
+        const updatedOpponentScore = amIPlayer1 ? p2Score : p1Score;
 
-          const isWin = duelResult.winnerId === state.self?.id;
-          if (isWin) {
-            playRoundWinFanfare();
-          } else {
-            playTone(280, "sawtooth", 0.3, 0.15);
-          }
+        const isWin =
+          duelResult.winnerId === playerId ||
+          (Boolean(get().self?.id) && duelResult.winnerId === get().self?.id);
 
-          return {
-            status: "roundReview",
-            latestDuelResult: duelResult,
-            roundHistory: [...state.roundHistory, duelResult],
-            reviewCountdown: nextCountdown,
-            self: state.self ? { ...state.self, score: updatedSelfScore } : null,
-            opponent: state.opponent ? { ...state.opponent, score: updatedOpponentScore } : null,
-          };
-        });
+        if (isWin) {
+          playRoundWinFanfare();
+        } else if (duelResult.winnerId !== "tie") {
+          playTone(280, "sawtooth", 0.3, 0.15);
+        }
+
+        set((state) => ({
+          status: "roundReview",
+          latestDuelResult: duelResult,
+          roundHistory: [...state.roundHistory, duelResult],
+          reviewCountdown: nextCountdown,
+          self: state.self ? { ...state.self, score: updatedSelfScore } : null,
+          opponent: state.opponent ? { ...state.opponent, score: updatedOpponentScore } : null,
+        }));
 
         // Fly camera to the actual country
         if (typeof window !== "undefined") {
@@ -405,7 +420,7 @@ export const useMultiplayerStore = create<MultiplayerState>((set, get) => {
 
         if (data.status === "matched" && data.roomId) {
           // Instant match! Connect immediately to room
-          connectToRoom(data.roomId);
+          connectToRoom(data.roomId, data.player1, data.player2);
         } else {
           // Listen on queue SSE until opponent joins
           const qes = new EventSource(`/api/multiplayer/queue/events?playerId=${playerId}`);

@@ -16,6 +16,7 @@ import {
 import { formatDistance } from "@/lib/geo/distance";
 
 export default function BattleFinalScore() {
+  const playerId = useMultiplayerStore((s) => s.playerId);
   const status = useMultiplayerStore((s) => s.status);
   const self = useMultiplayerStore((s) => s.self);
   const opponent = useMultiplayerStore((s) => s.opponent);
@@ -29,8 +30,16 @@ export default function BattleFinalScore() {
   const isAbandon = status === "opponentDisconnected";
   const isComplete = status === "matchComplete";
 
-  const isWon = isAbandon || winnerId === self?.id;
-  const isDraw = winnerId === "draw";
+  const selfScore = self?.score || 0;
+  const oppScore = opponent?.score || 0;
+
+  const isWon =
+    isAbandon ||
+    winnerId === playerId ||
+    (Boolean(self?.id) && winnerId === self?.id) ||
+    (winnerId !== "draw" && selfScore > oppScore);
+
+  const isDraw = winnerId === "draw" || (selfScore === oppScore && selfScore > 0);
   const isDefeat = !isWon && !isDraw;
 
   // Trigger celebration confetti on victory!
@@ -49,12 +58,23 @@ export default function BattleFinalScore() {
     return null;
   }
 
-  const selfScore = self?.score || 0;
-  const oppScore = opponent?.score || 0;
-
   // Compute round win counts from history
-  const selfRoundsWon = roundHistory.filter((r) => r.winnerId === self?.id).length;
-  const oppRoundsWon = roundHistory.filter((r) => r.winnerId === opponent?.id).length;
+  const selfRoundsWon = roundHistory.filter((r) => {
+    if (r.winnerId === playerId || (self?.id && r.winnerId === self.id)) return true;
+    const amIPlayer1 = r.player1Id ? r.player1Id === playerId : true;
+    const myScore = amIPlayer1 ? (r.player1Guess?.totalScore || 0) : (r.player2Guess?.totalScore || 0);
+    const theirScore = amIPlayer1 ? (r.player2Guess?.totalScore || 0) : (r.player1Guess?.totalScore || 0);
+    return r.winnerId !== "tie" && myScore > theirScore;
+  }).length;
+
+  const oppRoundsWon = roundHistory.filter((r) => {
+    if (r.winnerId === "tie") return false;
+    if (opponent?.id && r.winnerId === opponent.id) return true;
+    const amIPlayer1 = r.player1Id ? r.player1Id === playerId : true;
+    const myScore = amIPlayer1 ? (r.player1Guess?.totalScore || 0) : (r.player2Guess?.totalScore || 0);
+    const theirScore = amIPlayer1 ? (r.player2Guess?.totalScore || 0) : (r.player1Guess?.totalScore || 0);
+    return theirScore > myScore;
+  }).length;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in zoom-in-95 duration-400">
@@ -151,8 +171,11 @@ export default function BattleFinalScore() {
             <div className="grid grid-cols-10 gap-1 sm:gap-1.5">
               {Array.from({ length: 10 }).map((_, idx) => {
                 const round = roundHistory[idx];
-                const roundWin = round ? round.winnerId === self?.id : false;
-                const roundLoss = round ? round.winnerId === opponent?.id : false;
+                const amIPlayer1 = round ? (round.player1Id ? round.player1Id === playerId : true) : true;
+                const myScore = round ? (amIPlayer1 ? (round.player1Guess?.totalScore || 0) : (round.player2Guess?.totalScore || 0)) : 0;
+                const theirScore = round ? (amIPlayer1 ? (round.player2Guess?.totalScore || 0) : (round.player1Guess?.totalScore || 0)) : 0;
+                const roundWin = round ? (round.winnerId === playerId || (self?.id && round.winnerId === self.id) || (round.winnerId !== "tie" && myScore > theirScore)) : false;
+                const roundLoss = round ? (round.winnerId !== "tie" && !roundWin) : false;
 
                 return (
                   <div
