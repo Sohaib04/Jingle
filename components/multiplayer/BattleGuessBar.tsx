@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useMultiplayerStore } from "@/lib/multiplayer/store";
 import { Check, HelpCircle, MapPin, Search, X, Loader2 } from "lucide-react";
-import { getAllCountries, CountryMetadata } from "@/lib/geo/countries";
+import { ALL_COUNTRIES_SORTED, CountryMetadata } from "@/lib/geo/countries";
 
 export default function BattleGuessBar() {
   const status = useMultiplayerStore((s) => s.status);
@@ -17,9 +17,7 @@ export default function BattleGuessBar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const allCountries = useMemo(() => {
-    return getAllCountries().sort((a, b) => a.name.localeCompare(b.name));
-  }, []);
+  const allCountries = ALL_COUNTRIES_SORTED;
 
   const filteredCountries = useMemo(() => {
     if (!searchQuery.trim()) return allCountries.slice(0, 20);

@@ -17,7 +17,8 @@ export default function BattleHUD() {
   const leaveMatch = useMultiplayerStore((s) => s.leaveMatch);
   const tickTimer = useMultiplayerStore((s) => s.tickTimer);
 
-  const playbackState = useGameStore((s) => s.playbackState);
+  const isMuted = useGameStore((s) => s.playbackState.isMuted);
+  const volume = useGameStore((s) => s.playbackState.volume);
   const setVolume = useGameStore((s) => s.setVolume);
   const toggleMute = useGameStore((s) => s.toggleMute);
 
@@ -191,12 +192,12 @@ export default function BattleHUD() {
               <button
                 onClick={toggleMute}
                 className="text-slate-300 hover:text-white transition-colors cursor-pointer flex-shrink-0"
-                title={playbackState.isMuted ? "Unmute" : "Mute"}
-                aria-label={playbackState.isMuted ? "Unmute audio" : "Mute audio"}
+                title={isMuted ? "Unmute" : "Mute"}
+                aria-label={isMuted ? "Unmute audio" : "Mute audio"}
               >
-                {playbackState.isMuted || playbackState.volume === 0 ? (
+                {isMuted || volume === 0 ? (
                   <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400" />
-                ) : playbackState.volume < 0.5 ? (
+                ) : volume < 0.5 ? (
                   <Volume1 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                 ) : (
                   <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
@@ -209,10 +210,10 @@ export default function BattleHUD() {
                 min="0"
                 max="1"
                 step="0.01"
-                value={playbackState.isMuted ? 0 : playbackState.volume}
+                value={isMuted ? 0 : volume}
                 onChange={(e) => setVolume(parseFloat(e.target.value))}
                 aria-label="Volume slider"
-                title={`Volume: ${Math.round((playbackState.isMuted ? 0 : playbackState.volume) * 100)}%`}
+                title={`Volume: ${Math.round((isMuted ? 0 : volume) * 100)}%`}
                 className="hidden sm:block w-14 sm:w-20 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400 focus:outline-none"
               />
             </div>

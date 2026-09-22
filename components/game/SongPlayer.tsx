@@ -11,7 +11,7 @@ export default function SongPlayer() {
   const rounds = useGameStore((s) => s.rounds);
   const currentRoundIndex = useGameStore((s) => s.currentRoundIndex);
   const soloTimeRemaining = useGameStore((s) => s.timeRemaining);
-  const playbackState = useGameStore((s) => s.playbackState);
+  const isPlaying = useGameStore((s) => s.playbackState.isPlaying);
   const togglePlayPause = useGameStore((s) => s.togglePlayPause);
 
   const mpStatus = useMultiplayerStore((s) => s.status);
@@ -36,7 +36,7 @@ export default function SongPlayer() {
   const timerWarning = timeRemaining <= 5;
 
   return (
-    <div className="fixed top-14 left-3 right-3 sm:top-20 sm:left-6 sm:right-auto z-20 pointer-events-auto">
+    <div className="fixed top-14 left-3 right-3 sm:top-20 sm:left-6 sm:right-auto z-20 pointer-events-auto transform-gpu">
       <div className="radio-panel p-2.5 sm:p-3.5 rounded-2xl border border-white/10 shadow-2xl flex items-center space-x-3 sm:space-x-4 max-w-full sm:max-w-[340px] transition-all duration-300">
         {/* Album Artwork / Vinyl Disk */}
         <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 border border-white/10 shadow-inner group">
@@ -54,7 +54,7 @@ export default function SongPlayer() {
               {/* Spinning vinyl disk effect */}
               <div
                 className={`w-9 h-9 sm:w-12 sm:h-12 rounded-full border border-emerald-500/30 bg-slate-950 flex items-center justify-center ${
-                  playbackState.isPlaying ? "animate-spin" : ""
+                  isPlaying ? "animate-spin" : ""
                 }`}
                 style={{ animationDuration: "3.5s" }}
               >
@@ -70,10 +70,10 @@ export default function SongPlayer() {
           <button
             onClick={togglePlayPause}
             className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity backdrop-blur-[2px] cursor-pointer"
-            title={playbackState.isPlaying ? "Pause Stream" : "Resume Stream"}
-            aria-label={playbackState.isPlaying ? "Pause audio stream" : "Play audio stream"}
+            title={isPlaying ? "Pause Stream" : "Resume Stream"}
+            aria-label={isPlaying ? "Pause audio stream" : "Play audio stream"}
           >
-            {playbackState.isPlaying ? (
+            {isPlaying ? (
               <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current" />
             ) : (
               <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current ml-0.5" />
@@ -112,27 +112,27 @@ export default function SongPlayer() {
             <div className="flex items-end space-x-1 h-4 sm:h-5">
               <span
                 className={`w-1 bg-emerald-400 rounded-full h-full ${
-                  playbackState.isPlaying ? "audio-bar-1" : "scale-y-[0.2] opacity-40"
+                  isPlaying ? "audio-bar-1" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
                 className={`w-1 bg-teal-400 rounded-full h-full ${
-                  playbackState.isPlaying ? "audio-bar-2" : "scale-y-[0.2] opacity-40"
+                  isPlaying ? "audio-bar-2" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
                 className={`w-1 bg-cyan-400 rounded-full h-full ${
-                  playbackState.isPlaying ? "audio-bar-3" : "scale-y-[0.2] opacity-40"
+                  isPlaying ? "audio-bar-3" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
                 className={`w-1 bg-emerald-300 rounded-full h-full ${
-                  playbackState.isPlaying ? "audio-bar-4" : "scale-y-[0.2] opacity-40"
+                  isPlaying ? "audio-bar-4" : "scale-y-[0.2] opacity-40"
                 }`}
               />
               <span
                 className={`w-1 bg-emerald-500 rounded-full h-full ${
-                  playbackState.isPlaying ? "audio-bar-5" : "scale-y-[0.2] opacity-40"
+                  isPlaying ? "audio-bar-5" : "scale-y-[0.2] opacity-40"
                 }`}
               />
             </div>

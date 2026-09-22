@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { Check, HelpCircle, MapPin, Search, X } from "lucide-react";
-import { getAllCountries, CountryMetadata } from "@/lib/geo/countries";
+import { ALL_COUNTRIES_SORTED, CountryMetadata } from "@/lib/geo/countries";
 
 export default function GuessBar() {
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -15,9 +15,7 @@ export default function GuessBar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const allCountries = useMemo(() => {
-    return getAllCountries().sort((a, b) => a.name.localeCompare(b.name));
-  }, []);
+  const allCountries = ALL_COUNTRIES_SORTED;
 
   const filteredCountries = useMemo(() => {
     if (!searchQuery.trim()) return allCountries.slice(0, 20);

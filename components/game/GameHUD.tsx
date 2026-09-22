@@ -11,7 +11,8 @@ export default function GameHUD() {
   const rounds = useGameStore((s) => s.rounds);
   const totalScore = useGameStore((s) => s.totalScore);
   const currentStreak = useGameStore((s) => s.currentStreak);
-  const playbackState = useGameStore((s) => s.playbackState);
+  const isMuted = useGameStore((s) => s.playbackState.isMuted);
+  const volume = useGameStore((s) => s.playbackState.volume);
   const setVolume = useGameStore((s) => s.setVolume);
   const toggleMute = useGameStore((s) => s.toggleMute);
   const resetGame = useGameStore((s) => s.resetGame);
@@ -36,7 +37,7 @@ export default function GameHUD() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-30 px-3 py-2 sm:px-6 sm:py-4 safe-top pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-30 px-3 py-2 sm:px-6 sm:py-4 safe-top pointer-events-none transform-gpu">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         {/* Left: Brand & Quit */}
         <div className="flex items-center space-x-2 pointer-events-auto">
@@ -128,12 +129,12 @@ export default function GameHUD() {
               <button
                 onClick={toggleMute}
                 className="text-slate-300 hover:text-white transition-colors cursor-pointer flex-shrink-0"
-                title={playbackState.isMuted ? "Unmute" : "Mute"}
-                aria-label={playbackState.isMuted ? "Unmute audio" : "Mute audio"}
+                title={isMuted ? "Unmute" : "Mute"}
+                aria-label={isMuted ? "Unmute audio" : "Mute audio"}
               >
-                {playbackState.isMuted || playbackState.volume === 0 ? (
+                {isMuted || volume === 0 ? (
                   <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400" />
-                ) : playbackState.volume < 0.5 ? (
+                ) : volume < 0.5 ? (
                   <Volume1 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                 ) : (
                   <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
@@ -146,10 +147,10 @@ export default function GameHUD() {
                 min="0"
                 max="1"
                 step="0.01"
-                value={playbackState.isMuted ? 0 : playbackState.volume}
+                value={isMuted ? 0 : volume}
                 onChange={(e) => setVolume(parseFloat(e.target.value))}
                 aria-label="Volume slider"
-                title={`Volume: ${Math.round((playbackState.isMuted ? 0 : playbackState.volume) * 100)}%`}
+                title={`Volume: ${Math.round((isMuted ? 0 : volume) * 100)}%`}
                 className="hidden sm:block w-16 sm:w-20 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400 focus:outline-none"
               />
             </div>

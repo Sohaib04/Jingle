@@ -390,6 +390,13 @@ export class RoomManager {
       finalScoreP2: room.player2?.score || 0,
       roundHistory: room.roundHistory,
     });
+
+    // Automatically prune finished room after 3 minutes to prevent memory leak
+    setTimeout(() => {
+      this.rooms.delete(roomId);
+      this.roomListeners.delete(roomId);
+      this.clearTimer(roomId);
+    }, 180000);
   }
 
   // Connection & Heartbeat
@@ -445,6 +452,12 @@ export class RoomManager {
       reason: "Opponent left the match",
       winnerId,
     });
+
+    setTimeout(() => {
+      this.rooms.delete(roomId);
+      this.roomListeners.delete(roomId);
+      this.clearTimer(roomId);
+    }, 180000);
   }
 
   public getRoom(roomId: string): MultiplayerRoom | undefined {

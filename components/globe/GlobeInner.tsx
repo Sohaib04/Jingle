@@ -75,14 +75,20 @@ export default function GlobeInner() {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  // Fetch countries GeoJSON once
+  // Fetch countries GeoJSON once and pre-resolve country metadata on each feature
   useEffect(() => {
     let isMounted = true;
     fetch("/data/countries.geojson")
       .then((res) => res.json())
       .then((data) => {
         if (isMounted && data?.features) {
-          setCountriesData(data.features);
+          const features = data.features as (CountryFeature & { __country?: CountryMetadata })[];
+          for (let i = 0; i < features.length; i++) {
+            const f = features[i];
+            const code = f.properties?.ISO_A2 || f.properties?.NAME || f.properties?.ADMIN;
+            f.__country = code ? getCountry(String(code)) : undefined;
+          }
+          setCountriesData(features);
           setHasLoadedData(true);
         }
       })
@@ -93,7 +99,7 @@ export default function GlobeInner() {
     };
   }, []);
 
-  // Configure OrbitControls and camera defaults with Radio Garden smooth damping
+  // Configure OrbitControls and clamp WebGL pixel ratio for silky smooth 60/120fps
   useEffect(() => {
     if (globeRef.current) {
       const controls = globeRef.current.controls();
@@ -106,6 +112,10 @@ export default function GlobeInner() {
         controls.maxDistance = 460;
         controls.autoRotate = gameStatus === "idle" && isAutoRotating;
         controls.autoRotateSpeed = 0.4;
+      }
+      const renderer = globeRef.current.renderer?.();
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       }
     }
   }, [hasLoadedData, gameStatus, isAutoRotating]);
@@ -237,17 +247,9 @@ export default function GlobeInner() {
     mpLatestDuelResult,
   ]);
 
-  // Fast memoized lookup cache for features
-  const featureToCountryMap = useRef<WeakMap<CountryFeature, CountryMetadata | null>>(new WeakMap());
-
-  const resolveCountry = useCallback((feat: CountryFeature): CountryMetadata | undefined => {
-    if (featureToCountryMap.current.has(feat)) {
-      return featureToCountryMap.current.get(feat) || undefined;
-    }
-    const code = feat.properties?.ISO_A2 || feat.properties?.NAME || feat.properties?.ADMIN;
-    const country = code ? getCountry(String(code)) : undefined;
-    featureToCountryMap.current.set(feat, country || null);
-    return country;
+  // Direct O(1) country resolution from pre-cached feature reference
+  const resolveCountry = useCallback((feat: CountryFeature & { __country?: CountryMetadata }): CountryMetadata | undefined => {
+    return feat.__country;
   }, []);
 
   // Handlers for hover & click
@@ -259,7 +261,7 @@ export default function GlobeInner() {
           mpHoverCountry(null);
           return;
         }
-        const feat = polygon as CountryFeature;
+        const feat = polygon as CountryFeature & { __country?: CountryMetadata };
         const country = resolveCountry(feat);
         mpHoverCountry(country || null);
         return;
@@ -272,7 +274,7 @@ export default function GlobeInner() {
         hoverCountry(null);
         return;
       }
-      const feat = polygon as CountryFeature;
+      const feat = polygon as CountryFeature & { __country?: CountryMetadata };
       const country = resolveCountry(feat);
       hoverCountry(country || null);
     },
@@ -288,7 +290,7 @@ export default function GlobeInner() {
 
   const handlePolygonClick = useCallback(
     (polygon: object, _event?: MouseEvent, coords?: { lat: number; lng: number }) => {
-      const feat = polygon as CountryFeature;
+      const feat = polygon as CountryFeature & { __country?: CountryMetadata };
       const country = resolveCountry(feat);
       if (!country) return;
 
@@ -353,12 +355,6 @@ export default function GlobeInner() {
     []
   );
 
-  // Track active globe view mode in a ref for synchronous onBeforeRender shader checks
-  const currentViewModeRef = useRef(globeViewMode);
-  useEffect(() => {
-    currentViewModeRef.current = globeViewMode;
-  }, [globeViewMode]);
-
   // Preload all globe textures on mount for instantaneous, lag-free view switching
   useEffect(() => {
     const loader = new THREE.TextureLoader();
@@ -369,25 +365,18 @@ export default function GlobeInner() {
 
   // Dynamic uniforms to control night lights contrast and brightness in custom Three.js shader
   const nightUniforms = useRef({
-    uIsNight: { value: 0 },
+    uIsNight: { value: globeViewMode === "night" ? 1.0 : 0.0 },
   });
+
+  useEffect(() => {
+    nightUniforms.current.uIsNight.value = globeViewMode === "night" ? 1.0 : 0.0;
+  }, [globeViewMode]);
 
   // Enhanced globe material with custom shader for vibrant, high-contrast night lights
   const customGlobeMaterial = useMemo(() => {
     const mat = new THREE.MeshPhongMaterial({
       shininess: 15,
     });
-
-    // Per-frame guard: ensure night shader logic ONLY runs when the night texture is actively bound to mat.map.
-    // This completely eliminates any visual artifact where the daytime satellite map would flash through the night shader.
-    mat.onBeforeRender = () => {
-      const mapSrc = (mat.map?.image as HTMLImageElement | undefined)?.src || "";
-      const isNightTextureActive =
-        currentViewModeRef.current === "night" &&
-        (mapSrc.includes("BlackMarble") || mapSrc.includes("earth-night"));
-
-      nightUniforms.current.uIsNight.value = isNightTextureActive ? 1.0 : 0.0;
-    };
 
     mat.onBeforeCompile = (shader) => {
       shader.uniforms.uIsNight = nightUniforms.current.uIsNight;
@@ -575,8 +564,8 @@ export default function GlobeInner() {
 
   const getPolygonAltitude = useCallback(
     (featObj: object): number => {
-      const feat = featObj as CountryFeature;
-      const country = resolveCountry(feat);
+      const feat = featObj as CountryFeature & { __country?: CountryMetadata };
+      const country = feat.__country;
       if (!country) return 0.008;
 
       if (isMpActive) {
@@ -587,16 +576,14 @@ export default function GlobeInner() {
               mpLatestDuelResult.player1Guess?.countryCode === country.code ||
               mpLatestDuelResult.player2Guess?.countryCode === country.code)
           ) {
-            return 0.05;
+            return 0.045;
           }
           return 0.008;
         }
         if (mpSelectedCountry && country.code === mpSelectedCountry.code) {
-          return 0.04;
+          return 0.035;
         }
-        if (mpHoveredCountry && country.code === mpHoveredCountry.code) {
-          return 0.022;
-        }
+        // Hover no longer re-extrudes 3D geometry continuously across frames
         return 0.008;
       }
 
@@ -606,19 +593,16 @@ export default function GlobeInner() {
           (country.code === latestResult.actualCountry.code ||
             (latestResult.guessedCountry && country.code === latestResult.guessedCountry.code))
         ) {
-          return 0.05;
+          return 0.045;
         }
         return 0.008;
       }
 
       if (selectedCountry && country.code === selectedCountry.code) {
-        return 0.04;
+        return 0.035;
       }
 
-      if (hoveredCountry && country.code === hoveredCountry.code) {
-        return 0.022;
-      }
-
+      // Hover no longer re-extrudes 3D geometry continuously across frames
       return 0.008;
     },
     [
@@ -626,14 +610,17 @@ export default function GlobeInner() {
       mpStatus,
       mpLatestDuelResult,
       mpSelectedCountry,
-      mpHoveredCountry,
       gameStatus,
       latestResult,
       selectedCountry,
-      hoveredCountry,
-      resolveCountry,
     ]
   );
+
+  // Stable memoized accessors to prevent dirtying ThreeGlobe sub-renderers
+  const getPolygonSideColor = useCallback(() => globeConfig.sideColor, [globeConfig.sideColor]);
+  const getPolygonStrokeColor = useCallback(() => globeConfig.strokeColor, [globeConfig.strokeColor]);
+  const getArcColor = useCallback((arc: object) => (arc as ArcData).color, []);
+  const getArcAltitude = useCallback((arc: object) => (arc as ArcData).altitude, []);
 
   return (
     <div
@@ -653,17 +640,17 @@ export default function GlobeInner() {
         atmosphereAltitude={globeConfig.atmosphereAltitude}
         polygonsData={countriesData}
         polygonCapColor={getPolygonCapColor}
-        polygonSideColor={() => globeConfig.sideColor}
-        polygonStrokeColor={() => globeConfig.strokeColor}
+        polygonSideColor={getPolygonSideColor}
+        polygonStrokeColor={getPolygonStrokeColor}
         polygonAltitude={getPolygonAltitude}
-        polygonCapCurvatureResolution={2}
-        polygonsTransitionDuration={150}
+        polygonCapCurvatureResolution={5}
+        polygonsTransitionDuration={0}
         onPolygonHover={handlePolygonHover}
         onPolygonClick={handlePolygonClick}
         onGlobeClick={handleGlobeClick}
         arcsData={arcsData}
-        arcColor={(arc: object) => (arc as ArcData).color}
-        arcAltitude={(arc: object) => (arc as ArcData).altitude}
+        arcColor={getArcColor}
+        arcAltitude={getArcAltitude}
         arcStroke={1.5}
         arcDashLength={0.4}
         arcDashGap={0.2}

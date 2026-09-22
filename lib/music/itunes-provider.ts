@@ -39,15 +39,6 @@ export class ITunesMusicProvider implements IMusicProvider {
         this.updateState({ isPlaying: false });
       });
 
-      this.audio.addEventListener("timeupdate", () => {
-        if (this.audio) {
-          this.updateState({
-            currentTime: Math.floor(this.audio.currentTime),
-            duration: Math.floor(this.audio.duration || 30),
-          });
-        }
-      });
-
       this.audio.addEventListener("ended", () => {
         this.updateState({ isPlaying: false, currentTime: 0 });
       });
@@ -322,6 +313,15 @@ export class ITunesMusicProvider implements IMusicProvider {
   }
 
   private updateState(partial: Partial<PlaybackState>): void {
+    let hasChanged = false;
+    for (const key of Object.keys(partial) as (keyof PlaybackState)[]) {
+      if (this.state[key] !== partial[key]) {
+        hasChanged = true;
+        break;
+      }
+    }
+    if (!hasChanged) return;
+
     this.state = { ...this.state, ...partial };
     for (const listener of this.listeners) {
       listener(this.state);

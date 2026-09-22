@@ -49,35 +49,40 @@ body {
   background: rgba(255, 255, 255, 0.28);
 }
 
-/* Radio Garden & Glassmorphism Panels */
+/* Radio Garden & Glassmorphism Panels — Hardware-accelerated & lightweight blur */
 .glass-panel {
-  background: rgba(11, 15, 23, 0.78);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(11, 15, 23, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  transform: translateZ(0);
 }
 
 .glass-panel-subtle {
-  background: rgba(11, 15, 23, 0.52);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 15, 23, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  transform: translateZ(0);
 }
 
 .radio-panel {
-  background: radial-gradient(120% 120% at 50% 0%, rgba(20, 28, 42, 0.85) 0%, rgba(7, 10, 16, 0.9) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: radial-gradient(120% 120% at 50% 0%, rgba(20, 28, 42, 0.92) 0%, rgba(7, 10, 16, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transform: translateZ(0);
 }
 
 .radio-pill {
-  background: rgba(14, 20, 30, 0.7);
-  backdrop-filter: blur(12px);
+  background: rgba(14, 20, 30, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
 }
 
 /* Radio frequency / telemetry monospace tag */
