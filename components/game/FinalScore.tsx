@@ -9,6 +9,7 @@ import {
   Check,
   Copy,
   Flame,
+  Home,
   Navigation,
   RotateCcw,
   Timer,
@@ -21,7 +22,10 @@ export default function FinalScore() {
   const totalScore = useGameStore((s) => s.totalScore);
   const bestStreak = useGameStore((s) => s.bestStreak);
   const roundResults = useGameStore((s) => s.roundResults);
+  const difficulty = useGameStore((s) => s.difficulty);
+  const roundsCount = useGameStore((s) => s.roundsCount);
   const startGame = useGameStore((s) => s.startGame);
+  const resetGame = useGameStore((s) => s.resetGame);
 
   const [copied, setCopied] = useState(false);
   const [showDailyToast, setShowDailyToast] = useState(false);
@@ -165,13 +169,23 @@ export default function FinalScore() {
 
         {/* Action Buttons */}
         <div className="space-y-2 sm:space-y-2.5 pt-1">
-          <button
-            onClick={() => startGame()}
-            className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
-          >
-            <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>Play Again</span>
-          </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+            <button
+              onClick={() => startGame(difficulty, roundResults.length || roundsCount || 5)}
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span>Play Again</span>
+            </button>
+
+            <button
+              onClick={resetGame}
+              className="w-full py-3.5 px-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 cursor-pointer"
+            >
+              <Home className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+              <span>Main Menu</span>
+            </button>
+          </div>
 
           <div className="grid grid-cols-2 gap-2">
             <button

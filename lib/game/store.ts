@@ -20,11 +20,13 @@ export interface GameState {
   latestResult: RoundResult | null;
   playbackState: PlaybackState;
   difficulty: Difficulty;
+  roundsCount: number;
   globeViewMode: GlobeViewMode;
   isAutoRotating: boolean;
 
   // Actions
-  startGame: (difficulty?: Difficulty) => Promise<void>;
+  setRoundsCount: (count: number) => void;
+  startGame: (difficulty?: Difficulty, roundsCount?: number) => Promise<void>;
   hoverCountry: (country: CountryMetadata | null) => void;
   selectCountry: (country: CountryMetadata) => void;
   setGlobeViewMode: (mode: GlobeViewMode) => void;
@@ -61,13 +63,23 @@ export const useGameStore = create<GameState>((set, get) => {
     latestResult: null,
     playbackState: defaultMusicProvider.getPlaybackState(),
     difficulty: "easy",
+    roundsCount: 5,
     globeViewMode: "satellite",
     isAutoRotating: true,
 
-    startGame: async (difficulty: Difficulty = "easy") => {
+    setRoundsCount: (count: number) => {
+      const clamped = Math.max(1, Math.min(10, count));
+      set({ roundsCount: clamped });
+    },
+
+    startGame: async (difficulty?: Difficulty, roundsCount?: number) => {
+      const targetDifficulty = difficulty || get().difficulty || "easy";
+      const targetRounds = Math.max(1, Math.min(10, roundsCount ?? get().roundsCount ?? 5));
+
       set({
         gameStatus: "loading",
-        difficulty,
+        difficulty: targetDifficulty,
+        roundsCount: targetRounds,
         totalScore: 0,
         currentStreak: 0,
         bestStreak: 0,
@@ -80,7 +92,7 @@ export const useGameStore = create<GameState>((set, get) => {
       });
 
       try {
-        const tracks = await defaultMusicProvider.getTracksForGame(10, difficulty);
+        const tracks = await defaultMusicProvider.getTracksForGame(targetRounds, targetDifficulty);
         set({
           rounds: tracks,
           gameStatus: "playing",

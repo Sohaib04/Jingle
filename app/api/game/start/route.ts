@@ -5,7 +5,10 @@ export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => ({}));
     const difficulty = body.difficulty || "easy";
-    const roundsCount = 10;
+    const requestedCount = Number(body.roundsCount);
+    const roundsCount = Number.isInteger(requestedCount)
+      ? Math.max(1, Math.min(10, requestedCount))
+      : 5;
 
     const tracks = await defaultMusicProvider.getTracksForGame(roundsCount, difficulty);
 

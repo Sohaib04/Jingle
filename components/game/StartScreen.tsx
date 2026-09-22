@@ -3,15 +3,18 @@
 import React, { useState } from "react";
 import { useGameStore } from "@/lib/game/store";
 import { Difficulty } from "@/lib/game/types";
-import { Headphones, Play, Satellite, Sparkles, Zap, Loader2, Music, Swords } from "lucide-react";
+import { Headphones, Play, Satellite, Sparkles, Zap, Loader2, Music, Swords, Minus, Plus } from "lucide-react";
 import { useMultiplayerStore } from "@/lib/multiplayer/store";
 
 export default function StartScreen() {
   const gameStatus = useGameStore((s) => s.gameStatus);
   const startGame = useGameStore((s) => s.startGame);
+  const storeDifficulty = useGameStore((s) => s.difficulty);
+  const storeRoundsCount = useGameStore((s) => s.roundsCount);
   const mpStatus = useMultiplayerStore((s) => s.status);
   const openMatchmakingModal = useMultiplayerStore((s) => s.openMatchmakingModal);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>("easy");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(storeDifficulty || "easy");
+  const [selectedRounds, setSelectedRounds] = useState<number>(storeRoundsCount || 5);
 
   if (gameStatus !== "idle" && gameStatus !== "loading") {
     return null;
@@ -122,11 +125,70 @@ export default function StartScreen() {
           </div>
         </div>
 
+        {/* Rounds Selector */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between px-1">
+            <label className="text-[11px] sm:text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+              Session Length
+            </label>
+            <span className="text-[11px] font-mono text-emerald-400 font-bold">
+              {selectedRounds} {selectedRounds === 1 ? "Round" : "Rounds"} (1-10)
+            </span>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            {/* Stepper with - / + */}
+            <div className="flex items-center bg-white/[0.03] border border-white/10 rounded-xl p-1 space-x-1">
+              <button
+                type="button"
+                onClick={() => setSelectedRounds((r) => Math.max(1, r - 1))}
+                disabled={selectedRounds <= 1}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                title="Decrease rounds (min 1)"
+              >
+                <Minus className="w-3.5 h-3.5" />
+              </button>
+
+              <span className="w-8 text-center font-bold text-white font-mono text-xs sm:text-sm tabular-nums">
+                {selectedRounds}
+              </span>
+
+              <button
+                type="button"
+                onClick={() => setSelectedRounds((r) => Math.min(10, r + 1))}
+                disabled={selectedRounds >= 10}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/10 transition disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                title="Increase rounds (max 10)"
+              >
+                <Plus className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            {/* Quick Presets */}
+            <div className="grid grid-cols-4 gap-1.5 flex-1">
+              {[1, 3, 5, 10].map((count) => (
+                <button
+                  key={count}
+                  type="button"
+                  onClick={() => setSelectedRounds(count)}
+                  className={`py-2 px-1 rounded-xl text-xs font-bold font-mono transition-all cursor-pointer border ${
+                    selectedRounds === count
+                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-md shadow-emerald-500/10"
+                      : "bg-white/[0.02] text-slate-400 border-white/5 hover:bg-white/[0.06] hover:text-slate-200"
+                  }`}
+                >
+                  {count}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Game Mode Actions: Solo & 1v1 Battle Arena */}
         <div className="space-y-2.5 pt-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <button
-              onClick={() => startGame(selectedDifficulty)}
+              onClick={() => startGame(selectedDifficulty, selectedRounds)}
               disabled={isLoading}
               className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
             >
@@ -138,7 +200,7 @@ export default function StartScreen() {
               ) : (
                 <>
                   <Play className="w-4 h-4 fill-current" />
-                  <span>Solo (10 Rounds)</span>
+                  <span>Solo ({selectedRounds} {selectedRounds === 1 ? "Round" : "Rounds"})</span>
                 </>
               )}
             </button>
