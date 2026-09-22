@@ -38,49 +38,44 @@ export class RoomManager {
     difficulty: Difficulty,
     listener?: EventListener
   ): { status: "queued" | "matched"; room?: MultiplayerRoom } {
-    // If player is already in queue, update
+    // If player is already in queue, update while preserving listener if available
+    const existing = this.queue.get(player.id);
     this.queue.set(player.id, {
       player,
       difficulty,
-      joinedAt: Date.now(),
-      listener,
+      joinedAt: existing?.difficulty === difficulty ? existing.joinedAt : Date.now(),
+      listener: listener ?? existing?.listener,
     });
 
-    // Check if another player is waiting in queue
+    // Check if another player is waiting in queue with the EXACT SAME difficulty
     const potentialOpponents = Array.from(this.queue.entries()).filter(
-      ([id, qp]) => id !== player.id && qp.player.isConnected
+      ([id, qp]) =>
+        id !== player.id &&
+        qp.player.isConnected &&
+        qp.difficulty === difficulty
     );
 
     if (potentialOpponents.length > 0) {
-      // Find matching difficulty first, or any if waiting > 4s
-      const now = Date.now();
-      let match = potentialOpponents.find(
-        ([, qp]) => qp.difficulty === difficulty
+      // Prioritize the opponent who has been waiting the longest (FIFO)
+      potentialOpponents.sort((a, b) => a[1].joinedAt - b[1].joinedAt);
+      const [opponentId, opponentData] = potentialOpponents[0];
+
+      const playerListener = listener ?? this.queue.get(player.id)?.listener;
+
+      // Remove both from queue
+      this.queue.delete(player.id);
+      this.queue.delete(opponentId);
+
+      // Create new match room with the shared selected difficulty
+      const room = this.createRoom(
+        opponentData.player,
+        player,
+        difficulty,
+        opponentData.listener,
+        playerListener
       );
 
-      if (!match) {
-        match = potentialOpponents.find(
-          ([, qp]) => now - qp.joinedAt > 4000
-        );
-      }
-
-      if (match) {
-        const [opponentId, opponentData] = match;
-        // Remove both from queue
-        this.queue.delete(player.id);
-        this.queue.delete(opponentId);
-
-        // Create new match room
-        const room = this.createRoom(
-          opponentData.player,
-          player,
-          difficulty,
-          opponentData.listener,
-          listener
-        );
-
-        return { status: "matched", room };
-      }
+      return { status: "matched", room };
     }
 
     return { status: "queued" };
@@ -90,6 +85,26 @@ export class RoomManager {
     const qp = this.queue.get(playerId);
     if (qp) {
       qp.listener = listener;
+      return;
+    }
+
+    // In case player was matched right before this SSE subscription was established,
+    // notify them immediately with the room details so they can connect
+    for (const room of this.rooms.values()) {
+      if (
+        (room.player1.id === playerId || room.player2?.id === playerId) &&
+        (room.state === "countdown" || room.state === "roundActive") &&
+        Date.now() - room.createdAt < 10000
+      ) {
+        listener({
+          type: "MATCH_FOUND",
+          roomId: room.id,
+          player1: room.player1,
+          player2: room.player2 || room.player1,
+          difficulty: room.difficulty,
+        });
+        return;
+      }
     }
   }
 

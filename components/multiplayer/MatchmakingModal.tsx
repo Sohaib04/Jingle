@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   useMultiplayerStore,
   generateRandomCallsign,
@@ -36,6 +36,12 @@ export default function MatchmakingModal() {
   const cancelMatchmaking = useMultiplayerStore((s) => s.cancelMatchmaking);
 
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>(difficulty || "easy");
+
+  useEffect(() => {
+    if (difficulty) {
+      setSelectedDifficulty(difficulty);
+    }
+  }, [difficulty]);
 
   if (!show && status === "idle") {
     return null;
@@ -132,13 +138,13 @@ export default function MatchmakingModal() {
                 Scanning Radio Frequencies...
               </h3>
               <p className="text-xs text-slate-400">
-                Searching for an available challenger on Earth
+                Searching for an opponent selecting {selectedDifficulty.toUpperCase()} difficulty
               </p>
             </div>
 
             <div className="flex items-center justify-center space-x-2 text-xs font-mono text-emerald-400/90 py-1">
               <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
-              <span>Matching pilot on [{selectedDifficulty.toUpperCase()}]</span>
+              <span>Looking for {selectedDifficulty.toUpperCase()} tier challenger</span>
             </div>
 
             <button
