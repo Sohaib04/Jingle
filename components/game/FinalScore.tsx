@@ -58,7 +58,25 @@ export default function FinalScore() {
 
   // Share result formatter
   function handleShare() {
-    const summaryText = `🌐 Jingle — World Audio Observatory\n🏆 Score: ${totalScore.toLocaleString()} pts\n🎯 Accuracy: ${exactMatches}/${roundResults.length} Exact\n🔥 Best Streak: ${bestStreak}\n✈️ Total Distance: ${formatDistance(totalDistance)}\n\nPlay Jingle at: https://jingle.game`;
+    // Generate emoji indicators for each round (🟩 Exact / <200km, 🟨 Close <2000km, 🟥 Far)
+    const roundBlocks = roundResults
+      .map((r) => {
+        if (r.isExact || r.distanceKm < 200) return "🟩";
+        if (r.distanceKm < 2500) return "🟨";
+        return "🟥";
+      })
+      .join("");
+
+    const summaryText = [
+      `🎧 Jingle — World Music Geography`,
+      `🏆 Score: ${totalScore.toLocaleString()} pts`,
+      `🎯 Exact: ${exactMatches}/${roundResults.length} | 🔥 Best Streak: ${bestStreak}`,
+      `✈️ Total Distance: ${formatDistance(totalDistance)}`,
+      roundBlocks ? `\n${roundBlocks}\n` : "",
+      `Can you beat my ear? Play at: https://jingle-game.com`,
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(summaryText);

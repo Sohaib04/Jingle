@@ -5,6 +5,8 @@ import { useMultiplayerStore } from "@/lib/multiplayer/store";
 import confetti from "canvas-confetti";
 import {
   Award,
+  Check,
+  Copy,
   Crown,
   Flame,
   RotateCcw,
@@ -16,6 +18,7 @@ import {
 import { formatDistance } from "@/lib/geo/distance";
 
 export default function BattleFinalScore() {
+  const [copied, setCopied] = React.useState(false);
   const playerId = useMultiplayerStore((s) => s.playerId);
   const status = useMultiplayerStore((s) => s.status);
   const self = useMultiplayerStore((s) => s.self);
@@ -75,6 +78,36 @@ export default function BattleFinalScore() {
     const theirScore = amIPlayer1 ? (r.player2Guess?.totalScore || 0) : (r.player1Guess?.totalScore || 0);
     return theirScore > myScore;
   }).length;
+
+  function handleShare() {
+    const outcome = isWon ? "🏆 Victory" : isDefeat ? "⚔️ Defeat" : "🤝 Draw";
+    const duelEmojis = roundHistory
+      .map((r) => {
+        const amIPlayer1 = r.player1Id ? r.player1Id === playerId : true;
+        const myScore = amIPlayer1 ? (r.player1Guess?.totalScore || 0) : (r.player2Guess?.totalScore || 0);
+        const theirScore = amIPlayer1 ? (r.player2Guess?.totalScore || 0) : (r.player1Guess?.totalScore || 0);
+        const won = r.winnerId === playerId || (self?.id && r.winnerId === self.id) || (r.winnerId !== "tie" && myScore > theirScore);
+        const tied = r.winnerId === "tie" || myScore === theirScore;
+        return won ? "🟩" : tied ? "🟨" : "🟥";
+      })
+      .join("");
+
+    const summaryText = [
+      `⚔️ Jingle Duel — ${outcome}!`,
+      `Me: ${selfScore.toLocaleString()} pts (${selfRoundsWon} rounds)`,
+      `Rival: ${oppScore.toLocaleString()} pts (${oppRoundsWon} rounds)`,
+      duelEmojis ? `\n${duelEmojis}\n` : "",
+      `Challenge me at: https://jingle-game.com`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(summaryText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in zoom-in-95 duration-400">
@@ -204,21 +237,40 @@ export default function BattleFinalScore() {
         )}
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
-          <button
-            onClick={() => findMatch(difficulty)}
-            className="py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/20 active:scale-[0.98] transition cursor-pointer flex items-center justify-center space-x-2"
-          >
-            <Swords className="w-4 h-4" />
-            <span>Find New Match</span>
-          </button>
+        <div className="space-y-2.5 pt-2">
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => findMatch(difficulty)}
+              className="py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/20 active:scale-[0.98] transition cursor-pointer flex items-center justify-center space-x-2"
+            >
+              <Swords className="w-4 h-4" />
+              <span>Find New Match</span>
+            </button>
+
+            <button
+              onClick={leaveMatch}
+              className="py-3.5 px-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition cursor-pointer flex items-center justify-center space-x-2"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Main Menu</span>
+            </button>
+          </div>
 
           <button
-            onClick={leaveMatch}
-            className="py-3.5 px-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-slate-300 hover:text-white font-bold text-xs sm:text-sm transition cursor-pointer flex items-center justify-center space-x-2"
+            onClick={handleShare}
+            className="w-full py-2.5 px-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white text-xs font-semibold transition cursor-pointer flex items-center justify-center space-x-2"
           >
-            <RotateCcw className="w-4 h-4" />
-            <span>Main Menu</span>
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-emerald-300 font-bold">Copied Match Result!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4 text-slate-400" />
+                <span>Share Battle Result</span>
+              </>
+            )}
           </button>
         </div>
       </div>
